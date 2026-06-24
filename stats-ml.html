@@ -1,0 +1,814 @@
+<section id="statistics">
+<h2>STATISTICS</h2>
+<h3 id="stats">Formulas &amp; Syntax</h3>
+
+<div class="entry" id="stat-mean">
+<h4>Mean</h4>
+<p class="label">Formula</p>
+<div class="formula">μ = (1/n) Σ xᵢ</div>
+<p class="label">Full Syntax</p>
+<pre>import numpy as np
+import pandas as pd
+from scipy import stats
+
+np.mean(a, axis=None, dtype=None, out=None, keepdims=False, initial=0, where=True)
+pd.Series.mean(axis=None, skipna=True, numeric_only=False, **kwargs)
+df['col'].mean()
+stats.tmean(a, limits=None, inclusive=(True, True), axis=0)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Meaning</th></tr>
+<tr><td>skipna (pandas)</td><td>bool</td><td>True</td><td>Exclude NA values</td></tr>
+<tr><td>axis (numpy/pandas)</td><td>None, int</td><td>None / 0</td><td>Axis along which to compute</td></tr>
+<tr><td>limits (scipy)</td><td>tuple, optional</td><td>None</td><td>Lower/upper bounds to include</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>scalar, ndarray, Series</td><td>Arithmetic mean</td></tr></table>
+</div>
+
+<div class="entry" id="stat-median">
+<h4>Median</h4>
+<p class="label">Formula</p>
+<div class="formula">Middle value of sorted data (or average of two middle values if n is even)</div>
+<p class="label">Full Syntax</p>
+<pre>np.median(a, axis=None, out=None, overwrite_input=False, keepdims=False)
+pd.Series.median(axis=None, skipna=True, numeric_only=False, **kwargs)
+stats.median(a, axis=0)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Meaning</th></tr>
+<tr><td>skipna (pandas)</td><td>bool</td><td>True</td><td>Exclude NA</td></tr>
+<tr><td>overwrite_input (numpy)</td><td>bool</td><td>False</td><td>May modify input for memory</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>scalar, ndarray</td><td>Median value</td></tr></table>
+</div>
+
+<div class="entry" id="stat-mode">
+<h4>Mode</h4>
+<p class="label">Formula</p>
+<div class="formula">Value(s) with highest frequency</div>
+<p class="label">Full Syntax</p>
+<pre>from scipy import stats
+
+stats.mode(a, axis=0, nan_policy='propagate', keepdims=False)
+pd.Series.mode(dropna=True)
+df['col'].mode()</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Meaning</th></tr>
+<tr><td>dropna (pandas)</td><td>bool</td><td>True</td><td>Exclude NA</td></tr>
+<tr><td>nan_policy (scipy)</td><td>{'propagate','omit','raise'}</td><td>'propagate'</td><td>NA handling</td></tr>
+<tr><td>axis (scipy)</td><td>int</td><td>0</td><td>Axis along which to compute</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>Series (pandas)</td><td>All modes (can be multiple)</td></tr><tr><td>ModeResult (scipy)</td><td>.mode and .count attributes</td></tr></table>
+</div>
+
+<div class="entry" id="stat-variance">
+<h4>Variance</h4>
+<p class="label">Formula</p>
+<div class="formula">σ² = (1/n) Σ (xᵢ − μ)² &nbsp;|&nbsp; s² = (1/(n−1)) Σ (xᵢ − x̄)²</div>
+<p class="label">Full Syntax</p>
+<pre>np.var(a, axis=None, dtype=None, out=None, ddof=0, keepdims=False, where=True)
+pd.Series.var(axis=None, skipna=True, ddof=1, numeric_only=False, **kwargs)
+stats.tvar(a, limits=None, inclusive=(True, True), axis=0, ddof=0)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Meaning</th></tr>
+<tr><td>ddof</td><td>int</td><td>0 (np) / 1 (pd)</td><td>Delta degrees of freedom</td></tr>
+<tr><td>skipna (pandas)</td><td>bool</td><td>True</td><td>Exclude NA</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>scalar, ndarray</td><td>Variance</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>ddof=0 population; ddof=1 sample (pandas default)</li></ul>
+</div>
+
+<div class="entry" id="stat-std">
+<h4>Standard Deviation</h4>
+<p class="label">Formula</p>
+<div class="formula">σ = √(σ²) &nbsp;|&nbsp; s = √(s²)</div>
+<p class="label">Full Syntax</p>
+<pre>np.std(a, axis=None, dtype=None, out=None, ddof=0, keepdims=False, where=True)
+pd.Series.std(axis=None, skipna=True, ddof=1, numeric_only=False, **kwargs)
+stats.tstd(a, limits=None, inclusive=(True, True), axis=0, ddof=0)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Meaning</th></tr>
+<tr><td>ddof</td><td>int</td><td>0 (np) / 1 (pd)</td><td>Degrees of freedom correction</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>scalar, ndarray</td><td>Standard deviation</td></tr></table>
+</div>
+
+<div class="entry" id="stat-sample-var">
+<h4>Sample Variance</h4>
+<p class="label">Formula</p>
+<div class="formula">s² = (1/(n−1)) Σ (xᵢ − x̄)²</div>
+<p class="label">Full Syntax</p>
+<pre>np.var(x, ddof=1)
+pd.Series.var(ddof=1)
+stats.tvar(x, ddof=1)</pre>
+<p class="label">Parameters</p>
+<table><tr><th>Parameter</th><th>Type</th><th>Default</th><th>Meaning</th></tr>
+<tr><td>ddof</td><td>int</td><td>1</td><td>Set to 1 for unbiased sample variance</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>float</td><td>Sample variance (Bessel-corrected)</td></tr></table>
+</div>
+
+<div class="entry" id="stat-pop-var">
+<h4>Population Variance</h4>
+<p class="label">Formula</p>
+<div class="formula">σ² = (1/n) Σ (xᵢ − μ)²</div>
+<p class="label">Full Syntax</p>
+<pre>np.var(x, ddof=0)
+pd.Series.var(ddof=0)
+stats.tvar(x, ddof=0)</pre>
+<p class="label">Parameters</p>
+<table><tr><th>Parameter</th><th>Type</th><th>Default</th><th>Meaning</th></tr>
+<tr><td>ddof</td><td>int</td><td>0</td><td>No Bessel correction</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>float</td><td>Population variance</td></tr></table>
+</div>
+
+<div class="entry" id="stat-sample-std">
+<h4>Sample Standard Deviation</h4>
+<p class="label">Formula</p>
+<div class="formula">s = √(s²) = √((1/(n−1)) Σ (xᵢ − x̄)²)</div>
+<p class="label">Full Syntax</p>
+<pre>np.std(x, ddof=1)
+pd.Series.std(ddof=1)  # pandas default
+stats.tstd(x, ddof=1)</pre>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>float</td><td>Sample standard deviation</td></tr></table>
+</div>
+
+<div class="entry" id="stat-pop-std">
+<h4>Population Standard Deviation</h4>
+<p class="label">Formula</p>
+<div class="formula">σ = √(σ²) = √((1/n) Σ (xᵢ − μ)²)</div>
+<p class="label">Full Syntax</p>
+<pre>np.std(x, ddof=0)
+pd.Series.std(ddof=0)
+stats.tstd(x, ddof=0)</pre>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>float</td><td>Population standard deviation</td></tr></table>
+</div>
+
+<div class="entry" id="stat-percentile">
+<h4>Percentile</h4>
+<p class="label">Formula</p>
+<div class="formula">Value below which p% of observations fall (0 ≤ p ≤ 100)</div>
+<p class="label">Full Syntax</p>
+<pre>np.percentile(a, q, axis=None, out=None, overwrite_input=False, method='linear', keepdims=False)
+pd.Series.quantile(q, axis=0, numeric_only=False, interpolation='linear')  # q in [0,1]; percentile = q*100
+stats.scoreatpercentile(a, per, limit=None, interpolation_method='fraction')</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Meaning</th></tr>
+<tr><td>q / per</td><td>float, array</td><td>—</td><td>Percentile(s) 0–100</td></tr>
+<tr><td>method / interpolation</td><td>str</td><td>'linear'</td><td>Interpolation between ranks</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>scalar, ndarray</td><td>Percentile value(s)</td></tr></table>
+</div>
+
+<div class="entry" id="stat-quantile">
+<h4>Quantile</h4>
+<p class="label">Formula</p>
+<div class="formula">Value below which q proportion of observations fall (0 ≤ q ≤ 1)</div>
+<p class="label">Full Syntax</p>
+<pre>np.quantile(a, q, axis=None, out=None, overwrite_input=False, method='linear', keepdims=False)
+pd.Series.quantile(q=0.5, axis=0, numeric_only=False, interpolation='linear')
+df.quantile(q, axis=0, numeric_only=False, interpolation='linear')
+stats.mstats.mquantiles(a, prob=(0.25, 0.5, 0.75), alphap=0.4, betap=0.4)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Meaning</th></tr>
+<tr><td>q</td><td>float, array</td><td>0.5</td><td>Quantile(s) in [0, 1]</td></tr>
+<tr><td>interpolation</td><td>str</td><td>'linear'</td><td>'linear','lower','higher','midpoint','nearest'</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>scalar, Series</td><td>Quantile value(s)</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>np.percentile(a, 50) == np.quantile(a, 0.5)</li></ul>
+</div>
+
+<div class="entry" id="stat-zscore">
+<h4>Z-score</h4>
+<p class="label">Formula</p>
+<div class="formula">z = (x − μ) / σ &nbsp;|&nbsp; z = (x − x̄) / s</div>
+<p class="label">Full Syntax</p>
+<pre>from scipy import stats
+
+stats.zscore(a, axis=0, ddof=0, nan_policy='propagate')
+(x - np.mean(x)) / np.std(x, ddof=0)
+(x - x.mean()) / x.std(ddof=0)
+pd.Series.sub(df['col'].mean()).div(df['col'].std())</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Meaning</th></tr>
+<tr><td>ddof (scipy)</td><td>int</td><td>0</td><td>Degrees of freedom for std</td></tr>
+<tr><td>nan_policy</td><td>str</td><td>'propagate'</td><td>NA handling</td></tr>
+<tr><td>axis</td><td>int</td><td>0</td><td>Axis along which to compute</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>ndarray, Series</td><td>Standardized values (mean 0, std 1)</td></tr></table>
+</div>
+
+<div class="entry" id="stat-covariance">
+<h4>Covariance</h4>
+<p class="label">Formula</p>
+<div class="formula">Cov(X,Y) = (1/(n−1)) Σ (xᵢ − x̄)(yᵢ − ȳ)</div>
+<p class="label">Full Syntax</p>
+<pre>np.cov(m, y=None, rowvar=True, bias=False, ddof=None, fweights=None, aweights=None)
+pd.DataFrame.cov(min_periods=None, numeric_only=False)
+pd.Series.cov(other, min_periods=None, ddof=1)
+stats.covariance.from_arrays(x, y, frequency_weights=None, reliability_weights=None)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Meaning</th></tr>
+<tr><td>bias (numpy)</td><td>bool</td><td>False</td><td>False → divide by N−1</td></tr>
+<tr><td>ddof (pandas)</td><td>int</td><td>1</td><td>Degrees of freedom</td></tr>
+<tr><td>min_periods</td><td>int, optional</td><td>None</td><td>Min observations required</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>ndarray, DataFrame, float</td><td>Covariance matrix or pairwise covariance</td></tr></table>
+</div>
+
+<div class="entry" id="stat-correlation">
+<h4>Correlation</h4>
+<p class="label">Formula</p>
+<div class="formula">r = Cov(X,Y) / (σₓ · σᵧ) &nbsp;|&nbsp; Pearson: r ∈ [−1, 1]</div>
+<p class="label">Full Syntax</p>
+<pre>np.corrcoef(x, y=None, rowvar=True, bias=None, ddof=None)
+pd.DataFrame.corr(method='pearson', min_periods=1, numeric_only=False)
+pd.Series.corr(other, method='pearson', min_periods=None)
+stats.pearsonr(x, y)
+stats.spearmanr(a, b, axis=0, nan_policy='propagate')
+stats.kendalltau(x, y, nan_policy='omit', method='auto', variant='b')</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Meaning</th></tr>
+<tr><td>method (pandas)</td><td>str, callable</td><td>'pearson'</td><td>'pearson','kendall','spearman'</td></tr>
+<tr><td>min_periods</td><td>int</td><td>1</td><td>Min observations per pair</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>DataFrame, float, PearsonRResult</td><td>Correlation matrix or coefficient + p-value</td></tr></table>
+</div>
+
+<div class="entry" id="stat-ci">
+<h4>Confidence Interval</h4>
+<p class="label">Formula</p>
+<div class="formula">CI = x̄ ± t_{α/2, n−1} · (s / √n) &nbsp;|&nbsp; CI = x̄ ± z_{α/2} · (σ / √n)</div>
+<p class="label">Full Syntax</p>
+<pre>from scipy import stats
+
+stats.t.interval(confidence=0.95, df=n-1, loc=np.mean(x), scale=stats.sem(x))
+stats.norm.interval(confidence=0.95, loc=np.mean(x), scale=stats.sem(x))
+stats.ttest_1samp(a, popmean=0, axis=0, nan_policy='propagate', alternative='two-sided').confidence_interval(confidence_level=0.95)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Meaning</th></tr>
+<tr><td>confidence</td><td>float</td><td>0.95</td><td>Confidence level (e.g. 0.95 = 95%)</td></tr>
+<tr><td>df</td><td>int</td><td>n−1</td><td>Degrees of freedom (t-distribution)</td></tr>
+<tr><td>loc</td><td>float</td><td>sample mean</td><td>Center of interval</td></tr>
+<tr><td>scale</td><td>float</td><td>SEM</td><td>Standard error of the mean</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>tuple (low, high)</td><td>Lower and upper confidence bounds</td></tr></table>
+</div>
+
+<div class="entry" id="stat-bootstrap-ci">
+<h4>Bootstrap Confidence Interval</h4>
+<p class="label">Formula</p>
+<div class="formula">Resample with replacement B times → compute statistic each → CI = [percentile(α/2), percentile(1−α/2)]</div>
+<p class="label">Full Syntax</p>
+<pre>from scipy import stats
+
+rng = np.random.default_rng(seed=42)
+data = (x,)  # tuple of samples
+res = stats.bootstrap(data, np.mean, n_resamples=9999, confidence_level=0.95,
+                      random_state=rng, method='percentile', vectorized=False,
+                      paired=False, axis=0, batch=None)
+res.confidence_interval  # .low, .high</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Meaning</th></tr>
+<tr><td>data</td><td>sequence of arrays</td><td>—</td><td>Sample(s) to bootstrap</td></tr>
+<tr><td>statistic</td><td>callable</td><td>—</td><td>Function computing statistic (e.g. np.mean)</td></tr>
+<tr><td>n_resamples</td><td>int</td><td>9999</td><td>Number of bootstrap iterations</td></tr>
+<tr><td>confidence_level</td><td>float</td><td>0.95</td><td>Confidence level</td></tr>
+<tr><td>random_state</td><td>Generator, int</td><td>None</td><td>Random number generator</td></tr>
+<tr><td>method</td><td>{'percentile','basic','bca'}</td><td>'BCa'</td><td>CI construction method</td></tr>
+<tr><td>vectorized</td><td>bool</td><td>False</td><td>Vectorize statistic over resamples</td></tr>
+<tr><td>paired</td><td>bool</td><td>False</td><td>Paired bootstrap</td></tr>
+<tr><td>axis</td><td>int</td><td>0</td><td>Axis of samples</td></tr>
+<tr><td>batch</td><td>int, optional</td><td>None</td><td>Batch size for vectorized</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>BootstrapResult</td><td>.confidence_interval, .bootstrap_distribution, .standard_error</td></tr></table>
+</div>
+
+</section>
+
+<section id="machine-learning">
+<h2>MACHINE LEARNING</h2>
+
+<h3 id="ml-encoding">Encoding</h3>
+
+<div class="entry" id="pd-get-dummies">
+<h4>pd.get_dummies()</h4>
+<p class="label">Full Syntax</p>
+<pre>pandas.get_dummies(data, prefix=None, prefix_sep='_', dummy_na=False, columns=None, sparse=False, drop_first=False, dtype=None)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>data</td><td>array-like, Series, DataFrame</td><td>—</td><td>DataFrame</td><td>Data to encode</td></tr>
+<tr><td>prefix</td><td>str, list, dict</td><td>None</td><td>'col', {'col':'pre'}</td><td>Prefix for new column names</td></tr>
+<tr><td>prefix_sep</td><td>str</td><td>'_'</td><td>'_'</td><td>Separator between prefix and level</td></tr>
+<tr><td>dummy_na</td><td>bool</td><td>False</td><td>True, False</td><td>Create column for NaN</td></tr>
+<tr><td>columns</td><td>list-like, optional</td><td>None</td><td>['cat1']</td><td>Columns to encode (DataFrame)</td></tr>
+<tr><td>sparse</td><td>bool</td><td>False</td><td>True, False</td><td>Return sparse matrix (deprecated)</td></tr>
+<tr><td>drop_first</td><td>bool</td><td>False</td><td>True, False</td><td>Drop first level (avoid multicollinearity)</td></tr>
+<tr><td>dtype</td><td>dtype, optional</td><td>None</td><td>np.uint8, bool</td><td>Output dtype</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>DataFrame</td><td>One-hot encoded columns (0/1)</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>drop_first=True for n−1 dummy variables</li></ul>
+</div>
+
+<h3 id="ml-scaling">Feature Scaling</h3>
+
+<div class="entry" id="standard-scaler">
+<h4>StandardScaler()</h4>
+<p class="label">Full Syntax</p>
+<pre>from sklearn.preprocessing import StandardScaler
+
+StandardScaler(*, copy=True, with_mean=True, with_std=True)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>copy</td><td>bool</td><td>True</td><td>True, False</td><td>Copy input or operate in-place</td></tr>
+<tr><td>with_mean</td><td>bool</td><td>True</td><td>True, False</td><td>Center to zero mean before scaling</td></tr>
+<tr><td>with_std</td><td>bool</td><td>True</td><td>True, False</td><td>Scale to unit variance</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>StandardScaler</td><td>Scaler estimator object</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Transforms: z = (x − mean) / std</li><li>Attributes after fit: mean_, scale_, var_, n_features_in_, feature_names_in_</li></ul>
+</div>
+
+<div class="entry" id="scaler-fit">
+<h4>StandardScaler.fit()</h4>
+<p class="label">Full Syntax</p>
+<pre>StandardScaler.fit(X, y=None, sample_weight=None)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>X</td><td>{array-like, sparse matrix}</td><td>—</td><td>(n_samples, n_features)</td><td>Training data to compute mean/std</td></tr>
+<tr><td>y</td><td>ignored</td><td>None</td><td>—</td><td>Ignored (API compatibility)</td></tr>
+<tr><td>sample_weight</td><td>array-like, optional</td><td>None</td><td>(n_samples,)</td><td>Per-sample weights</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>self</td><td>Fitted scaler</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Learns mean_ and scale_ from training data only</li></ul>
+</div>
+
+<div class="entry" id="scaler-transform">
+<h4>StandardScaler.transform()</h4>
+<p class="label">Full Syntax</p>
+<pre>StandardScaler.transform(X, copy=None)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>X</td><td>{array-like, sparse matrix}</td><td>—</td><td>(n_samples, n_features)</td><td>Data to standardize</td></tr>
+<tr><td>copy</td><td>bool, optional</td><td>None</td><td>True, False</td><td>Override copy setting</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>ndarray or sparse matrix</td><td>Standardized features</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Must call fit() first; returns new array</li></ul>
+</div>
+
+<div class="entry" id="scaler-fit-transform">
+<h4>StandardScaler.fit_transform()</h4>
+<p class="label">Full Syntax</p>
+<pre>StandardScaler.fit_transform(X, y=None, **fit_params)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>X</td><td>{array-like, sparse matrix}</td><td>—</td><td>(n_samples, n_features)</td><td>Training data</td></tr>
+<tr><td>y</td><td>ignored</td><td>None</td><td>—</td><td>Ignored</td></tr>
+<tr><td>**fit_params</td><td>any</td><td>—</td><td>sample_weight</td><td>Passed to fit()</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>ndarray or sparse matrix</td><td>Standardized training data</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Equivalent to fit(X).transform(X)</li></ul>
+</div>
+
+<div class="entry" id="scaler-inverse-transform">
+<h4>StandardScaler.inverse_transform()</h4>
+<p class="label">Full Syntax</p>
+<pre>StandardScaler.inverse_transform(X, copy=None)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>X</td><td>{array-like, sparse matrix}</td><td>—</td><td>scaled data</td><td>Standardized data to reverse</td></tr>
+<tr><td>copy</td><td>bool, optional</td><td>None</td><td>True, False</td><td>Override copy setting</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>ndarray or sparse matrix</td><td>Original-scale data</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>x = X * scale_ + mean_</li></ul>
+</div>
+
+<h3 id="ml-linreg">Linear Regression</h3>
+
+<div class="entry" id="linear-regression">
+<h4>LinearRegression()</h4>
+<p class="label">Full Syntax</p>
+<pre>from sklearn.linear_model import LinearRegression
+
+LinearRegression(*, fit_intercept=True, copy_X=True, n_jobs=None, positive=False)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>fit_intercept</td><td>bool</td><td>True</td><td>True, False</td><td>Calculate intercept (bias term)</td></tr>
+<tr><td>copy_X</td><td>bool</td><td>True</td><td>True, False</td><td>Copy X; if False may overwrite</td></tr>
+<tr><td>n_jobs</td><td>int, optional</td><td>None</td><td>int</td><td>Parallel jobs (deprecated for OLS)</td></tr>
+<tr><td>positive</td><td>bool</td><td>False</td><td>True, False</td><td>Force coefficients ≥ 0 (NNLS)</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>LinearRegression</td><td>OLS estimator object</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Attributes after fit: coef_, intercept_, n_features_in_</li></ul>
+</div>
+
+<div class="entry" id="linreg-fit">
+<h4>LinearRegression.fit()</h4>
+<p class="label">Full Syntax</p>
+<pre>LinearRegression.fit(X, y, sample_weight=None)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>X</td><td>{array-like, sparse matrix}</td><td>—</td><td>(n_samples, n_features)</td><td>Training features</td></tr>
+<tr><td>y</td><td>{array-like}</td><td>—</td><td>(n_samples,) or (n_samples, n_targets)</td><td>Target values</td></tr>
+<tr><td>sample_weight</td><td>array-like, optional</td><td>None</td><td>(n_samples,)</td><td>Individual sample weights</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>self</td><td>Fitted estimator</td></tr></table>
+</div>
+
+<div class="entry" id="linreg-predict">
+<h4>LinearRegression.predict()</h4>
+<p class="label">Full Syntax</p>
+<pre>LinearRegression.predict(X)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>X</td><td>{array-like, sparse matrix}</td><td>—</td><td>(n_samples, n_features)</td><td>Samples to predict</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>ndarray</td><td>Predicted values (n_samples,) or (n_samples, n_targets)</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>y_pred = X @ coef_.T + intercept_</li></ul>
+</div>
+
+<div class="entry" id="linreg-score">
+<h4>LinearRegression.score()</h4>
+<p class="label">Full Syntax</p>
+<pre>LinearRegression.score(X, y, sample_weight=None)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>X</td><td>array-like</td><td>—</td><td>features</td><td>Test samples</td></tr>
+<tr><td>y</td><td>array-like</td><td>—</td><td>targets</td><td>True values</td></tr>
+<tr><td>sample_weight</td><td>array-like, optional</td><td>None</td><td>weights</td><td>Sample weights</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>float</td><td>R² coefficient of determination</td></tr></table>
+</div>
+
+<div class="entry" id="linreg-get-params">
+<h4>LinearRegression.get_params()</h4>
+<p class="label">Full Syntax</p>
+<pre>LinearRegression.get_params(deep=True)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>deep</td><td>bool</td><td>True</td><td>True, False</td><td>Return parameters of nested estimators</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>dict</td><td>Parameter names mapped to values</td></tr></table>
+</div>
+
+<div class="entry" id="linreg-set-params">
+<h4>LinearRegression.set_params()</h4>
+<p class="label">Full Syntax</p>
+<pre>LinearRegression.set_params(**params)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>**params</td><td>any</td><td>—</td><td>fit_intercept=False</td><td>Estimator parameters to set</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>self</td><td>Estimator with updated params</td></tr></table>
+</div>
+
+<div class="entry" id="linreg-coef">
+<h4>LinearRegression.coef_</h4>
+<p class="label">Full Syntax</p>
+<pre>model.coef_</pre>
+<p class="label">Parameters</p>
+<table><tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr><tr><td colspan="5">Attribute — available after fit()</td></tr></table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>ndarray</td><td>Shape (n_features,) or (n_targets, n_features)</td></tr></table>
+</div>
+
+<div class="entry" id="linreg-intercept">
+<h4>LinearRegression.intercept_</h4>
+<p class="label">Full Syntax</p>
+<pre>model.intercept_</pre>
+<p class="label">Parameters</p>
+<table><tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr><tr><td colspan="5">Attribute — available after fit()</td></tr></table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>float or ndarray</td><td>Intercept (bias) term(s)</td></tr></table>
+</div>
+
+<h3 id="ml-logreg">Logistic Regression</h3>
+
+<div class="entry" id="logistic-regression">
+<h4>LogisticRegression()</h4>
+<p class="label">Full Syntax</p>
+<pre>from sklearn.linear_model import LogisticRegression
+
+LogisticRegression(penalty='l2', *, dual=False, tol=0.0001, C=1.0, fit_intercept=True, intercept_scaling=1, class_weight=None, random_state=None, solver='lbfgs', max_iter=100, multi_class='deprecated', verbose=0, warm_start=False, n_jobs=None, l1_ratio=None)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>penalty</td><td>{'l1','l2','elasticnet',None}</td><td>'l2'</td><td>penalty types</td><td>Regularization norm</td></tr>
+<tr><td>dual</td><td>bool</td><td>False</td><td>True, False</td><td>Dual formulation (liblinear, L2)</td></tr>
+<tr><td>tol</td><td>float</td><td>1e-4</td><td>float</td><td>Stopping criterion tolerance</td></tr>
+<tr><td>C</td><td>float</td><td>1.0</td><td>float &gt; 0</td><td>Inverse regularization strength</td></tr>
+<tr><td>fit_intercept</td><td>bool</td><td>True</td><td>True, False</td><td>Add intercept term</td></tr>
+<tr><td>intercept_scaling</td><td>float</td><td>1</td><td>float</td><td>Intercept scaling (liblinear)</td></tr>
+<tr><td>class_weight</td><td>dict, 'balanced', optional</td><td>None</td><td>{0:1, 1:2}, 'balanced'</td><td>Class weights</td></tr>
+<tr><td>random_state</td><td>int, Generator, optional</td><td>None</td><td>int</td><td>Random seed</td></tr>
+<tr><td>solver</td><td>{'lbfgs','liblinear','newton-cg','newton-cholesky','sag','saga'}</td><td>'lbfgs'</td><td>solver names</td><td>Optimization algorithm</td></tr>
+<tr><td>max_iter</td><td>int</td><td>100</td><td>int</td><td>Max solver iterations</td></tr>
+<tr><td>multi_class</td><td>{'auto','ovr','multinomial'}</td><td>'deprecated'</td><td>multiclass modes</td><td>Multiclass strategy (deprecated)</td></tr>
+<tr><td>verbose</td><td>int</td><td>0</td><td>≥0</td><td>Verbosity level</td></tr>
+<tr><td>warm_start</td><td>bool</td><td>False</td><td>True, False</td><td>Reuse previous solution</td></tr>
+<tr><td>n_jobs</td><td>int, optional</td><td>None</td><td>int</td><td>Parallel jobs (ovr)</td></tr>
+<tr><td>l1_ratio</td><td>float, optional</td><td>None</td><td>0.0–1.0</td><td>Elastic-net mixing (saga)</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>LogisticRegression</td><td>Classifier estimator</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Attributes after fit: coef_, intercept_, classes_, n_features_in_</li></ul>
+</div>
+
+<div class="entry" id="logreg-fit">
+<h4>LogisticRegression.fit()</h4>
+<p class="label">Full Syntax</p>
+<pre>LogisticRegression.fit(X, y, sample_weight=None)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>X</td><td>{array-like, sparse matrix}</td><td>—</td><td>(n_samples, n_features)</td><td>Training features</td></tr>
+<tr><td>y</td><td>{array-like}</td><td>—</td><td>(n_samples,)</td><td>Class labels</td></tr>
+<tr><td>sample_weight</td><td>array-like, optional</td><td>None</td><td>(n_samples,)</td><td>Sample weights</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>self</td><td>Fitted classifier</td></tr></table>
+</div>
+
+<div class="entry" id="logreg-predict">
+<h4>LogisticRegression.predict()</h4>
+<p class="label">Full Syntax</p>
+<pre>LogisticRegression.predict(X)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>X</td><td>{array-like, sparse matrix}</td><td>—</td><td>(n_samples, n_features)</td><td>Samples to classify</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>ndarray</td><td>Predicted class labels (n_samples,)</td></tr></table>
+</div>
+
+<div class="entry" id="logreg-predict-proba">
+<h4>LogisticRegression.predict_proba()</h4>
+<p class="label">Full Syntax</p>
+<pre>LogisticRegression.predict_proba(X)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>X</td><td>{array-like, sparse matrix}</td><td>—</td><td>(n_samples, n_features)</td><td>Samples</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>ndarray</td><td>Class probabilities (n_samples, n_classes)</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Rows sum to 1.0</li></ul>
+</div>
+
+<div class="entry" id="logreg-score">
+<h4>LogisticRegression.score()</h4>
+<p class="label">Full Syntax</p>
+<pre>LogisticRegression.score(X, y, sample_weight=None)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>X</td><td>array-like</td><td>—</td><td>features</td><td>Test samples</td></tr>
+<tr><td>y</td><td>array-like</td><td>—</td><td>labels</td><td>True labels</td></tr>
+<tr><td>sample_weight</td><td>array-like, optional</td><td>None</td><td>weights</td><td>Sample weights</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>float</td><td>Mean accuracy on test set</td></tr></table>
+</div>
+
+<div class="entry" id="logreg-get-params">
+<h4>LogisticRegression.get_params()</h4>
+<p class="label">Full Syntax</p>
+<pre>LogisticRegression.get_params(deep=True)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>deep</td><td>bool</td><td>True</td><td>True, False</td><td>Include nested estimator params</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>dict</td><td>Parameter name → value mapping</td></tr></table>
+</div>
+
+<div class="entry" id="logreg-set-params">
+<h4>LogisticRegression.set_params()</h4>
+<p class="label">Full Syntax</p>
+<pre>LogisticRegression.set_params(**params)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>**params</td><td>any</td><td>—</td><td>C=0.1, solver='saga'</td><td>Parameters to set</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>self</td><td>Updated estimator</td></tr></table>
+</div>
+
+<div class="entry" id="logreg-coef">
+<h4>LogisticRegression.coef_</h4>
+<p class="label">Full Syntax</p>
+<pre>model.coef_</pre>
+<p class="label">Parameters</p>
+<table><tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr><tr><td colspan="5">Attribute — after fit()</td></tr></table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>ndarray</td><td>(n_classes, n_features) or (1, n_features) binary</td></tr></table>
+</div>
+
+<div class="entry" id="logreg-intercept">
+<h4>LogisticRegression.intercept_</h4>
+<p class="label">Full Syntax</p>
+<pre>model.intercept_</pre>
+<p class="label">Parameters</p>
+<table><tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr><tr><td colspan="5">Attribute — after fit()</td></tr></table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>ndarray</td><td>(n_classes,) intercept values</td></tr></table>
+</div>
+
+<h3 id="ml-metrics">Metrics</h3>
+
+<div class="entry" id="accuracy-score">
+<h4>accuracy_score()</h4>
+<p class="label">Full Syntax</p>
+<pre>from sklearn.metrics import accuracy_score
+
+accuracy_score(y_true, y_pred, *, normalize=True, sample_weight=None)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>y_true</td><td>1d array-like</td><td>—</td><td>labels</td><td>Ground truth labels</td></tr>
+<tr><td>y_pred</td><td>1d array-like</td><td>—</td><td>labels</td><td>Predicted labels</td></tr>
+<tr><td>normalize</td><td>bool</td><td>True</td><td>True, False</td><td>Return fraction; False returns count</td></tr>
+<tr><td>sample_weight</td><td>array-like, optional</td><td>None</td><td>weights</td><td>Sample weights</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>float</td><td>Fraction or count of correct predictions</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>(TP+TN) / (TP+TN+FP+FN)</li></ul>
+</div>
+
+<div class="entry" id="precision-score">
+<h4>precision_score()</h4>
+<p class="label">Full Syntax</p>
+<pre>from sklearn.metrics import precision_score
+
+precision_score(y_true, y_pred, *, labels=None, pos_label=1, average='binary', sample_weight=None, zero_division='warn')</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>y_true</td><td>1d array-like</td><td>—</td><td>labels</td><td>Ground truth</td></tr>
+<tr><td>y_pred</td><td>1d array-like</td><td>—</td><td>labels</td><td>Predictions</td></tr>
+<tr><td>labels</td><td>array-like, optional</td><td>None</td><td>list</td><td>Labels to include</td></tr>
+<tr><td>pos_label</td><td>int, str</td><td>1</td><td>0, 1, 'positive'</td><td>Positive class label</td></tr>
+<tr><td>average</td><td>{'micro','macro','samples','weighted','binary'}</td><td>'binary'</td><td>average modes</td><td>Averaging strategy</td></tr>
+<tr><td>sample_weight</td><td>array-like, optional</td><td>None</td><td>weights</td><td>Sample weights</td></tr>
+<tr><td>zero_division</td><td>{0,1,'warn'}</td><td>'warn'</td><td>0, 1, 'warn'</td><td>Value when division by zero</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>float</td><td>Precision: TP / (TP + FP)</td></tr></table>
+</div>
+
+<div class="entry" id="recall-score">
+<h4>recall_score()</h4>
+<p class="label">Full Syntax</p>
+<pre>from sklearn.metrics import recall_score
+
+recall_score(y_true, y_pred, *, labels=None, pos_label=1, average='binary', sample_weight=None, zero_division='warn')</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>y_true</td><td>1d array-like</td><td>—</td><td>labels</td><td>Ground truth</td></tr>
+<tr><td>y_pred</td><td>1d array-like</td><td>—</td><td>labels</td><td>Predictions</td></tr>
+<tr><td>labels</td><td>array-like, optional</td><td>None</td><td>list</td><td>Labels to include</td></tr>
+<tr><td>pos_label</td><td>int, str</td><td>1</td><td>label</td><td>Positive class</td></tr>
+<tr><td>average</td><td>{'micro','macro','samples','weighted','binary'}</td><td>'binary'</td><td>average modes</td><td>Averaging strategy</td></tr>
+<tr><td>sample_weight</td><td>array-like, optional</td><td>None</td><td>weights</td><td>Sample weights</td></tr>
+<tr><td>zero_division</td><td>{0,1,'warn'}</td><td>'warn'</td><td>0, 1, 'warn'</td><td>Zero division handling</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>float</td><td>Recall (Sensitivity): TP / (TP + FN)</td></tr></table>
+</div>
+
+<div class="entry" id="f1-score">
+<h4>f1_score()</h4>
+<p class="label">Full Syntax</p>
+<pre>from sklearn.metrics import f1_score
+
+f1_score(y_true, y_pred, *, labels=None, pos_label=1, average='binary', sample_weight=None, zero_division='warn')</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>y_true</td><td>1d array-like</td><td>—</td><td>labels</td><td>Ground truth</td></tr>
+<tr><td>y_pred</td><td>1d array-like</td><td>—</td><td>labels</td><td>Predictions</td></tr>
+<tr><td>labels</td><td>array-like, optional</td><td>None</td><td>list</td><td>Labels to include</td></tr>
+<tr><td>pos_label</td><td>int, str</td><td>1</td><td>label</td><td>Positive class</td></tr>
+<tr><td>average</td><td>{'micro','macro','samples','weighted','binary'}</td><td>'binary'</td><td>average modes</td><td>Averaging strategy</td></tr>
+<tr><td>sample_weight</td><td>array-like, optional</td><td>None</td><td>weights</td><td>Sample weights</td></tr>
+<tr><td>zero_division</td><td>{0,1,'warn'}</td><td>'warn'</td><td>0, 1, 'warn'</td><td>Zero division handling</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>float</td><td>F1 = 2 · (precision · recall) / (precision + recall)</td></tr></table>
+</div>
+
+<div class="entry" id="confusion-matrix">
+<h4>confusion_matrix()</h4>
+<p class="label">Full Syntax</p>
+<pre>from sklearn.metrics import confusion_matrix
+
+confusion_matrix(y_true, y_pred, *, labels=None, sample_weight=None, normalize=None)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>y_true</td><td>array-like</td><td>—</td><td>labels</td><td>Ground truth</td></tr>
+<tr><td>y_pred</td><td>array-like</td><td>—</td><td>labels</td><td>Predictions</td></tr>
+<tr><td>labels</td><td>array-like, optional</td><td>None</td><td>[0,1,2]</td><td>Index order of matrix</td></tr>
+<tr><td>sample_weight</td><td>array-like, optional</td><td>None</td><td>weights</td><td>Sample weights</td></tr>
+<tr><td>normalize</td><td>{'true','pred','all'}, optional</td><td>None</td><td>normalize modes</td><td>Normalize by row/col/all</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>ndarray (n_classes, n_classes)</td><td>C[i,j] = true i, predicted j</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Rows = true class; columns = predicted class</li></ul>
+</div>
+
+<h3 id="ml-sigmoid">Sigmoid Function</h3>
+
+<div class="entry" id="sigmoid">
+<h4>Sigmoid</h4>
+<p class="label">Formula</p>
+<div class="formula">σ(z) = 1 / (1 + e<sup>−z</sup>)</div>
+<p class="label">Full Syntax</p>
+<pre>import numpy as np
+
+def sigmoid(z):
+    return 1 / (1 + np.exp(-z))
+
+# vectorized
+sigmoid = lambda z: 1 / (1 + np.exp(-z))
+np_sigmoid = lambda z: np.where(z &gt;= 0, 1 / (1 + np.exp(-z)), np.exp(z) / (1 + np.exp(z)))  # numerically stable</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>z</td><td>scalar, array-like</td><td>—</td><td>float, ndarray</td><td>Input (log-odds / linear combination)</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>float or ndarray</td><td>Probability in (0, 1)</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Output range: (0, 1)</li><li>Use stable form for large |z| to avoid overflow</li><li>LogisticRegression: P(y=1|x) = sigmoid(x @ coef + intercept)</li></ul>
+</div>
+
+</section>

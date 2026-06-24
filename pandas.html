@@ -1,0 +1,1081 @@
+<section id="pandas">
+<h2>PANDAS</h2>
+
+<h3 id="pd-io">Input / Output</h3>
+
+<div class="entry" id="pd-read-csv">
+<h4>pd.read_csv()</h4>
+<p class="label">Full Syntax</p>
+<pre>pandas.read_csv(filepath_or_buffer, sep=',', delimiter=None, header='infer', names=None, index_col=None, usecols=None, dtype=None, engine=None, converters=None, true_values=None, false_values=None, skipinitialspace=False, skiprows=None, skipfooter=0, nrows=None, na_values=None, keep_default_na=True, na_filter=True, verbose=False, skip_blank_lines=True, parse_dates=False, infer_datetime_format=False, keep_date_col=False, date_parser=None, date_format=None, dayfirst=False, cache_dates=True, iterator=False, chunksize=None, compression='infer', thousands=None, decimal='.', lineterminator=None, quotechar='"', quoting=0, doublequote=True, escapechar=None, comment=None, encoding=None, encoding_errors='strict', dialect=None, on_bad_lines='error', delim_whitespace=False, low_memory=True, memory_map=False, float_precision=None, storage_options=None, dtype_backend=&lt;no default&gt;)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>filepath_or_buffer</td><td>str, path, file-like</td><td>—</td><td>path, URL, buffer</td><td>CSV file source</td></tr>
+<tr><td>sep</td><td>str</td><td>','</td><td>',', '\t', ';'</td><td>Delimiter to use</td></tr>
+<tr><td>delimiter</td><td>str, optional</td><td>None</td><td>same as sep</td><td>Deprecated alias for sep</td></tr>
+<tr><td>header</td><td>int, list of int, None</td><td>'infer'</td><td>0, [0,1], None</td><td>Row(s) for column names</td></tr>
+<tr><td>names</td><td>list-like, optional</td><td>None</td><td>['col1','col2']</td><td>Column names to use</td></tr>
+<tr><td>index_col</td><td>int, str, list, False</td><td>None</td><td>0, 'id', [0,1]</td><td>Column(s) as index</td></tr>
+<tr><td>usecols</td><td>list-like, callable, optional</td><td>None</td><td>['a','b'], range</td><td>Columns to parse</td></tr>
+<tr><td>dtype</td><td>dtype or dict</td><td>None</td><td>{'col':'int64'}</td><td>Data types for columns</td></tr>
+<tr><td>engine</td><td>{'c','python','pyarrow'}</td><td>None</td><td>'c','python'</td><td>Parser engine</td></tr>
+<tr><td>converters</td><td>dict</td><td>None</td><td>{'col': func}</td><td>Column conversion functions</td></tr>
+<tr><td>true_values</td><td>list</td><td>None</td><td>['True','yes']</td><td>Values to interpret as True</td></tr>
+<tr><td>false_values</td><td>list</td><td>None</td><td>['False','no']</td><td>Values to interpret as False</td></tr>
+<tr><td>skipinitialspace</td><td>bool</td><td>False</td><td>True, False</td><td>Skip spaces after delimiter</td></tr>
+<tr><td>skiprows</td><td>int, list, callable</td><td>None</td><td>1, [0,2]</td><td>Lines to skip at start</td></tr>
+<tr><td>skipfooter</td><td>int</td><td>0</td><td>≥0</td><td>Lines to skip at end (python engine)</td></tr>
+<tr><td>nrows</td><td>int, optional</td><td>None</td><td>int</td><td>Number of rows to read</td></tr>
+<tr><td>na_values</td><td>scalar, list, dict</td><td>None</td><td>['NA','']</td><td>Additional NA values</td></tr>
+<tr><td>keep_default_na</td><td>bool</td><td>True</td><td>True, False</td><td>Include default NA set</td></tr>
+<tr><td>na_filter</td><td>bool</td><td>True</td><td>True, False</td><td>Detect missing values</td></tr>
+<tr><td>verbose</td><td>bool</td><td>False</td><td>True, False</td><td>Print parse info</td></tr>
+<tr><td>skip_blank_lines</td><td>bool</td><td>True</td><td>True, False</td><td>Skip empty lines</td></tr>
+<tr><td>parse_dates</td><td>bool, list, dict</td><td>False</td><td>True, ['date']</td><td>Parse columns as dates</td></tr>
+<tr><td>infer_datetime_format</td><td>bool</td><td>False</td><td>True, False</td><td>Infer date format (deprecated)</td></tr>
+<tr><td>keep_date_col</td><td>bool</td><td>False</td><td>True, False</td><td>Keep original date columns</td></tr>
+<tr><td>date_parser</td><td>callable, optional</td><td>None</td><td>func</td><td>Custom date parser (deprecated)</td></tr>
+<tr><td>date_format</td><td>str, dict</td><td>None</td><td>'%Y-%m-%d'</td><td>strftime format for dates</td></tr>
+<tr><td>dayfirst</td><td>bool</td><td>False</td><td>True, False</td><td>DD/MM vs MM/DD</td></tr>
+<tr><td>cache_dates</td><td>bool</td><td>True</td><td>True, False</td><td>Cache unique date conversions</td></tr>
+<tr><td>iterator</td><td>bool</td><td>False</td><td>True, False</td><td>Return TextFileReader</td></tr>
+<tr><td>chunksize</td><td>int, optional</td><td>None</td><td>int</td><td>Rows per chunk</td></tr>
+<tr><td>compression</td><td>str, dict</td><td>'infer'</td><td>'gzip','zip',None</td><td>Compression type</td></tr>
+<tr><td>thousands</td><td>str, optional</td><td>None</td><td>','</td><td>Thousands separator</td></tr>
+<tr><td>decimal</td><td>str</td><td>'.'</td><td>'.', ','</td><td>Decimal character</td></tr>
+<tr><td>lineterminator</td><td>str, optional</td><td>None</td><td>'\n'</td><td>Line terminator</td></tr>
+<tr><td>quotechar</td><td>str</td><td>'"'</td><td>'"', "'"</td><td>Quote character</td></tr>
+<tr><td>quoting</td><td>int</td><td>0</td><td>csv.QUOTE_*</td><td>Quoting control</td></tr>
+<tr><td>doublequote</td><td>bool</td><td>True</td><td>True, False</td><td>Double quote within field</td></tr>
+<tr><td>escapechar</td><td>str, optional</td><td>None</td><td>'\\'</td><td>Escape character</td></tr>
+<tr><td>comment</td><td>str, optional</td><td>None</td><td>'#'</td><td>Comment character</td></tr>
+<tr><td>encoding</td><td>str, optional</td><td>None</td><td>'utf-8'</td><td>File encoding</td></tr>
+<tr><td>encoding_errors</td><td>str</td><td>'strict'</td><td>'ignore','replace'</td><td>Encoding error handling</td></tr>
+<tr><td>dialect</td><td>csv.Dialect, optional</td><td>None</td><td>Dialect</td><td>CSV dialect</td></tr>
+<tr><td>on_bad_lines</td><td>{'error','warn','skip'}</td><td>'error'</td><td>error modes</td><td>Handle malformed rows</td></tr>
+<tr><td>delim_whitespace</td><td>bool</td><td>False</td><td>True, False</td><td>Whitespace delimiter (deprecated)</td></tr>
+<tr><td>low_memory</td><td>bool</td><td>True</td><td>True, False</td><td>Chunked type inference</td></tr>
+<tr><td>memory_map</td><td>bool</td><td>False</td><td>True, False</td><td>Memory-map file</td></tr>
+<tr><td>float_precision</td><td>str, optional</td><td>None</td><td>'high','legacy'</td><td>Float parsing precision</td></tr>
+<tr><td>storage_options</td><td>dict, optional</td><td>None</td><td>dict</td><td>Remote storage options</td></tr>
+<tr><td>dtype_backend</td><td>{'numpy_nullable','pyarrow'}</td><td>None</td><td>backend names</td><td>Nullable dtype backend</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>DataFrame</td><td>Parsed CSV data</td></tr><tr><td>TextFileReader</td><td>If iterator=True or chunksize set</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Returns new DataFrame</li><li>Common: pd.read_csv('file.csv', index_col=0, parse_dates=True)</li></ul>
+</div>
+
+<div class="entry" id="pd-read-excel">
+<h4>pd.read_excel()</h4>
+<p class="label">Full Syntax</p>
+<pre>pandas.read_excel(io, sheet_name=0, *, header=0, names=None, index_col=None, usecols=None, dtype=None, engine=None, converters=None, true_values=None, false_values=None, skiprows=None, nrows=None, na_values=None, keep_default_na=True, na_filter=True, verbose=False, parse_dates=False, date_parser=None, date_format=None, thousands=None, decimal='.', comment=None, skipfooter=0, storage_options=None, dtype_backend=&lt;no default&gt;, engine_kwargs=None)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>io</td><td>str, path, bytes, file-like</td><td>—</td><td>path, buffer</td><td>Excel file</td></tr>
+<tr><td>sheet_name</td><td>str, int, list, None</td><td>0</td><td>0, 'Sheet1', [0,1]</td><td>Sheet(s) to read</td></tr>
+<tr><td>header</td><td>int, list of int, None</td><td>0</td><td>0, [0,1]</td><td>Row(s) for column labels</td></tr>
+<tr><td>names</td><td>list-like, optional</td><td>None</td><td>list of str</td><td>Column names</td></tr>
+<tr><td>index_col</td><td>int, str, list, optional</td><td>None</td><td>0, 'id'</td><td>Column as index</td></tr>
+<tr><td>usecols</td><td>int, str, list, callable</td><td>None</td><td>'A:C', [0,2]</td><td>Columns to parse</td></tr>
+<tr><td>dtype</td><td>dtype or dict</td><td>None</td><td>dict</td><td>Column dtypes</td></tr>
+<tr><td>engine</td><td>{'openpyxl','calamine','odf','pyxlsb','xlrd'}</td><td>None</td><td>engine names</td><td>Excel engine</td></tr>
+<tr><td>converters</td><td>dict</td><td>None</td><td>{col: func}</td><td>Column converters</td></tr>
+<tr><td>true_values</td><td>list</td><td>None</td><td>list</td><td>True values</td></tr>
+<tr><td>false_values</td><td>list</td><td>None</td><td>list</td><td>False values</td></tr>
+<tr><td>skiprows</td><td>int, list, callable</td><td>None</td><td>int, list</td><td>Rows to skip</td></tr>
+<tr><td>nrows</td><td>int, optional</td><td>None</td><td>int</td><td>Rows to read</td></tr>
+<tr><td>na_values</td><td>scalar, list, dict</td><td>None</td><td>list</td><td>NA values</td></tr>
+<tr><td>keep_default_na</td><td>bool</td><td>True</td><td>True, False</td><td>Keep default NA</td></tr>
+<tr><td>na_filter</td><td>bool</td><td>True</td><td>True, False</td><td>Detect NA</td></tr>
+<tr><td>verbose</td><td>bool</td><td>False</td><td>True, False</td><td>Verbose output</td></tr>
+<tr><td>parse_dates</td><td>bool, list, dict</td><td>False</td><td>True, ['date']</td><td>Parse dates</td></tr>
+<tr><td>date_parser</td><td>callable, optional</td><td>None</td><td>func</td><td>Date parser (deprecated)</td></tr>
+<tr><td>date_format</td><td>str, dict</td><td>None</td><td>str</td><td>Date format</td></tr>
+<tr><td>thousands</td><td>str, optional</td><td>None</td><td>','</td><td>Thousands separator</td></tr>
+<tr><td>decimal</td><td>str</td><td>'.'</td><td>'.'</td><td>Decimal point</td></tr>
+<tr><td>comment</td><td>str, optional</td><td>None</td><td>'#'</td><td>Comment char</td></tr>
+<tr><td>skipfooter</td><td>int</td><td>0</td><td>≥0</td><td>Rows to skip at end</td></tr>
+<tr><td>storage_options</td><td>dict, optional</td><td>None</td><td>dict</td><td>Storage options</td></tr>
+<tr><td>dtype_backend</td><td>{'numpy_nullable','pyarrow'}</td><td>None</td><td>backend</td><td>Nullable backend</td></tr>
+<tr><td>engine_kwargs</td><td>dict, optional</td><td>None</td><td>dict</td><td>Engine-specific kwargs</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>DataFrame</td><td>Single sheet data</td></tr><tr><td>dict of DataFrame</td><td>If sheet_name is list or None</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Requires openpyxl (xlsx) or xlrd (xls)</li></ul>
+</div>
+
+<div class="entry" id="pd-to-csv">
+<h4>DataFrame.to_csv()</h4>
+<p class="label">Full Syntax</p>
+<pre>DataFrame.to_csv(path_or_buf=None, sep=',', na_rep='', float_format=None, columns=None, header=True, index=True, index_label=None, mode='w', encoding=None, compression='infer', quoting=None, quotechar='"', lineterminator=None, chunksize=None, date_format=None, doublequote=True, escapechar=None, decimal='.', errors='strict', storage_options=None)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>path_or_buf</td><td>str, path, file-like</td><td>None</td><td>path, buffer</td><td>Output destination; None returns string</td></tr>
+<tr><td>sep</td><td>str</td><td>','</td><td>',', '\t'</td><td>Field delimiter</td></tr>
+<tr><td>na_rep</td><td>str</td><td>''</td><td>'NA', 'null'</td><td>Missing data representation</td></tr>
+<tr><td>float_format</td><td>str, callable</td><td>None</td><td>'%.2f'</td><td>Float formatting</td></tr>
+<tr><td>columns</td><td>sequence, optional</td><td>None</td><td>col names</td><td>Columns to write</td></tr>
+<tr><td>header</td><td>bool, list of str</td><td>True</td><td>True, False</td><td>Write column names</td></tr>
+<tr><td>index</td><td>bool</td><td>True</td><td>True, False</td><td>Write row names (index)</td></tr>
+<tr><td>index_label</td><td>str, sequence, False</td><td>None</td><td>'id'</td><td>Index column name(s)</td></tr>
+<tr><td>mode</td><td>{'w','a','x'}</td><td>'w'</td><td>'w','a'</td><td>File open mode</td></tr>
+<tr><td>encoding</td><td>str, optional</td><td>None</td><td>'utf-8'</td><td>Encoding</td></tr>
+<tr><td>compression</td><td>str, dict</td><td>'infer'</td><td>'gzip', None</td><td>Compression</td></tr>
+<tr><td>quoting</td><td>int, optional</td><td>None</td><td>csv.QUOTE_*</td><td>Quoting style</td></tr>
+<tr><td>quotechar</td><td>str</td><td>'"'</td><td>'"'</td><td>Quote character</td></tr>
+<tr><td>lineterminator</td><td>str, optional</td><td>None</td><td>'\n'</td><td>Line ending</td></tr>
+<tr><td>chunksize</td><td>int, optional</td><td>None</td><td>int</td><td>Rows per chunk</td></tr>
+<tr><td>date_format</td><td>str, optional</td><td>None</td><td>'%Y-%m-%d'</td><td>Datetime format</td></tr>
+<tr><td>doublequote</td><td>bool</td><td>True</td><td>True, False</td><td>Double-quote in fields</td></tr>
+<tr><td>escapechar</td><td>str, optional</td><td>None</td><td>'\\'</td><td>Escape character</td></tr>
+<tr><td>decimal</td><td>str</td><td>'.'</td><td>'.'</td><td>Decimal separator</td></tr>
+<tr><td>errors</td><td>str</td><td>'strict'</td><td>'ignore','replace'</td><td>Encoding errors</td></tr>
+<tr><td>storage_options</td><td>dict, optional</td><td>None</td><td>dict</td><td>Storage options</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>None or str</td><td>None if path given; CSV string if path_or_buf=None</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>index=False common to omit row index</li></ul>
+</div>
+
+<div class="entry" id="pd-to-excel">
+<h4>DataFrame.to_excel()</h4>
+<p class="label">Full Syntax</p>
+<pre>DataFrame.to_excel(excel_writer, sheet_name='Sheet1', na_rep='', float_format=None, columns=None, header=True, index=True, index_label=None, startrow=0, startcol=0, engine=None, merge_cells=True, inf_rep='inf', freeze_panes=None, storage_options=None, engine_kwargs=None)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>excel_writer</td><td>path, ExcelWriter</td><td>—</td><td>'out.xlsx', writer</td><td>Output file or writer object</td></tr>
+<tr><td>sheet_name</td><td>str</td><td>'Sheet1'</td><td>str</td><td>Sheet name</td></tr>
+<tr><td>na_rep</td><td>str</td><td>''</td><td>'NA'</td><td>Missing value string</td></tr>
+<tr><td>float_format</td><td>str, optional</td><td>None</td><td>'%.2f'</td><td>Float format</td></tr>
+<tr><td>columns</td><td>sequence, optional</td><td>None</td><td>list</td><td>Columns to write</td></tr>
+<tr><td>header</td><td>bool, list of str</td><td>True</td><td>True, False</td><td>Write header</td></tr>
+<tr><td>index</td><td>bool</td><td>True</td><td>True, False</td><td>Write index</td></tr>
+<tr><td>index_label</td><td>str, sequence</td><td>None</td><td>str</td><td>Index label</td></tr>
+<tr><td>startrow</td><td>int</td><td>0</td><td>≥0</td><td>Upper-left row offset</td></tr>
+<tr><td>startcol</td><td>int</td><td>0</td><td>≥0</td><td>Upper-left col offset</td></tr>
+<tr><td>engine</td><td>str, optional</td><td>None</td><td>'openpyxl','xlsxwriter'</td><td>Write engine</td></tr>
+<tr><td>merge_cells</td><td>bool</td><td>True</td><td>True, False</td><td>Merge MultiIndex cells</td></tr>
+<tr><td>inf_rep</td><td>str</td><td>'inf'</td><td>str</td><td>Representation for infinity</td></tr>
+<tr><td>freeze_panes</td><td>tuple, optional</td><td>None</td><td>(1,0)</td><td>Freeze pane position</td></tr>
+<tr><td>storage_options</td><td>dict, optional</td><td>None</td><td>dict</td><td>Storage options</td></tr>
+<tr><td>engine_kwargs</td><td>dict, optional</td><td>None</td><td>dict</td><td>Engine kwargs</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>None</td><td>Writes to file</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Use pd.ExcelWriter for multiple sheets</li></ul>
+</div>
+
+<h3 id="pd-inspection">Inspection</h3>
+
+<div class="entry" id="pd-head">
+<h4>DataFrame.head()</h4>
+<p class="label">Full Syntax</p>
+<pre>DataFrame.head(n=5)</pre>
+<p class="label">Parameters</p>
+<table><tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>n</td><td>int</td><td>5</td><td>≥0</td><td>Number of rows to return</td></tr></table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>DataFrame</td><td>First n rows (copy/view of subset)</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Returns new DataFrame subset</li></ul>
+</div>
+
+<div class="entry" id="pd-tail">
+<h4>DataFrame.tail()</h4>
+<p class="label">Full Syntax</p>
+<pre>DataFrame.tail(n=5)</pre>
+<p class="label">Parameters</p>
+<table><tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>n</td><td>int</td><td>5</td><td>≥0</td><td>Number of rows to return</td></tr></table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>DataFrame</td><td>Last n rows</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Returns new DataFrame subset</li></ul>
+</div>
+
+<div class="entry" id="pd-sample">
+<h4>DataFrame.sample()</h4>
+<p class="label">Full Syntax</p>
+<pre>DataFrame.sample(n=None, frac=None, replace=False, weights=None, random_state=None, axis=None, ignore_index=False)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>n</td><td>int, optional</td><td>None</td><td>int</td><td>Number of items to sample</td></tr>
+<tr><td>frac</td><td>float, optional</td><td>None</td><td>0.0–1.0</td><td>Fraction of items to sample</td></tr>
+<tr><td>replace</td><td>bool</td><td>False</td><td>True, False</td><td>Sample with replacement</td></tr>
+<tr><td>weights</td><td>str, ndarray, optional</td><td>None</td><td>array, col name</td><td>Sampling weights</td></tr>
+<tr><td>random_state</td><td>int, Generator, optional</td><td>None</td><td>int, np.random.Generator</td><td>Random seed/generator</td></tr>
+<tr><td>axis</td><td>{0,1,'index','columns'}</td><td>None</td><td>0, 1</td><td>Sample rows (0) or columns (1)</td></tr>
+<tr><td>ignore_index</td><td>bool</td><td>False</td><td>True, False</td><td>Reset index in result</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>DataFrame or Series</td><td>Random sample</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Specify n or frac, not both</li></ul>
+</div>
+
+<div class="entry" id="pd-info">
+<h4>DataFrame.info()</h4>
+<p class="label">Full Syntax</p>
+<pre>DataFrame.info(verbose=None, buf=None, max_cols=None, memory_usage=None, show_counts=None, null_counts=None)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>verbose</td><td>bool, optional</td><td>None</td><td>True, False</td><td>Full summary vs truncated</td></tr>
+<tr><td>buf</td><td>writable, optional</td><td>None</td><td>sys.stdout, StringIO</td><td>Output buffer</td></tr>
+<tr><td>max_cols</td><td>int, optional</td><td>None</td><td>int</td><td>Max columns to display</td></tr>
+<tr><td>memory_usage</td><td>bool, str</td><td>None</td><td>True, 'deep'</td><td>Memory usage display</td></tr>
+<tr><td>show_counts</td><td>bool, optional</td><td>None</td><td>True, False</td><td>Show non-null counts</td></tr>
+<tr><td>null_counts</td><td>bool, optional</td><td>None</td><td>True, False</td><td>Show null counts (deprecated alias)</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>None</td><td>Prints summary to stdout</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>In-place print; returns None</li></ul>
+</div>
+
+<div class="entry" id="pd-describe">
+<h4>DataFrame.describe()</h4>
+<p class="label">Full Syntax</p>
+<pre>DataFrame.describe(percentiles=None, include=None, exclude=None)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>percentiles</td><td>list-like, optional</td><td>None</td><td>[.25,.5,.75]</td><td>Percentiles to include</td></tr>
+<tr><td>include</td><td>'all', list-like, optional</td><td>None</td><td>['object'], dtypes</td><td>Columns to describe</td></tr>
+<tr><td>exclude</td><td>list-like, optional</td><td>None</td><td>['number']</td><td>Columns to exclude</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>DataFrame</td><td>Summary statistics</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Default: numeric columns only</li></ul>
+</div>
+
+<h3 id="pd-columns">Columns &amp; Types</h3>
+
+<div class="entry" id="pd-columns-attr">
+<h4>DataFrame.columns</h4>
+<p class="label">Full Syntax</p>
+<pre>df.columns</pre>
+<p class="label">Parameters</p>
+<table><tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr><tr><td colspan="5">Attribute — no parameters</td></tr></table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>Index</td><td>Column label index</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Assignable: df.columns = new_names</li></ul>
+</div>
+
+<div class="entry" id="pd-dtypes">
+<h4>DataFrame.dtypes</h4>
+<p class="label">Full Syntax</p>
+<pre>df.dtypes</pre>
+<p class="label">Parameters</p>
+<table><tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr><tr><td colspan="5">Attribute — no parameters</td></tr></table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>Series</td><td>Column name → dtype mapping</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Read-only attribute</li></ul>
+</div>
+
+<div class="entry" id="pd-select-dtypes">
+<h4>DataFrame.select_dtypes()</h4>
+<p class="label">Full Syntax</p>
+<pre>DataFrame.select_dtypes(include=None, exclude=None)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>include</td><td>scalar, list, optional</td><td>None</td><td>'number', np.int64, ['bool']</td><td>Subsets to include</td></tr>
+<tr><td>exclude</td><td>scalar, list, optional</td><td>None</td><td>'object', np.float64</td><td>Subsets to exclude</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>DataFrame</td><td>Subset with matching dtypes</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Returns new DataFrame view/copy of selected columns</li></ul>
+</div>
+
+<h3 id="pd-selection">Selection</h3>
+
+<div class="entry" id="pd-loc">
+<h4>DataFrame.loc[]</h4>
+<p class="label">Full Syntax</p>
+<pre>df.loc[row_indexer, column_indexer]
+df.loc[label]
+df.loc[label, 'col']
+df.loc[start:end, ['col1','col2']]
+df.loc[condition]</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>row_indexer</td><td>label, slice, list, bool array</td><td>—</td><td>'a', 0:5, [0,2], mask</td><td>Row selection by label</td></tr>
+<tr><td>column_indexer</td><td>label, slice, list, optional</td><td>—</td><td>'col', 'a':'c'</td><td>Column selection by label</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>Series or DataFrame or scalar</td><td>Selected data</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Label-based; slice end is inclusive</li><li>Assignment modifies in-place</li></ul>
+</div>
+
+<div class="entry" id="pd-iloc">
+<h4>DataFrame.iloc[]</h4>
+<p class="label">Full Syntax</p>
+<pre>df.iloc[row_indexer, column_indexer]
+df.iloc[0]
+df.iloc[0:5, 1:3]
+df.iloc[[0,2,4], [0,1]]</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>row_indexer</td><td>int, slice, list, bool array</td><td>—</td><td>0, 0:5, [0,2]</td><td>Row selection by integer position</td></tr>
+<tr><td>column_indexer</td><td>int, slice, list, optional</td><td>—</td><td>0, 1:3</td><td>Column selection by position</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>Series or DataFrame or scalar</td><td>Selected data</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Integer-position based; slice end exclusive</li></ul>
+</div>
+
+<h3 id="pd-filtering">Filtering</h3>
+
+<div class="entry" id="pd-bool-filter">
+<h4>Boolean Filtering</h4>
+<p class="label">Full Syntax</p>
+<pre>df[df['col'] &gt; value]
+df[df['col'].isin([a, b])]
+df[(df['a'] &gt; x) &amp; (df['b'] &lt; y)]
+df.query equivalent via bracket notation</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>condition</td><td>Series, bool</td><td>—</td><td>boolean Series aligned to index</td><td>Rows where True retained</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>DataFrame</td><td>Filtered rows (new object)</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Use &amp;, |, ~ with parentheses for multiple conditions</li></ul>
+</div>
+
+<div class="entry" id="pd-query">
+<h4>DataFrame.query()</h4>
+<p class="label">Full Syntax</p>
+<pre>DataFrame.query(expr, parser='pandas', engine=None, local_dict=None, global_dict=None, resolvers=(), level=0, target=None, inplace=False)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>expr</td><td>str</td><td>—</td><td>'col &gt; 5 and b == "x"'</td><td>Query expression string</td></tr>
+<tr><td>parser</td><td>{'pandas','python'}</td><td>'pandas'</td><td>'pandas','python'</td><td>Expression parser</td></tr>
+<tr><td>engine</td><td>{'python','numexpr'}</td><td>None</td><td>engines</td><td>Evaluation engine</td></tr>
+<tr><td>local_dict</td><td>dict, optional</td><td>None</td><td>dict</td><td>Local variables for eval</td></tr>
+<tr><td>global_dict</td><td>dict, optional</td><td>None</td><td>dict</td><td>Global variables for eval</td></tr>
+<tr><td>resolvers</td><td>tuple</td><td>()</td><td>tuple</td><td>Column resolvers</td></tr>
+<tr><td>level</td><td>int</td><td>0</td><td>int</td><td>Stack level for globals</td></tr>
+<tr><td>target</td><td>object, optional</td><td>None</td><td>DataFrame</td><td>Target object</td></tr>
+<tr><td>inplace</td><td>bool</td><td>False</td><td>True, False</td><td>Modify in-place</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>DataFrame or None</td><td>Filtered DataFrame; None if inplace=True</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Column names with spaces: backticks `col name`</li><li>inplace=True modifies original</li></ul>
+</div>
+
+<h3 id="pd-missing">Missing Values</h3>
+
+<div class="entry" id="pd-isna">
+<h4>DataFrame.isna() / pd.isna()</h4>
+<p class="label">Full Syntax</p>
+<pre>pandas.isna(obj)
+DataFrame.isna()</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>obj</td><td>scalar, array, DataFrame</td><td>—</td><td>any</td><td>Object to test (pd.isna only)</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>bool, Series, DataFrame</td><td>True where NA/NaN</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Alias: isnull()</li></ul>
+</div>
+
+<div class="entry" id="pd-notna">
+<h4>DataFrame.notna() / pd.notna()</h4>
+<p class="label">Full Syntax</p>
+<pre>pandas.notna(obj)
+DataFrame.notna()</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>obj</td><td>scalar, array, DataFrame</td><td>—</td><td>any</td><td>Object to test (pd.notna only)</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>bool, Series, DataFrame</td><td>True where not NA</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Alias: notnull()</li></ul>
+</div>
+
+<div class="entry" id="pd-dropna">
+<h4>DataFrame.dropna()</h4>
+<p class="label">Full Syntax</p>
+<pre>DataFrame.dropna(*, axis=0, how='any', thresh=None, subset=None, inplace=False, ignore_index=False)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>axis</td><td>{0,1,'index','columns'}</td><td>0</td><td>0, 1</td><td>Drop rows (0) or columns (1)</td></tr>
+<tr><td>how</td><td>{'any','all'}</td><td>'any'</td><td>'any','all'</td><td>Drop if any or all NA</td></tr>
+<tr><td>thresh</td><td>int, optional</td><td>None</td><td>int</td><td>Min non-NA count to keep</td></tr>
+<tr><td>subset</td><td>label, array-like, optional</td><td>None</td><td>['col1']</td><td>Columns to consider</td></tr>
+<tr><td>inplace</td><td>bool</td><td>False</td><td>True, False</td><td>Modify in-place</td></tr>
+<tr><td>ignore_index</td><td>bool</td><td>False</td><td>True, False</td><td>Reset index</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>DataFrame or None</td><td>DataFrame without NA; None if inplace</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Default: drop rows with any NA</li></ul>
+</div>
+
+<div class="entry" id="pd-fillna">
+<h4>DataFrame.fillna()</h4>
+<p class="label">Full Syntax</p>
+<pre>DataFrame.fillna(value=None, *, method=None, axis=None, inplace=False, limit=None, downcast=None)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>value</td><td>scalar, dict, Series, DataFrame</td><td>None</td><td>0, {'col':1}, df.mean()</td><td>Fill value(s)</td></tr>
+<tr><td>method</td><td>{'backfill','bfill','ffill','pad'}, optional</td><td>None</td><td>fill methods</td><td>Fill method (deprecated)</td></tr>
+<tr><td>axis</td><td>{0,1}, optional</td><td>None</td><td>0, 1</td><td>Axis for method fill</td></tr>
+<tr><td>inplace</td><td>bool</td><td>False</td><td>True, False</td><td>Modify in-place</td></tr>
+<tr><td>limit</td><td>int, optional</td><td>None</td><td>int</td><td>Max consecutive fills</td></tr>
+<tr><td>downcast</td><td>dict, optional</td><td>None</td><td>dict</td><td>Downcast dtypes (deprecated)</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>DataFrame or None</td><td>Filled DataFrame; None if inplace</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>df.fillna(df.mean()) common for numeric</li><li>ffill()/bfill() preferred over method param</li></ul>
+</div>
+
+<h3 id="pd-replace">Replacement</h3>
+
+<div class="entry" id="pd-replace">
+<h4>DataFrame.replace()</h4>
+<p class="label">Full Syntax</p>
+<pre>DataFrame.replace(to_replace=None, value=_NoDefault.no_default, *, inplace=False, limit=None, regex=False, method=_NoDefault.no_default)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>to_replace</td><td>str, regex, list, dict, Series, int, float, None</td><td>None</td><td>'old', {old:new}, [a,b]</td><td>Values to replace</td></tr>
+<tr><td>value</td><td>scalar, dict, list, regex, optional</td><td>no_default</td><td>'new', {old:new}</td><td>Replacement value(s)</td></tr>
+<tr><td>inplace</td><td>bool</td><td>False</td><td>True, False</td><td>Modify in-place</td></tr>
+<tr><td>limit</td><td>int, optional</td><td>None</td><td>int</td><td>Max replacements per column (deprecated with method)</td></tr>
+<tr><td>regex</td><td>bool</td><td>False</td><td>True, False</td><td>Interpret to_replace as regex</td></tr>
+<tr><td>method</td><td>{'pad','ffill','bfill'}, optional</td><td>no_default</td><td>fill methods</td><td>Fill method (deprecated)</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>DataFrame, Series, or None</td><td>Object with replacements; None if inplace</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Dict form: df.replace({'col': {old: new}})</li></ul>
+</div>
+
+<h3 id="pd-astype">Type Conversion</h3>
+
+<div class="entry" id="pd-astype">
+<h4>DataFrame.astype()</h4>
+<p class="label">Full Syntax</p>
+<pre>DataFrame.astype(dtype, copy=_NoDefault.no_default, errors='raise')</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>dtype</td><td>dtype, str, dict, Series</td><td>—</td><td>'int64', {'col':'float'}</td><td>Target dtype(s)</td></tr>
+<tr><td>copy</td><td>bool, optional</td><td>no_default</td><td>True, False</td><td>Copy data</td></tr>
+<tr><td>errors</td><td>{'raise','ignore'}</td><td>'raise'</td><td>'raise','ignore'</td><td>On conversion failure</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>DataFrame, Series</td><td>Casted object</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Returns new object when copy=True</li></ul>
+</div>
+
+<h3 id="pd-rename">Rename</h3>
+
+<div class="entry" id="pd-rename">
+<h4>DataFrame.rename()</h4>
+<p class="label">Full Syntax</p>
+<pre>DataFrame.rename(mapper=None, *, index=None, columns=None, axis=None, copy=None, inplace=False, level=None, errors='ignore')</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>mapper</td><td>dict, function, optional</td><td>None</td><td>{old:new}, func</td><td>Renaming mapper (axis-dependent)</td></tr>
+<tr><td>index</td><td>dict, function, optional</td><td>None</td><td>{old:new}</td><td>Index relabeling</td></tr>
+<tr><td>columns</td><td>dict, function, optional</td><td>None</td><td>{old:new}</td><td>Column relabeling</td></tr>
+<tr><td>axis</td><td>{0,1,'index','columns'}, optional</td><td>None</td><td>0, 1</td><td>Axis for mapper (deprecated)</td></tr>
+<tr><td>copy</td><td>bool, optional</td><td>None</td><td>True, False</td><td>Copy underlying data</td></tr>
+<tr><td>inplace</td><td>bool</td><td>False</td><td>True, False</td><td>Modify in-place</td></tr>
+<tr><td>level</td><td>int, str, optional</td><td>None</td><td>0, 'name'</td><td>MultiIndex level</td></tr>
+<tr><td>errors</td><td>{'ignore','raise'}</td><td>'ignore'</td><td>'ignore','raise'</td><td>On missing labels</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>DataFrame or None</td><td>Renamed DataFrame; None if inplace</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>columns={'old':'new'} most common</li></ul>
+</div>
+
+<h3 id="pd-drop">Drop</h3>
+
+<div class="entry" id="pd-drop">
+<h4>DataFrame.drop()</h4>
+<p class="label">Full Syntax</p>
+<pre>DataFrame.drop(labels=None, *, axis=0, index=None, columns=None, level=None, inplace=False, errors='raise')</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>labels</td><td>label or list-like, optional</td><td>None</td><td>'col', [0,1]</td><td>Index/column labels to drop</td></tr>
+<tr><td>axis</td><td>{0,1,'index','columns'}</td><td>0</td><td>0, 1</td><td>Drop from rows (0) or cols (1)</td></tr>
+<tr><td>index</td><td>label or list-like, optional</td><td>None</td><td>labels</td><td>Index labels to drop</td></tr>
+<tr><td>columns</td><td>label or list-like, optional</td><td>None</td><td>labels</td><td>Column labels to drop</td></tr>
+<tr><td>level</td><td>int, optional</td><td>None</td><td>int</td><td>MultiIndex level</td></tr>
+<tr><td>inplace</td><td>bool</td><td>False</td><td>True, False</td><td>Modify in-place</td></tr>
+<tr><td>errors</td><td>{'raise','ignore'}</td><td>'raise'</td><td>'raise','ignore'</td><td>On missing labels</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>DataFrame or None</td><td>DataFrame with dropped labels; None if inplace</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>columns=['col'] preferred over axis=1</li></ul>
+</div>
+
+<h3 id="pd-duplicates">Duplicates</h3>
+
+<div class="entry" id="pd-drop-duplicates">
+<h4>DataFrame.drop_duplicates()</h4>
+<p class="label">Full Syntax</p>
+<pre>DataFrame.drop_duplicates(subset=None, *, keep='first', inplace=False, ignore_index=False)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>subset</td><td>label, list-like, optional</td><td>None</td><td>['col1']</td><td>Columns to check; None = all</td></tr>
+<tr><td>keep</td><td>{'first','last',False}</td><td>'first'</td><td>'first','last',False</td><td>Which duplicates to keep</td></tr>
+<tr><td>inplace</td><td>bool</td><td>False</td><td>True, False</td><td>Modify in-place</td></tr>
+<tr><td>ignore_index</td><td>bool</td><td>False</td><td>True, False</td><td>Reset index</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>DataFrame or None</td><td>Deduplicated DataFrame; None if inplace</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>keep=False drops all duplicates</li></ul>
+</div>
+
+<h3 id="pd-sort">Sorting</h3>
+
+<div class="entry" id="pd-sort-values">
+<h4>DataFrame.sort_values()</h4>
+<p class="label">Full Syntax</p>
+<pre>DataFrame.sort_values(by, *, axis=0, ascending=True, inplace=False, kind='quicksort', na_position='last', ignore_index=False, key=None)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>by</td><td>str, list of str</td><td>—</td><td>'col', ['a','b']</td><td>Column(s) to sort by</td></tr>
+<tr><td>axis</td><td>{0,1,'index','columns'}</td><td>0</td><td>0, 1</td><td>Sort rows or columns</td></tr>
+<tr><td>ascending</td><td>bool, list of bool</td><td>True</td><td>True, False, [True,False]</td><td>Sort order per key</td></tr>
+<tr><td>inplace</td><td>bool</td><td>False</td><td>True, False</td><td>Modify in-place</td></tr>
+<tr><td>kind</td><td>{'quicksort','mergesort','heapsort','stable'}</td><td>'quicksort'</td><td>sort kinds</td><td>Sort algorithm</td></tr>
+<tr><td>na_position</td><td>{'first','last'}</td><td>'last'</td><td>'first','last'</td><td>NA placement</td></tr>
+<tr><td>ignore_index</td><td>bool</td><td>False</td><td>True, False</td><td>Reset index</td></tr>
+<tr><td>key</td><td>callable, optional</td><td>None</td><td>func</td><td>Apply to values before sort</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>DataFrame or None</td><td>Sorted DataFrame; None if inplace</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Returns new sorted DataFrame by default</li></ul>
+</div>
+
+<h3 id="pd-frequency">Frequency Analysis</h3>
+
+<div class="entry" id="pd-value-counts">
+<h4>Series.value_counts()</h4>
+<p class="label">Full Syntax</p>
+<pre>Series.value_counts(normalize=False, sort=True, ascending=False, bins=None, dropna=True)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>normalize</td><td>bool</td><td>False</td><td>True, False</td><td>Return proportions instead of counts</td></tr>
+<tr><td>sort</td><td>bool</td><td>True</td><td>True, False</td><td>Sort by frequency</td></tr>
+<tr><td>ascending</td><td>bool</td><td>False</td><td>True, False</td><td>Sort ascending</td></tr>
+<tr><td>bins</td><td>int, optional</td><td>None</td><td>int</td><td>Bin numeric values</td></tr>
+<tr><td>dropna</td><td>bool</td><td>True</td><td>True, False</td><td>Exclude NA from counts</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>Series</td><td>Value → count (or proportion)</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Returns new Series; sorted by count descending</li></ul>
+</div>
+
+<div class="entry" id="pd-nunique">
+<h4>Series.nunique() / DataFrame.nunique()</h4>
+<p class="label">Full Syntax</p>
+<pre>Series.nunique(dropna=True)
+DataFrame.nunique(axis=0, dropna=True)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>dropna</td><td>bool</td><td>True</td><td>True, False</td><td>Exclude NA from count</td></tr>
+<tr><td>axis</td><td>{0,1}</td><td>0</td><td>0, 1</td><td>Count per column (0) or row (1)</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>int or Series</td><td>Number of unique values</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Series returns int; DataFrame returns Series of counts</li></ul>
+</div>
+
+<h3 id="pd-apply">Apply &amp; Map</h3>
+
+<div class="entry" id="pd-apply">
+<h4>DataFrame.apply()</h4>
+<p class="label">Full Syntax</p>
+<pre>DataFrame.apply(func, axis=0, raw=False, result_type=None, args=(), by_row='compat', engine='python', engine_kwargs=None, **kwargs)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>func</td><td>function</td><td>—</td><td>callable</td><td>Function to apply</td></tr>
+<tr><td>axis</td><td>{0,1,'index','columns'}</td><td>0</td><td>0, 1</td><td>0=columns, 1=rows</td></tr>
+<tr><td>raw</td><td>bool</td><td>False</td><td>True, False</td><td>Pass ndarray instead of Series</td></tr>
+<tr><td>result_type</td><td>{'expand','reduce','broadcast'}, optional</td><td>None</td><td>result types</td><td>Shape of result</td></tr>
+<tr><td>args</td><td>tuple</td><td>()</td><td>tuple</td><td>Extra positional args for func</td></tr>
+<tr><td>by_row</td><td>{'compat',False}</td><td>'compat'</td><td>'compat', False</td><td>Row-wise list-like handling</td></tr>
+<tr><td>engine</td><td>{'python','numba'}</td><td>'python'</td><td>engines</td><td>Execution engine</td></tr>
+<tr><td>engine_kwargs</td><td>dict, optional</td><td>None</td><td>dict</td><td>Engine kwargs</td></tr>
+<tr><td>**kwargs</td><td>any</td><td>—</td><td>—</td><td>Extra keyword args for func</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>Series or DataFrame</td><td>Result of applying func</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>axis=0 applies to each column; axis=1 to each row</li></ul>
+</div>
+
+<div class="entry" id="pd-map">
+<h4>Series.map()</h4>
+<p class="label">Full Syntax</p>
+<pre>Series.map(arg, na_action=None)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>arg</td><td>function, dict, Series</td><td>—</td><td>{k:v}, func, Series</td><td>Mapping function or dict</td></tr>
+<tr><td>na_action</td><td>{'ignore'}, optional</td><td>None</td><td>'ignore'</td><td>Propagate NA without applying</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>Series</td><td>Transformed Series</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Dict maps values; unmapped → NaN</li><li>Element-wise only (not for DataFrame)</li></ul>
+</div>
+
+<h3 id="pd-assign">New Columns</h3>
+
+<div class="entry" id="pd-assign">
+<h4>DataFrame.assign()</h4>
+<p class="label">Full Syntax</p>
+<pre>DataFrame.assign(**kwargs)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>**kwargs</td><td>callable or Series</td><td>—</td><td>new_col=df['a']+df['b']</td><td>Column name = value or callable(df)</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>DataFrame</td><td>Copy with new/overwritten columns</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Returns new DataFrame; original unchanged</li><li>Callable receives DataFrame</li></ul>
+</div>
+
+<h3 id="pd-string">String Methods</h3>
+
+<div class="entry" id="pd-str-lower">
+<h4>Series.str.lower()</h4>
+<p class="label">Full Syntax</p>
+<pre>Series.str.lower()</pre>
+<p class="label">Parameters</p>
+<table><tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr><tr><td colspan="5">No parameters</td></tr></table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>Series</td><td>Lowercased strings</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Requires string dtype; NaN preserved</li></ul>
+</div>
+
+<div class="entry" id="pd-str-upper">
+<h4>Series.str.upper()</h4>
+<p class="label">Full Syntax</p>
+<pre>Series.str.upper()</pre>
+<p class="label">Parameters</p>
+<table><tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr><tr><td colspan="5">No parameters</td></tr></table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>Series</td><td>Uppercased strings</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Returns new Series</li></ul>
+</div>
+
+<div class="entry" id="pd-str-contains">
+<h4>Series.str.contains()</h4>
+<p class="label">Full Syntax</p>
+<pre>Series.str.contains(pat, case=True, flags=0, na=nan, regex=True)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>pat</td><td>str</td><td>—</td><td>'sub', r'\d+'</td><td>Character sequence or regex pattern</td></tr>
+<tr><td>case</td><td>bool</td><td>True</td><td>True, False</td><td>Case sensitive</td></tr>
+<tr><td>flags</td><td>int</td><td>0</td><td>re flags</td><td>Regex flags (re.IGNORECASE, etc.)</td></tr>
+<tr><td>na</td><td>scalar, optional</td><td>NaN</td><td>True, False, NaN</td><td>Fill value for NA</td></tr>
+<tr><td>regex</td><td>bool</td><td>True</td><td>True, False</td><td>Interpret pat as regex</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>Series (bool)</td><td>True where pat found</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>regex=False for literal substring match</li></ul>
+</div>
+
+<div class="entry" id="pd-str-strip">
+<h4>Series.str.strip()</h4>
+<p class="label">Full Syntax</p>
+<pre>Series.str.strip(to_strip=None)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>to_strip</td><td>str, optional</td><td>None</td><td>' ', 'abc'</td><td>Chars to remove; None = whitespace</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>Series</td><td>Stripped strings</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Also: lstrip(), rstrip()</li></ul>
+</div>
+
+<div class="entry" id="pd-str-replace">
+<h4>Series.str.replace()</h4>
+<p class="label">Full Syntax</p>
+<pre>Series.str.replace(pat, repl, n=-1, case=None, flags=0, regex=False)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>pat</td><td>str or compiled regex</td><td>—</td><td>'old', r'\d+'</td><td>Pattern to find</td></tr>
+<tr><td>repl</td><td>str, callable</td><td>—</td><td>'new', func</td><td>Replacement string or callable</td></tr>
+<tr><td>n</td><td>int</td><td>-1</td><td>≥0, -1</td><td>Max replacements; -1 = all</td></tr>
+<tr><td>case</td><td>bool, optional</td><td>None</td><td>True, False</td><td>Case sensitive (regex)</td></tr>
+<tr><td>flags</td><td>int</td><td>0</td><td>re flags</td><td>Regex flags</td></tr>
+<tr><td>regex</td><td>bool</td><td>False</td><td>True, False</td><td>Enable regex</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>Series</td><td>Strings with replacements</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>regex=True for pattern matching</li></ul>
+</div>
+
+<h3 id="pd-binning">Binning</h3>
+
+<div class="entry" id="pd-cut">
+<h4>pd.cut()</h4>
+<p class="label">Full Syntax</p>
+<pre>pandas.cut(x, bins, right=True, labels=None, retbins=False, precision=3, include_lowest=False, duplicates='raise', ordered=True)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>x</td><td>array-like</td><td>—</td><td>Series, array</td><td>Input values to bin</td></tr>
+<tr><td>bins</td><td>int, sequence, IntervalIndex</td><td>—</td><td>3, [0,18,65,100]</td><td>Bin edges or number of equal-width bins</td></tr>
+<tr><td>right</td><td>bool</td><td>True</td><td>True, False</td><td>Interval closed on right</td></tr>
+<tr><td>labels</td><td>array, False, optional</td><td>None</td><td>['low','high'], False</td><td>Bin labels; False returns intervals</td></tr>
+<tr><td>retbins</td><td>bool</td><td>False</td><td>True, False</td><td>Return (result, bins)</td></tr>
+<tr><td>precision</td><td>int</td><td>3</td><td>≥0</td><td>Bin label precision</td></tr>
+<tr><td>include_lowest</td><td>bool</td><td>False</td><td>True, False</td><td>First interval includes lowest</td></tr>
+<tr><td>duplicates</td><td>{'raise','drop'}</td><td>'raise'</td><td>'raise','drop'</td><td>Handle duplicate bin edges</td></tr>
+<tr><td>ordered</td><td>bool</td><td>True</td><td>True, False</td><td>Result is ordered Categorical</td></tr>
+</table>
+<p class="label">Returns</p>
+<table>
+<tr><th>Return Type</th><th>Meaning</th></tr>
+<tr><td>Categorical, Series</td><td>Binned values</td></tr>
+<tr><td>tuple</td><td>(result, bins) if retbins=True</td></tr>
+</table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Equal-width bins; use qcut for quantile bins</li></ul>
+</div>
+
+<div class="entry" id="pd-qcut">
+<h4>pd.qcut()</h4>
+<p class="label">Full Syntax</p>
+<pre>pandas.qcut(x, q, labels=None, retbins=False, precision=3, duplicates='raise')</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>x</td><td>1-D array-like</td><td>—</td><td>Series</td><td>Input values</td></tr>
+<tr><td>q</td><td>int or list of float</td><td>—</td><td>4, [0,.25,.5,1]</td><td>Number of quantiles or quantile edges</td></tr>
+<tr><td>labels</td><td>array, False, optional</td><td>None</td><td>list, False</td><td>Bin labels</td></tr>
+<tr><td>retbins</td><td>bool</td><td>False</td><td>True, False</td><td>Return (result, bins)</td></tr>
+<tr><td>precision</td><td>int</td><td>3</td><td>≥0</td><td>Label precision</td></tr>
+<tr><td>duplicates</td><td>{'raise','drop'}</td><td>'raise'</td><td>'raise','drop'</td><td>Handle duplicate edges</td></tr>
+</table>
+<p class="label">Returns</p>
+<table>
+<tr><th>Return Type</th><th>Meaning</th></tr>
+<tr><td>Categorical, Series</td><td>Quantile-based bins</td></tr>
+<tr><td>tuple</td><td>(result, bins) if retbins=True</td></tr>
+</table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Equal-frequency bins</li></ul>
+</div>
+
+<h3 id="pd-combine">Combining Data</h3>
+
+<div class="entry" id="pd-merge">
+<h4>pd.merge()</h4>
+<p class="label">Full Syntax</p>
+<pre>pandas.merge(left, right, how='inner', on=None, left_on=None, right_on=None, left_index=False, right_index=False, sort=False, suffixes=('_x', '_y'), copy=None, indicator=False, validate=None)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>left</td><td>DataFrame</td><td>—</td><td>DataFrame</td><td>Left DataFrame</td></tr>
+<tr><td>right</td><td>DataFrame</td><td>—</td><td>DataFrame</td><td>Right DataFrame</td></tr>
+<tr><td>how</td><td>{'left','right','outer','inner','cross'}</td><td>'inner'</td><td>join types</td><td>Type of merge</td></tr>
+<tr><td>on</td><td>label, list, optional</td><td>None</td><td>'key', ['k1','k2']</td><td>Join column(s) in both</td></tr>
+<tr><td>left_on</td><td>label, list, optional</td><td>None</td><td>col names</td><td>Join columns from left</td></tr>
+<tr><td>right_on</td><td>label, list, optional</td><td>None</td><td>col names</td><td>Join columns from right</td></tr>
+<tr><td>left_index</td><td>bool</td><td>False</td><td>True, False</td><td>Use left index as join key</td></tr>
+<tr><td>right_index</td><td>bool</td><td>False</td><td>True, False</td><td>Use right index as join key</td></tr>
+<tr><td>sort</td><td>bool</td><td>False</td><td>True, False</td><td>Sort result by join keys</td></tr>
+<tr><td>suffixes</td><td>tuple of str</td><td>('_x','_y')</td><td>('_l','_r')</td><td>Suffix for overlapping columns</td></tr>
+<tr><td>copy</td><td>bool, optional</td><td>None</td><td>True, False</td><td>Copy data</td></tr>
+<tr><td>indicator</td><td>bool, str</td><td>False</td><td>True, '_merge'</td><td>Add merge indicator column</td></tr>
+<tr><td>validate</td><td>str, optional</td><td>None</td><td>'one_to_one','one_to_many','many_to_one','many_to_many'</td><td>Check merge uniqueness</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>DataFrame</td><td>Merged DataFrame</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>SQL-style join; returns new DataFrame</li></ul>
+</div>
+
+<div class="entry" id="pd-concat">
+<h4>pd.concat()</h4>
+<p class="label">Full Syntax</p>
+<pre>pandas.concat(objs, *, axis=0, join='outer', ignore_index=False, keys=None, levels=None, names=None, verify_integrity=False, sort=False, copy=True)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>objs</td><td>sequence of Series/DataFrame</td><td>—</td><td>[df1, df2]</td><td>Objects to concatenate</td></tr>
+<tr><td>axis</td><td>{0,1,'index','columns'}</td><td>0</td><td>0, 1</td><td>Concatenate along rows (0) or cols (1)</td></tr>
+<tr><td>join</td><td>{'inner','outer'}</td><td>'outer'</td><td>'inner','outer'</td><td>Index alignment type</td></tr>
+<tr><td>ignore_index</td><td>bool</td><td>False</td><td>True, False</td><td>Use new integer index</td></tr>
+<tr><td>keys</td><td>sequence, optional</td><td>None</td><td>['a','b']</td><td>Hierarchy keys for MultiIndex</td></tr>
+<tr><td>levels</td><td>sequence, optional</td><td>None</td><td>list</td><td>Specific levels for MultiIndex</td></tr>
+<tr><td>names</td><td>list, optional</td><td>None</td><td>['group']</td><td>Names for keys levels</td></tr>
+<tr><td>verify_integrity</td><td>bool</td><td>False</td><td>True, False</td><td>Check for duplicate index</td></tr>
+<tr><td>sort</td><td>bool</td><td>False</td><td>True, False</td><td>Sort non-concat axis</td></tr>
+<tr><td>copy</td><td>bool</td><td>True</td><td>True, False</td><td>Copy data</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>Series or DataFrame</td><td>Concatenated result</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>axis=0 stacks vertically; axis=1 side-by-side</li></ul>
+</div>
+
+<h3 id="pd-reshape">Reshaping</h3>
+
+<div class="entry" id="pd-melt">
+<h4>DataFrame.melt()</h4>
+<p class="label">Full Syntax</p>
+<pre>DataFrame.melt(id_vars=None, value_vars=None, var_name=None, value_name='value', col_level=None, ignore_index=True)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>id_vars</td><td>scalar, list, optional</td><td>None</td><td>['id']</td><td>Identifier columns (kept)</td></tr>
+<tr><td>value_vars</td><td>scalar, list, optional</td><td>None</td><td>['a','b']</td><td>Columns to unpivot; None = rest</td></tr>
+<tr><td>var_name</td><td>scalar, optional</td><td>None</td><td>'variable'</td><td>Name for variable column</td></tr>
+<tr><td>value_name</td><td>scalar</td><td>'value'</td><td>str</td><td>Name for value column</td></tr>
+<tr><td>col_level</td><td>int, str, optional</td><td>None</td><td>int</td><td>MultiIndex column level</td></tr>
+<tr><td>ignore_index</td><td>bool</td><td>True</td><td>True, False</td><td>Ignore index in result</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>DataFrame</td><td>Unpivoted long-format DataFrame</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Wide → long transformation</li></ul>
+</div>
+
+<div class="entry" id="pd-pivot">
+<h4>DataFrame.pivot()</h4>
+<p class="label">Full Syntax</p>
+<pre>DataFrame.pivot(*, columns, index=_NoDefault.no_default, values=_NoDefault.no_default)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>columns</td><td>str</td><td>—</td><td>col name</td><td>Column to spread into new columns</td></tr>
+<tr><td>index</td><td>str, optional</td><td>no_default</td><td>col name</td><td>Column to use as new index</td></tr>
+<tr><td>values</td><td>str, optional</td><td>no_default</td><td>col name</td><td>Column to use as values</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>DataFrame</td><td>Pivoted DataFrame (no aggregation)</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Raises error on duplicate index/column pairs</li><li>Use pivot_table for aggregation</li></ul>
+</div>
+
+<div class="entry" id="pd-pivot-table">
+<h4>DataFrame.pivot_table()</h4>
+<p class="label">Full Syntax</p>
+<pre>DataFrame.pivot_table(values=None, index=None, columns=None, aggfunc='mean', fill_value=None, margins=False, dropna=True, margins_name='All', observed=False, sort=True)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>values</td><td>str, list, optional</td><td>None</td><td>'sales'</td><td>Column(s) to aggregate</td></tr>
+<tr><td>index</td><td>str, list, optional</td><td>None</td><td>'region'</td><td>Row grouping key(s)</td></tr>
+<tr><td>columns</td><td>str, list, optional</td><td>None</td><td>'year'</td><td>Column grouping key(s)</td></tr>
+<tr><td>aggfunc</td><td>function, list, dict</td><td>'mean'</td><td>'sum', np.mean, {'a':'sum'}</td><td>Aggregation function(s)</td></tr>
+<tr><td>fill_value</td><td>scalar, optional</td><td>None</td><td>0</td><td>Replace NA in result</td></tr>
+<tr><td>margins</td><td>bool</td><td>False</td><td>True, False</td><td>Add row/column totals</td></tr>
+<tr><td>dropna</td><td>bool</td><td>True</td><td>True, False</td><td>Exclude NA group keys</td></tr>
+<tr><td>margins_name</td><td>str</td><td>'All'</td><td>str</td><td>Name for margins row/col</td></tr>
+<tr><td>observed</td><td>bool</td><td>False</td><td>True, False</td><td>Only observed categories (Categorical)</td></tr>
+<tr><td>sort</td><td>bool</td><td>True</td><td>True, False</td><td>Sort group keys</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>DataFrame</td><td>Spreadsheet-style pivot with aggregation</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Handles duplicate keys via aggregation</li></ul>
+</div>
+
+<h3 id="pd-groupby">Grouping</h3>
+
+<div class="entry" id="pd-groupby">
+<h4>DataFrame.groupby()</h4>
+<p class="label">Full Syntax</p>
+<pre>DataFrame.groupby(by=None, axis=0, level=None, as_index=True, sort=True, group_keys=True, observed=False, dropna=True)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>by</td><td>mapping, function, label, list, optional</td><td>None</td><td>'col', ['a','b'], func</td><td>Grouping key(s)</td></tr>
+<tr><td>axis</td><td>{0,1,'index','columns'}</td><td>0</td><td>0, 1</td><td>Axis to group along</td></tr>
+<tr><td>level</td><td>int, level name, sequence, optional</td><td>None</td><td>0, 'name'</td><td>MultiIndex level to group by</td></tr>
+<tr><td>as_index</td><td>bool</td><td>True</td><td>True, False</td><td>Group keys as index</td></tr>
+<tr><td>sort</td><td>bool</td><td>True</td><td>True, False</td><td>Sort group keys</td></tr>
+<tr><td>group_keys</td><td>bool</td><td>True</td><td>True, False</td><td>Include group keys in apply output</td></tr>
+<tr><td>observed</td><td>bool</td><td>False</td><td>True, False</td><td>Only observed categorical values</td></tr>
+<tr><td>dropna</td><td>bool</td><td>True</td><td>True, False</td><td>Exclude NA in group keys</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>DataFrameGroupBy</td><td>GroupBy object for aggregation</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Lazy; chain .agg(), .transform(), .filter()</li></ul>
+</div>
+
+<div class="entry" id="pd-agg">
+<h4>DataFrameGroupBy.agg()</h4>
+<p class="label">Full Syntax</p>
+<pre>DataFrameGroupBy.agg(func=None, *, engine=None, engine_kwargs=None, **kwargs)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>func</td><td>function, str, list, dict, optional</td><td>None</td><td>'mean', ['sum','mean'], {'col':'sum'}</td><td>Aggregation function(s)</td></tr>
+<tr><td>engine</td><td>{'cython','numba'}, optional</td><td>None</td><td>engines</td><td>Computation engine</td></tr>
+<tr><td>engine_kwargs</td><td>dict, optional</td><td>None</td><td>dict</td><td>Engine kwargs</td></tr>
+<tr><td>**kwargs</td><td>any</td><td>—</td><td>col='sum'</td><td>Named aggregation syntax</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>Series or DataFrame</td><td>Aggregated result per group</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Alias: .aggregate()</li><li>Reduces groups to one row per group</li></ul>
+</div>
+
+<div class="entry" id="pd-transform">
+<h4>DataFrameGroupBy.transform()</h4>
+<p class="label">Full Syntax</p>
+<pre>DataFrameGroupBy.transform(func, *args, engine=None, engine_kwargs=None, **kwargs)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>func</td><td>function, str, list, dict</td><td>—</td><td>'mean', lambda x: x-x.mean()</td><td>Transform function</td></tr>
+<tr><td>*args</td><td>any</td><td>—</td><td>—</td><td>Positional args for func</td></tr>
+<tr><td>engine</td><td>{'cython','numba'}, optional</td><td>None</td><td>engines</td><td>Computation engine</td></tr>
+<tr><td>engine_kwargs</td><td>dict, optional</td><td>None</td><td>dict</td><td>Engine kwargs</td></tr>
+<tr><td>**kwargs</td><td>any</td><td>—</td><td>—</td><td>Keyword args for func</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>DataFrame or Series</td><td>Same shape as original; group-wise transform</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Output aligned to original index</li></ul>
+</div>
+
+<div class="entry" id="pd-filter">
+<h4>DataFrameGroupBy.filter()</h4>
+<p class="label">Full Syntax</p>
+<pre>DataFrameGroupBy.filter(func, dropna=True, *args, **kwargs)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>func</td><td>function</td><td>—</td><td>lambda g: len(g)&gt;5</td><td>Predicate on each group; True keeps group</td></tr>
+<tr><td>dropna</td><td>bool</td><td>True</td><td>True, False</td><td>Drop groups that are all NA</td></tr>
+<tr><td>*args</td><td>any</td><td>—</td><td>—</td><td>Positional args for func</td></tr>
+<tr><td>**kwargs</td><td>any</td><td>—</td><td>—</td><td>Keyword args for func</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>DataFrame or Series</td><td>Filtered rows from passing groups</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>func receives group DataFrame/Series</li></ul>
+</div>
+
+<h3 id="pd-crosstab">Cross Tabulation</h3>
+
+<div class="entry" id="pd-crosstab">
+<h4>pd.crosstab()</h4>
+<p class="label">Full Syntax</p>
+<pre>pandas.crosstab(index, columns, values=None, rownames=None, colnames=None, aggfunc=None, margins=False, margins_name='All', dropna=True, normalize=False)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>index</td><td>array-like, Series, list of arrays</td><td>—</td><td>Series, [s1,s2]</td><td>Row index factor(s)</td></tr>
+<tr><td>columns</td><td>array-like, Series, list of arrays</td><td>—</td><td>Series</td><td>Column index factor(s)</td></tr>
+<tr><td>values</td><td>array-like, optional</td><td>None</td><td>array</td><td>Values to aggregate</td></tr>
+<tr><td>rownames</td><td>sequence, optional</td><td>None</td><td>['r1']</td><td>Row index names</td></tr>
+<tr><td>colnames</td><td>sequence, optional</td><td>None</td><td>['c1']</td><td>Column index names</td></tr>
+<tr><td>aggfunc</td><td>function, optional</td><td>None</td><td>np.mean, len</td><td>Aggregation; None = count</td></tr>
+<tr><td>margins</td><td>bool</td><td>False</td><td>True, False</td><td>Add row/column totals</td></tr>
+<tr><td>margins_name</td><td>str</td><td>'All'</td><td>str</td><td>Label for margins</td></tr>
+<tr><td>dropna</td><td>bool</td><td>True</td><td>True, False</td><td>Exclude NA categories</td></tr>
+<tr><td>normalize</td><td>bool, str</td><td>False</td><td>True,'index','columns','all'</td><td>Normalize counts to proportions</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>DataFrame</td><td>Frequency table of factors</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Default aggfunc is count (size)</li></ul>
+</div>
+
+<h3 id="pd-corr">Correlation</h3>
+
+<div class="entry" id="pd-corr">
+<h4>DataFrame.corr()</h4>
+<p class="label">Full Syntax</p>
+<pre>DataFrame.corr(method='pearson', min_periods=1, numeric_only=False)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>method</td><td>{'pearson','kendall','spearman'} or callable</td><td>'pearson'</td><td>method names, func</td><td>Correlation method</td></tr>
+<tr><td>min_periods</td><td>int, optional</td><td>1</td><td>int</td><td>Min observations per pair</td></tr>
+<tr><td>numeric_only</td><td>bool</td><td>False</td><td>True, False</td><td>Include only numeric columns</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>DataFrame</td><td>Correlation matrix (symmetric)</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Pairwise complete observations</li><li>numeric_only=True recommended</li></ul>
+</div>
+
+<h3 id="pd-between">Range Filtering</h3>
+
+<div class="entry" id="pd-between">
+<h4>Series.between()</h4>
+<p class="label">Full Syntax</p>
+<pre>Series.between(left, right, inclusive='both')</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>left</td><td>scalar or array-like</td><td>—</td><td>number, Series</td><td>Left boundary</td></tr>
+<tr><td>right</td><td>scalar or array-like</td><td>—</td><td>number, Series</td><td>Right boundary</td></tr>
+<tr><td>inclusive</td><td>{'both','neither','left','right'}</td><td>'both'</td><td>inclusive options</td><td>Which bounds are inclusive</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>Series (bool)</td><td>True where values in range</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Use in filter: df[df['col'].between(1,10)]</li></ul>
+</div>
+
+</section>

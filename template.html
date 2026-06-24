@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0f1419">
+  <title>Python Data Science Syntax Reference</title>
+  <style>
+    :root {
+      --bg: #0f1419;
+      --surface: #1a2332;
+      --surface2: #243044;
+      --border: #2d3a4f;
+      --text: #e6edf3;
+      --muted: #8b9cb3;
+      --accent: #58a6ff;
+      --accent2: #3fb950;
+      --code-bg: #0d1117;
+      --table-head: #1f2d3d;
+      --warn: #d29922;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      display: flex;
+      min-height: 100vh;
+    }
+    nav {
+      position: fixed;
+      top: 0; left: 0;
+      width: 260px;
+      height: 100vh;
+      overflow-y: auto;
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      padding: 1.5rem 1rem;
+      z-index: 100;
+    }
+    nav h1 { font-size: 1rem; color: var(--accent); margin-bottom: 1rem; line-height: 1.4; }
+    nav h2 { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin: 1rem 0 0.4rem; }
+    nav a {
+      display: block;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.82rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+    }
+    nav a:hover { color: var(--accent); background: var(--surface2); }
+    nav a:active { background: var(--surface2); }
+    .table-wrap {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 0.5rem 0;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+    }
+    .table-wrap table { margin: 0; border: none; min-width: 520px; }
+    .table-wrap th, .table-wrap td { white-space: normal; word-break: break-word; }
+    .mobile-header {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 56px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      z-index: 150;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1rem;
+      padding-top: env(safe-area-inset-top, 0);
+    }
+    .mobile-header .title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--accent);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      flex: 1;
+      margin: 0 0.75rem;
+    }
+    .menu-btn, .top-btn {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      color: var(--text);
+      width: 44px;
+      height: 44px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .menu-btn:hover, .top-btn:hover { background: var(--border); }
+    .nav-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      z-index: 110;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+    .nav-overlay.open { display: block; opacity: 1; }
+    .nav-close {
+      display: none;
+      position: absolute;
+      top: 0.75rem;
+      right: 0.75rem;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      color: var(--text);
+      width: 44px;
+      height: 44px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1.25rem;
+      align-items: center;
+      justify-content: center;
+    }
+    main {
+      margin-left: 260px;
+      flex: 1;
+      max-width: 960px;
+      padding: 2rem 2.5rem 4rem;
+    }
+    .hero {
+      margin-bottom: 2.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+    .hero p { color: var(--muted); font-size: 0.95rem; }
+    section { margin-bottom: 3rem; }
+    section > h2 {
+      font-size: 1.6rem;
+      color: var(--accent);
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+    section > h3 {
+      font-size: 1.15rem;
+      color: var(--accent2);
+      margin: 2rem 0 1rem;
+    }
+    .entry { margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border); }
+    .entry h4 { font-size: 1.05rem; color: var(--text); margin-bottom: 0.75rem; }
+    .label { font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin: 0.75rem 0 0.4rem; }
+    pre {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1rem 1.2rem;
+      overflow-x: auto;
+      font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: #c9d1d9;
+    }
+    code { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; font-size: 0.88em; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+      margin: 0.5rem 0;
+    }
+    th, td {
+      border: 1px solid var(--border);
+      padding: 0.45rem 0.65rem;
+      text-align: left;
+      vertical-align: top;
+    }
+    th { background: var(--table-head); color: var(--accent); font-weight: 600; }
+    td code { color: #79c0ff; }
+    ul.notes { margin: 0.5rem 0 0 1.2rem; font-size: 0.85rem; color: var(--muted); }
+    ul.notes li { margin-bottom: 0.25rem; }
+    .formula { background: var(--surface2); border-left: 3px solid var(--warn); padding: 0.6rem 1rem; margin: 0.5rem 0; font-family: 'Times New Roman', serif; font-size: 1rem; }
+    .print-btn {
+      position: fixed; top: 1rem; right: 1rem;
+      background: var(--accent); color: #000; border: none;
+      padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer;
+      font-weight: 600; font-size: 0.85rem; z-index: 200;
+      min-height: 44px;
+    }
+    .print-btn:hover { opacity: 0.9; }
+    .back-to-top {
+      display: none;
+      position: fixed;
+      bottom: calc(1rem + env(safe-area-inset-bottom, 0));
+      right: 1rem;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #000;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      z-index: 200;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.4);
+    }
+    .back-to-top.visible { display: flex; align-items: center; justify-content: center; }
+    @media print {
+      nav, .mobile-header, .nav-overlay, .back-to-top { display: none !important; }
+      main { margin-left: 0; max-width: 100%; padding: 1rem; padding-top: 1rem !important; }
+      .print-btn { display: none; }
+      body { background: #fff; color: #000; }
+      pre { background: #f5f5f5; border-color: #ccc; color: #000; }
+      th { background: #eee; color: #000; }
+      section > h2 { color: #000; }
+      .entry { page-break-inside: avoid; }
+      .table-wrap { border: none; overflow: visible; }
+      .table-wrap table { min-width: 0; }
+    }
+    /* Tablet */
+    @media (max-width: 1024px) {
+      nav { width: 220px; }
+      main { margin-left: 220px; padding: 1.5rem 1.5rem 3rem; max-width: none; }
+      .hero h1 { font-size: 1.65rem; }
+      pre { font-size: 0.8rem; }
+      table { font-size: 0.78rem; }
+    }
+    /* Mobile & small tablet */
+    @media (max-width: 768px) {
+      body { display: block; }
+      .mobile-header { display: flex; }
+      .print-btn { top: auto; bottom: calc(4.5rem + env(safe-area-inset-bottom, 0)); right: 1rem; font-size: 0.75rem; padding: 0.5rem 0.75rem; }
+      nav {
+        display: block;
+        transform: translateX(-100%);
+        transition: transform 0.28s ease;
+        width: min(300px, 88vw);
+        box-shadow: 4px 0 24px rgba(0,0,0,0.35);
+        padding-top: calc(3.5rem + env(safe-area-inset-top, 0));
+        padding-bottom: env(safe-area-inset-bottom, 1rem);
+      }
+      nav.open { transform: translateX(0); }
+      nav a { padding: 0.55rem 0.65rem; font-size: 0.9rem; min-height: 44px; display: flex; align-items: center; }
+      .nav-close { display: flex; }
+      main {
+        margin-left: 0;
+        padding: 1rem;
+        padding-top: calc(56px + 1rem + env(safe-area-inset-top, 0));
+        max-width: 100%;
+      }
+      .hero { margin-bottom: 1.5rem; padding-bottom: 1rem; }
+      .hero h1 { font-size: 1.35rem; line-height: 1.3; }
+      .hero p { font-size: 0.85rem; line-height: 1.5; }
+      section > h2 { font-size: 1.35rem; }
+      section > h3 { font-size: 1.05rem; margin: 1.5rem 0 0.75rem; }
+      .entry h4 { font-size: 1rem; }
+      pre {
+        font-size: 0.72rem;
+        padding: 0.75rem;
+        border-radius: 8px;
+      }
+      .formula { font-size: 0.9rem; padding: 0.5rem 0.75rem; }
+      th, td { padding: 0.5rem 0.55rem; font-size: 0.75rem; }
+    }
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 1.2rem; }
+      pre { font-size: 0.68rem; }
+      .print-btn { font-size: 0.7rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      nav, .nav-overlay { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="mobile-header" aria-label="Mobile navigation">
+    <button class="menu-btn" id="menuBtn" aria-label="Open navigation" aria-expanded="false" aria-controls="sidebar">☰</button>
+    <span class="title">DS Syntax Reference</span>
+    <button class="top-btn" id="headerTopBtn" aria-label="Scroll to top" title="Top">↑</button>
+  </header>
+  <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
+  <button class="print-btn" onclick="window.print()">Print / PDF</button>
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+  <nav id="sidebar" aria-label="Table of contents">
+    <button class="nav-close" id="navClose" aria-label="Close navigation">✕</button>
+    <h1>DS Syntax Reference</h1>
+    <h2>NumPy</h2>
+    <a href="#np-array-creation">Array Creation</a>
+    <a href="#np-range">Range Generation</a>
+    <a href="#np-metadata">Array Metadata</a>
+    <a href="#np-reshape">Reshaping</a>
+    <a href="#np-transpose">Transpose</a>
+    <a href="#np-aggregation">Aggregation</a>
+    <a href="#np-variance">Variance &amp; Std</a>
+    <a href="#np-extremes">Extremes</a>
+    <a href="#np-cumulative">Cumulative</a>
+    <a href="#np-sorting">Sorting</a>
+    <a href="#np-unique">Unique</a>
+    <a href="#np-conditional">Conditional</a>
+    <a href="#np-logical">Logical</a>
+    <a href="#np-bool-index">Boolean Indexing</a>
+    <a href="#np-clip">Clipping</a>
+    <a href="#np-percentile">Percentiles</a>
+    <a href="#np-linalg">Linear Algebra</a>
+    <a href="#np-stacking">Stacking</a>
+    <a href="#np-random">Random</a>
+    <a href="#np-elementwise">Element-wise Math</a>
+    <a href="#np-rounding">Rounding</a>
+    <h2>Pandas</h2>
+    <a href="#pd-io">Input / Output</a>
+    <a href="#pd-inspection">Inspection</a>
+    <a href="#pd-columns">Columns &amp; Types</a>
+    <a href="#pd-selection">Selection</a>
+    <a href="#pd-filtering">Filtering</a>
+    <a href="#pd-missing">Missing Values</a>
+    <a href="#pd-replace">Replacement</a>
+    <a href="#pd-astype">Type Conversion</a>
+    <a href="#pd-rename">Rename</a>
+    <a href="#pd-drop">Drop</a>
+    <a href="#pd-duplicates">Duplicates</a>
+    <a href="#pd-sort">Sorting</a>
+    <a href="#pd-frequency">Frequency</a>
+    <a href="#pd-apply">Apply &amp; Map</a>
+    <a href="#pd-assign">New Columns</a>
+    <a href="#pd-string">String Methods</a>
+    <a href="#pd-binning">Binning</a>
+    <a href="#pd-combine">Combining</a>
+    <a href="#pd-reshape">Reshaping</a>
+    <a href="#pd-groupby">Grouping</a>
+    <a href="#pd-crosstab">Crosstab</a>
+    <a href="#pd-corr">Correlation</a>
+    <a href="#pd-between">Range Filtering</a>
+    <h2>Visualization</h2>
+    <a href="#mpl">Matplotlib</a>
+    <a href="#sns">Seaborn</a>
+    <h2>Statistics</h2>
+    <a href="#stats">Formulas &amp; Syntax</a>
+    <h2>ML</h2>
+    <a href="#ml-encoding">Encoding</a>
+    <a href="#ml-scaling">Feature Scaling</a>
+    <a href="#ml-linreg">Linear Regression</a>
+    <a href="#ml-logreg">Logistic Regression</a>
+    <a href="#ml-metrics">Metrics</a>
+    <a href="#ml-sigmoid">Sigmoid</a>
+  </nav>
+
+  <main>
+    <div class="hero">
+      <h1>Python Data Science Syntax Reference</h1>
+      <p>Complete function signatures and parameter reference. NumPy 2.x · Pandas 2.x · Matplotlib 3.x · Seaborn 0.13.x · scikit-learn 1.x</p>
+    </div>
+
+    <!-- NUMPY SECTION -->
+    <div id="numpy-section"></div>
+    <!-- PANDAS SECTION -->
+    <div id="pandas-section"></div>
+    <!-- VIZ SECTION -->
+    <div id="viz-section"></div>
+    <!-- STATS ML SECTION -->
+    <div id="stats-ml-section"></div>
+  </main>
+  <script>
+    (function () {
+      var sidebar = document.getElementById('sidebar');
+      var overlay = document.getElementById('navOverlay');
+      var menuBtn = document.getElementById('menuBtn');
+      var navClose = document.getElementById('navClose');
+      var backToTop = document.getElementById('backToTop');
+      var headerTopBtn = document.getElementById('headerTopBtn');
+
+      function openNav() {
+        sidebar.classList.add('open');
+        overlay.classList.add('open');
+        menuBtn.setAttribute('aria-expanded', 'true');
+        overlay.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeNav() {
+        sidebar.classList.remove('open');
+        overlay.classList.remove('open');
+        menuBtn.setAttribute('aria-expanded', 'false');
+        overlay.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }
+      function scrollTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+
+      menuBtn.addEventListener('click', openNav);
+      navClose.addEventListener('click', closeNav);
+      overlay.addEventListener('click', closeNav);
+      backToTop.addEventListener('click', scrollTop);
+      headerTopBtn.addEventListener('click', scrollTop);
+
+      sidebar.querySelectorAll('a[href^="#"]').forEach(function (link) {
+        link.addEventListener('click', function () {
+          if (window.matchMedia('(max-width: 768px)').matches) closeNav();
+        });
+      });
+
+      window.addEventListener('scroll', function () {
+        backToTop.classList.toggle('visible', window.scrollY > 400);
+      }, { passive: true });
+
+      window.addEventListener('resize', function () {
+        if (window.innerWidth > 768) closeNav();
+      });
+
+      document.querySelectorAll('.entry table').forEach(function (table) {
+        if (!table.parentElement.classList.contains('table-wrap')) {
+          var wrap = document.createElement('div');
+          wrap.className = 'table-wrap';
+          table.parentNode.insertBefore(wrap, table);
+          wrap.appendChild(table);
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

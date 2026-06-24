@@ -1,0 +1,1054 @@
+<section id="numpy">
+<h2>NUMPY</h2>
+
+<h3 id="np-array-creation">Array Creation</h3>
+
+<div class="entry" id="np-array">
+<h4>np.array()</h4>
+<p class="label">Full Syntax</p>
+<pre>numpy.array(object, dtype=None, *, copy=True, order='K', subok=False, ndmin=0, like=None)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>object</td><td>array_like</td><td>—</td><td>list, tuple, ndarray, scalar</td><td>Input data to convert to ndarray</td></tr>
+<tr><td>dtype</td><td>dtype, optional</td><td>None</td><td>np.float64, np.int32, etc.</td><td>Desired data type of array</td></tr>
+<tr><td>copy</td><td>bool</td><td>True</td><td>True, False</td><td>If True, object is copied</td></tr>
+<tr><td>order</td><td>{'K','A','C','F'}</td><td>'K'</td><td>'K','A','C','F'</td><td>Memory layout: K=keep, A=any, C=row, F=col</td></tr>
+<tr><td>subok</td><td>bool</td><td>False</td><td>True, False</td><td>If True, subclasses passed through</td></tr>
+<tr><td>ndmin</td><td>int</td><td>0</td><td>≥0</td><td>Minimum number of dimensions</td></tr>
+<tr><td>like</td><td>array_like, optional</td><td>None</td><td>ndarray</td><td>Reference object for array creation (NEP 35)</td></tr>
+</table>
+<p class="label">Returns</p>
+<table>
+<tr><th>Return Type</th><th>Meaning</th></tr>
+<tr><td>ndarray</td><td>Array interpretation of input object</td></tr>
+</table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Returns new array (copy=True default)</li><li>copy=False may return view if input is already ndarray</li></ul>
+</div>
+
+<div class="entry" id="np-zeros">
+<h4>np.zeros()</h4>
+<p class="label">Full Syntax</p>
+<pre>numpy.zeros(shape, dtype=float, order='C', *, like=None)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>shape</td><td>int or tuple of ints</td><td>—</td><td>(m,), (m,n), etc.</td><td>Shape of new array</td></tr>
+<tr><td>dtype</td><td>dtype, optional</td><td>float</td><td>any dtype</td><td>Data type of array elements</td></tr>
+<tr><td>order</td><td>{'C','F'}</td><td>'C'</td><td>'C','F'</td><td>Row-major or column-major</td></tr>
+<tr><td>like</td><td>array_like, optional</td><td>None</td><td>ndarray</td><td>Reference for array creation</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>ndarray</td><td>Array of zeros</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Returns new array; elements initialized to 0</li></ul>
+</div>
+
+<div class="entry" id="np-ones">
+<h4>np.ones()</h4>
+<p class="label">Full Syntax</p>
+<pre>numpy.ones(shape, dtype=None, order='C', *, like=None)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>shape</td><td>int or tuple of ints</td><td>—</td><td>(m,), (m,n)</td><td>Shape of new array</td></tr>
+<tr><td>dtype</td><td>dtype, optional</td><td>None</td><td>any dtype</td><td>Data type; default np.float64</td></tr>
+<tr><td>order</td><td>{'C','F'}</td><td>'C'</td><td>'C','F'</td><td>Memory layout</td></tr>
+<tr><td>like</td><td>array_like, optional</td><td>None</td><td>ndarray</td><td>Reference for array creation</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>ndarray</td><td>Array of ones</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Returns new array</li></ul>
+</div>
+
+<div class="entry" id="np-empty">
+<h4>np.empty()</h4>
+<p class="label">Full Syntax</p>
+<pre>numpy.empty(shape, dtype=float, order='C', *, like=None)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>shape</td><td>int or tuple of ints</td><td>—</td><td>(m,), (m,n)</td><td>Shape of new array</td></tr>
+<tr><td>dtype</td><td>dtype, optional</td><td>float</td><td>any dtype</td><td>Data type</td></tr>
+<tr><td>order</td><td>{'C','F'}</td><td>'C'</td><td>'C','F'</td><td>Memory layout</td></tr>
+<tr><td>like</td><td>array_like, optional</td><td>None</td><td>ndarray</td><td>Reference for array creation</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>ndarray</td><td>Uninitialized array (garbage values)</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Does not initialize to zero; fastest allocation</li></ul>
+</div>
+
+<div class="entry" id="np-full">
+<h4>np.full()</h4>
+<p class="label">Full Syntax</p>
+<pre>numpy.full(shape, fill_value, dtype=None, order='C', *, like=None)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>shape</td><td>int or tuple of ints</td><td>—</td><td>(m,), (m,n)</td><td>Shape of new array</td></tr>
+<tr><td>fill_value</td><td>scalar or array_like</td><td>—</td><td>any scalar</td><td>Fill value for all elements</td></tr>
+<tr><td>dtype</td><td>dtype, optional</td><td>None</td><td>any dtype</td><td>Data type; inferred from fill_value if None</td></tr>
+<tr><td>order</td><td>{'C','F'}</td><td>'C'</td><td>'C','F'</td><td>Memory layout</td></tr>
+<tr><td>like</td><td>array_like, optional</td><td>None</td><td>ndarray</td><td>Reference for array creation</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>ndarray</td><td>Array filled with fill_value</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Returns new array</li></ul>
+</div>
+
+<h3 id="np-range">Range Generation</h3>
+
+<div class="entry" id="np-arange">
+<h4>np.arange()</h4>
+<p class="label">Full Syntax</p>
+<pre>numpy.arange([start,] stop[, step,], dtype=None, *, like=None)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>start</td><td>number, optional</td><td>0</td><td>int, float</td><td>Start of interval (inclusive)</td></tr>
+<tr><td>stop</td><td>number</td><td>—</td><td>int, float</td><td>End of interval (exclusive)</td></tr>
+<tr><td>step</td><td>number, optional</td><td>1</td><td>int, float</td><td>Spacing between values</td></tr>
+<tr><td>dtype</td><td>dtype, optional</td><td>None</td><td>any dtype</td><td>Data type of output</td></tr>
+<tr><td>like</td><td>array_like, optional</td><td>None</td><td>ndarray</td><td>Reference for array creation</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>ndarray</td><td>Evenly spaced values within [start, stop)</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>stop is exclusive; floating-point step may cause precision issues</li><li>Use linspace for exact float endpoints</li></ul>
+</div>
+
+<div class="entry" id="np-linspace">
+<h4>np.linspace()</h4>
+<p class="label">Full Syntax</p>
+<pre>numpy.linspace(start, stop, num=50, endpoint=True, retstep=False, dtype=None, axis=0, *, like=None)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>start</td><td>array_like</td><td>—</td><td>scalar</td><td>Start value</td></tr>
+<tr><td>stop</td><td>array_like</td><td>—</td><td>scalar</td><td>Stop value</td></tr>
+<tr><td>num</td><td>int</td><td>50</td><td>≥0</td><td>Number of samples</td></tr>
+<tr><td>endpoint</td><td>bool</td><td>True</td><td>True, False</td><td>If True, stop is included</td></tr>
+<tr><td>retstep</td><td>bool</td><td>False</td><td>True, False</td><td>If True, return (samples, step)</td></tr>
+<tr><td>dtype</td><td>dtype, optional</td><td>None</td><td>any dtype</td><td>Data type of output</td></tr>
+<tr><td>axis</td><td>int</td><td>0</td><td>int</td><td>Axis in result along which samples are stored</td></tr>
+<tr><td>like</td><td>array_like, optional</td><td>None</td><td>ndarray</td><td>Reference for array creation</td></tr>
+</table>
+<p class="label">Returns</p>
+<table>
+<tr><th>Return Type</th><th>Meaning</th></tr>
+<tr><td>ndarray</td><td>num evenly spaced samples</td></tr>
+<tr><td>tuple (ndarray, float)</td><td>If retstep=True: samples and step size</td></tr>
+</table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Preferred over arange for float ranges</li></ul>
+</div>
+
+<h3 id="np-metadata">Array Metadata</h3>
+
+<div class="entry" id="np-shape">
+<h4>ndarray.shape</h4>
+<p class="label">Full Syntax</p>
+<pre>arr.shape</pre>
+<p class="label">Parameters</p>
+<table><tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr><tr><td colspan="5">Attribute — no parameters</td></tr></table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>tuple of ints</td><td>Dimensions along each axis</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Read-only tuple; assign tuple to reshape in-place via arr.shape = (m,n)</li></ul>
+</div>
+
+<div class="entry" id="np-size">
+<h4>ndarray.size</h4>
+<p class="label">Full Syntax</p>
+<pre>arr.size</pre>
+<p class="label">Parameters</p>
+<table><tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr><tr><td colspan="5">Attribute — no parameters</td></tr></table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>int</td><td>Total number of elements</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Equivalent to np.prod(arr.shape)</li></ul>
+</div>
+
+<div class="entry" id="np-ndim">
+<h4>ndarray.ndim</h4>
+<p class="label">Full Syntax</p>
+<pre>arr.ndim</pre>
+<p class="label">Parameters</p>
+<table><tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr><tr><td colspan="5">Attribute — no parameters</td></tr></table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>int</td><td>Number of array dimensions</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>0 for scalar ndarray, 1 for vector, 2 for matrix</li></ul>
+</div>
+
+<div class="entry" id="np-dtype">
+<h4>ndarray.dtype</h4>
+<p class="label">Full Syntax</p>
+<pre>arr.dtype</pre>
+<p class="label">Parameters</p>
+<table><tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr><tr><td colspan="5">Attribute — no parameters</td></tr></table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>dtype</td><td>Data type object describing element type</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Read-only; use astype() to convert</li></ul>
+</div>
+
+<h3 id="np-reshape">Reshaping</h3>
+
+<div class="entry" id="np-reshape-fn">
+<h4>ndarray.reshape()</h4>
+<p class="label">Full Syntax</p>
+<pre>ndarray.reshape(shape, order='C')</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>shape</td><td>int or tuple of ints</td><td>—</td><td>(m,n), -1 for inferred</td><td>New shape; one dimension may be -1</td></tr>
+<tr><td>order</td><td>{'C','F','A'}</td><td>'C'</td><td>'C','F','A'</td><td>Read elements in C, F, or any order</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>ndarray</td><td>Reshaped array (view if possible)</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Returns view when memory is contiguous; copy otherwise</li><li>arr.reshape(-1) flattens to 1D</li></ul>
+</div>
+
+<div class="entry" id="np-flatten">
+<h4>ndarray.flatten()</h4>
+<p class="label">Full Syntax</p>
+<pre>ndarray.flatten(order='C')</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>order</td><td>{'C','F','A','K'}</td><td>'C'</td><td>'C','F','A','K'</td><td>Element order in flattened output</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>ndarray</td><td>1D copy of array</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Always returns copy, not view</li></ul>
+</div>
+
+<div class="entry" id="np-ravel">
+<h4>ndarray.ravel() / np.ravel()</h4>
+<p class="label">Full Syntax</p>
+<pre>numpy.ravel(a, order='C')
+ndarray.ravel([order])</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>a</td><td>array_like</td><td>—</td><td>ndarray</td><td>Input array (np.ravel only)</td></tr>
+<tr><td>order</td><td>{'C','F','A','K'}</td><td>'C'</td><td>'C','F','A','K'</td><td>Element order</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>ndarray</td><td>1D array (view when possible)</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Returns view if contiguous; copy if not</li></ul>
+</div>
+
+<h3 id="np-transpose">Transpose</h3>
+
+<div class="entry" id="np-transpose-fn">
+<h4>ndarray.transpose() / np.transpose()</h4>
+<p class="label">Full Syntax</p>
+<pre>numpy.transpose(a, axes=None)
+ndarray.transpose(*axes)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>a</td><td>array_like</td><td>—</td><td>ndarray</td><td>Input array (np.transpose only)</td></tr>
+<tr><td>axes</td><td>tuple of ints, optional</td><td>None</td><td>(1,0,2), etc.</td><td>Permutation of axes; default reverses all</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>ndarray</td><td>Array with axes permuted (view)</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Returns view; 2D equivalent to arr.T</li></ul>
+</div>
+
+<div class="entry" id="np-T">
+<h4>ndarray.T</h4>
+<p class="label">Full Syntax</p>
+<pre>arr.T</pre>
+<p class="label">Parameters</p>
+<table><tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr><tr><td colspan="5">Property — no parameters</td></tr></table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>ndarray</td><td>Transposed view (2D: swap rows/cols)</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>View only; for 1D returns same array</li></ul>
+</div>
+
+<h3 id="np-aggregation">Aggregation</h3>
+
+<div class="entry" id="np-sum">
+<h4>np.sum()</h4>
+<p class="label">Full Syntax</p>
+<pre>numpy.sum(a, axis=None, dtype=None, out=None, keepdims=False, initial=0, where=True)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>a</td><td>array_like</td><td>—</td><td>ndarray</td><td>Elements to sum</td></tr>
+<tr><td>axis</td><td>None, int, tuple of ints</td><td>None</td><td>0, 1, (0,1)</td><td>Axis or axes along which to sum</td></tr>
+<tr><td>dtype</td><td>dtype, optional</td><td>None</td><td>any dtype</td><td>Type of returned sum</td></tr>
+<tr><td>out</td><td>ndarray, optional</td><td>None</td><td>ndarray</td><td>Output array for result</td></tr>
+<tr><td>keepdims</td><td>bool</td><td>False</td><td>True, False</td><td>Retain reduced dimensions as size 1</td></tr>
+<tr><td>initial</td><td>scalar</td><td>0</td><td>number</td><td>Starting value for sum</td></tr>
+<tr><td>where</td><td>array_like of bool</td><td>True</td><td>bool array</td><td>Elements to include in sum</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>ndarray or scalar</td><td>Sum along axis</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Returns new value; does not modify input</li><li>axis=None sums all elements</li></ul>
+</div>
+
+<div class="entry" id="np-mean">
+<h4>np.mean()</h4>
+<p class="label">Full Syntax</p>
+<pre>numpy.mean(a, axis=None, dtype=None, out=None, keepdims=&lt;no value&gt;, *, where=&lt;no value&gt;)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>a</td><td>array_like</td><td>—</td><td>ndarray</td><td>Input array</td></tr>
+<tr><td>axis</td><td>None, int, tuple of ints</td><td>None</td><td>0, 1, (0,1)</td><td>Axis(es) along which mean is computed</td></tr>
+<tr><td>dtype</td><td>dtype, optional</td><td>None</td><td>float dtype</td><td>Intermediate and return dtype</td></tr>
+<tr><td>out</td><td>ndarray, optional</td><td>None</td><td>ndarray</td><td>Alternative output array</td></tr>
+<tr><td>keepdims</td><td>bool</td><td>False</td><td>True, False</td><td>Keep reduced axes</td></tr>
+<tr><td>where</td><td>array_like of bool</td><td>True</td><td>bool array</td><td>Elements to include</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>ndarray or scalar</td><td>Arithmetic mean</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Returns new value</li></ul>
+</div>
+
+<div class="entry" id="np-median">
+<h4>np.median()</h4>
+<p class="label">Full Syntax</p>
+<pre>numpy.median(a, axis=None, out=None, overwrite_input=False, keepdims=False)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>a</td><td>array_like</td><td>—</td><td>ndarray</td><td>Input array</td></tr>
+<tr><td>axis</td><td>int, sequence of ints, optional</td><td>None</td><td>0, 1</td><td>Axis along which median computed</td></tr>
+<tr><td>out</td><td>ndarray, optional</td><td>None</td><td>ndarray</td><td>Output array</td></tr>
+<tr><td>overwrite_input</td><td>bool</td><td>False</td><td>True, False</td><td>If True, input may be modified for memory</td></tr>
+<tr><td>keepdims</td><td>bool</td><td>False</td><td>True, False</td><td>Keep reduced axes</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>ndarray or scalar</td><td>Median along axis</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>overwrite_input=True may modify a in-place</li></ul>
+</div>
+
+<h3 id="np-variance">Variance &amp; Standard Deviation</h3>
+
+<div class="entry" id="np-var">
+<h4>np.var()</h4>
+<p class="label">Full Syntax</p>
+<pre>numpy.var(a, axis=None, dtype=None, out=None, ddof=0, keepdims=False, *, where=True)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>a</td><td>array_like</td><td>—</td><td>ndarray</td><td>Input array</td></tr>
+<tr><td>axis</td><td>None, int, tuple of ints</td><td>None</td><td>0, 1</td><td>Axis along which variance computed</td></tr>
+<tr><td>dtype</td><td>dtype, optional</td><td>None</td><td>float dtype</td><td>Computation dtype</td></tr>
+<tr><td>out</td><td>ndarray, optional</td><td>None</td><td>ndarray</td><td>Output array</td></tr>
+<tr><td>ddof</td><td>int</td><td>0</td><td>0, 1</td><td>Delta degrees of freedom (1=sample var)</td></tr>
+<tr><td>keepdims</td><td>bool</td><td>False</td><td>True, False</td><td>Keep reduced axes</td></tr>
+<tr><td>where</td><td>array_like of bool</td><td>True</td><td>bool array</td><td>Elements to include</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>ndarray or scalar</td><td>Variance</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>ddof=0 population variance; ddof=1 sample variance</li></ul>
+</div>
+
+<div class="entry" id="np-std">
+<h4>np.std()</h4>
+<p class="label">Full Syntax</p>
+<pre>numpy.std(a, axis=None, dtype=None, out=None, ddof=0, keepdims=False, *, where=True)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>a</td><td>array_like</td><td>—</td><td>ndarray</td><td>Input array</td></tr>
+<tr><td>axis</td><td>None, int, tuple of ints</td><td>None</td><td>0, 1</td><td>Axis along which std computed</td></tr>
+<tr><td>dtype</td><td>dtype, optional</td><td>None</td><td>float dtype</td><td>Computation dtype</td></tr>
+<tr><td>out</td><td>ndarray, optional</td><td>None</td><td>ndarray</td><td>Output array</td></tr>
+<tr><td>ddof</td><td>int</td><td>0</td><td>0, 1</td><td>Degrees of freedom correction</td></tr>
+<tr><td>keepdims</td><td>bool</td><td>False</td><td>True, False</td><td>Keep reduced axes</td></tr>
+<tr><td>where</td><td>array_like of bool</td><td>True</td><td>bool array</td><td>Elements to include</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>ndarray or scalar</td><td>Standard deviation</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>sqrt of var with same ddof</li></ul>
+</div>
+
+<h3 id="np-extremes">Extremes</h3>
+
+<div class="entry" id="np-min">
+<h4>np.min() / ndarray.min()</h4>
+<p class="label">Full Syntax</p>
+<pre>numpy.min(a, axis=None, out=None, keepdims=&lt;no value&gt;, initial=&lt;no value&gt;, where=&lt;no value&gt;)
+ndarray.min(axis=None, out=None, keepdims=False, initial=&lt;no value&gt;, where=True)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>a</td><td>array_like</td><td>—</td><td>ndarray</td><td>Input data (np.min only)</td></tr>
+<tr><td>axis</td><td>None, int, tuple of ints</td><td>None</td><td>0, 1</td><td>Axis along which minimum computed</td></tr>
+<tr><td>out</td><td>ndarray, optional</td><td>None</td><td>ndarray</td><td>Output array</td></tr>
+<tr><td>keepdims</td><td>bool</td><td>False</td><td>True, False</td><td>Keep reduced axes</td></tr>
+<tr><td>initial</td><td>scalar, optional</td><td>None</td><td>number</td><td>Minimum value of empty slice</td></tr>
+<tr><td>where</td><td>array_like of bool</td><td>True</td><td>bool array</td><td>Elements to compare</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>ndarray or scalar</td><td>Minimum value</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Alias: np.amin()</li></ul>
+</div>
+
+<div class="entry" id="np-max">
+<h4>np.max() / ndarray.max()</h4>
+<p class="label">Full Syntax</p>
+<pre>numpy.max(a, axis=None, out=None, keepdims=&lt;no value&gt;, initial=&lt;no value&gt;, where=&lt;no value&gt;)
+ndarray.max(axis=None, out=None, keepdims=False, initial=&lt;no value&gt;, where=True)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>a</td><td>array_like</td><td>—</td><td>ndarray</td><td>Input data (np.max only)</td></tr>
+<tr><td>axis</td><td>None, int, tuple of ints</td><td>None</td><td>0, 1</td><td>Axis along which maximum computed</td></tr>
+<tr><td>out</td><td>ndarray, optional</td><td>None</td><td>ndarray</td><td>Output array</td></tr>
+<tr><td>keepdims</td><td>bool</td><td>False</td><td>True, False</td><td>Keep reduced axes</td></tr>
+<tr><td>initial</td><td>scalar, optional</td><td>None</td><td>number</td><td>Maximum value of empty slice</td></tr>
+<tr><td>where</td><td>array_like of bool</td><td>True</td><td>bool array</td><td>Elements to compare</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>ndarray or scalar</td><td>Maximum value</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Alias: np.amax()</li></ul>
+</div>
+
+<div class="entry" id="np-argmin">
+<h4>np.argmin() / ndarray.argmin()</h4>
+<p class="label">Full Syntax</p>
+<pre>numpy.argmin(a, axis=None, out=None, *, keepdims=False)
+ndarray.argmin(axis=None, out=None, *, keepdims=False)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>a</td><td>array_like</td><td>—</td><td>ndarray</td><td>Input array (np.argmin only)</td></tr>
+<tr><td>axis</td><td>int, optional</td><td>None</td><td>0, 1</td><td>Axis along which index returned</td></tr>
+<tr><td>out</td><td>ndarray, optional</td><td>None</td><td>ndarray</td><td>Output array</td></tr>
+<tr><td>keepdims</td><td>bool</td><td>False</td><td>True, False</td><td>Keep reduced axes</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>int or ndarray of int</td><td>Index of minimum value</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>axis=None returns flat index</li></ul>
+</div>
+
+<div class="entry" id="np-argmax">
+<h4>np.argmax() / ndarray.argmax()</h4>
+<p class="label">Full Syntax</p>
+<pre>numpy.argmax(a, axis=None, out=None, *, keepdims=False)
+ndarray.argmax(axis=None, out=None, *, keepdims=False)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>a</td><td>array_like</td><td>—</td><td>ndarray</td><td>Input array (np.argmax only)</td></tr>
+<tr><td>axis</td><td>int, optional</td><td>None</td><td>0, 1</td><td>Axis along which index returned</td></tr>
+<tr><td>out</td><td>ndarray, optional</td><td>None</td><td>ndarray</td><td>Output array</td></tr>
+<tr><td>keepdims</td><td>bool</td><td>False</td><td>True, False</td><td>Keep reduced axes</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>int or ndarray of int</td><td>Index of maximum value</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>axis=None returns flat index</li></ul>
+</div>
+
+<h3 id="np-cumulative">Cumulative Operations</h3>
+
+<div class="entry" id="np-cumsum">
+<h4>np.cumsum() / ndarray.cumsum()</h4>
+<p class="label">Full Syntax</p>
+<pre>numpy.cumsum(a, axis=None, dtype=None, out=None)
+ndarray.cumsum(axis=None, dtype=None, out=None)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>a</td><td>array_like</td><td>—</td><td>ndarray</td><td>Input array (np.cumsum only)</td></tr>
+<tr><td>axis</td><td>int, optional</td><td>None</td><td>0, 1</td><td>Axis along which cumulative sum computed</td></tr>
+<tr><td>dtype</td><td>dtype, optional</td><td>None</td><td>any dtype</td><td>Return dtype</td></tr>
+<tr><td>out</td><td>ndarray, optional</td><td>None</td><td>ndarray</td><td>Output array</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>ndarray</td><td>Cumulative sum (same shape as a)</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Returns new array</li></ul>
+</div>
+
+<div class="entry" id="np-cumprod">
+<h4>np.cumprod() / ndarray.cumprod()</h4>
+<p class="label">Full Syntax</p>
+<pre>numpy.cumprod(a, axis=None, dtype=None, out=None)
+ndarray.cumprod(axis=None, dtype=None, out=None)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>a</td><td>array_like</td><td>—</td><td>ndarray</td><td>Input array (np.cumprod only)</td></tr>
+<tr><td>axis</td><td>int, optional</td><td>None</td><td>0, 1</td><td>Axis along which cumulative product computed</td></tr>
+<tr><td>dtype</td><td>dtype, optional</td><td>None</td><td>any dtype</td><td>Return dtype</td></tr>
+<tr><td>out</td><td>ndarray, optional</td><td>None</td><td>ndarray</td><td>Output array</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>ndarray</td><td>Cumulative product</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Returns new array</li></ul>
+</div>
+
+<h3 id="np-sorting">Sorting</h3>
+
+<div class="entry" id="np-sort">
+<h4>np.sort()</h4>
+<p class="label">Full Syntax</p>
+<pre>numpy.sort(a, axis=-1, kind=None, order=None, *, stable=None)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>a</td><td>array_like</td><td>—</td><td>ndarray</td><td>Array to sort</td></tr>
+<tr><td>axis</td><td>int, optional</td><td>-1</td><td>0, 1, -1</td><td>Axis along which to sort</td></tr>
+<tr><td>kind</td><td>{'quicksort','mergesort','heapsort','stable'}</td><td>None</td><td>sort algorithms</td><td>Sorting algorithm</td></tr>
+<tr><td>order</td><td>str or list of str, optional</td><td>None</td><td>field names</td><td>Sort structured array by field(s)</td></tr>
+<tr><td>stable</td><td>bool, optional</td><td>None</td><td>True, False</td><td>Stable sort if True</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>ndarray</td><td>Sorted copy of array</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Returns copy; does not modify input</li></ul>
+</div>
+
+<div class="entry" id="ndarray-sort">
+<h4>ndarray.sort()</h4>
+<p class="label">Full Syntax</p>
+<pre>ndarray.sort(axis=-1, kind=None, order=None)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>axis</td><td>int, optional</td><td>-1</td><td>0, 1, -1</td><td>Axis along which to sort</td></tr>
+<tr><td>kind</td><td>{'quicksort','mergesort','heapsort','stable'}</td><td>None</td><td>sort algorithms</td><td>Sorting algorithm</td></tr>
+<tr><td>order</td><td>str or list of str, optional</td><td>None</td><td>field names</td><td>Sort structured array by field(s)</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>None</td><td>Sorts array in-place</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>In-place; returns None</li></ul>
+</div>
+
+<h3 id="np-unique">Unique Values</h3>
+
+<div class="entry" id="np-unique">
+<h4>np.unique()</h4>
+<p class="label">Full Syntax</p>
+<pre>numpy.unique(ar, return_index=False, return_inverse=False, return_counts=False, axis=None, *, equal_nan=True)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>ar</td><td>array_like</td><td>—</td><td>ndarray</td><td>Input array</td></tr>
+<tr><td>return_index</td><td>bool</td><td>False</td><td>True, False</td><td>Return indices of first occurrence</td></tr>
+<tr><td>return_inverse</td><td>bool</td><td>False</td><td>True, False</td><td>Return indices to reconstruct original</td></tr>
+<tr><td>return_counts</td><td>bool</td><td>False</td><td>True, False</td><td>Return count of each unique element</td></tr>
+<tr><td>axis</td><td>int, optional</td><td>None</td><td>0, 1</td><td>Axis for unique rows/cols</td></tr>
+<tr><td>equal_nan</td><td>bool</td><td>True</td><td>True, False</td><td>NaN values treated as equal</td></tr>
+</table>
+<p class="label">Returns</p>
+<table>
+<tr><th>Return Type</th><th>Meaning</th></tr>
+<tr><td>ndarray</td><td>Sorted unique values</td></tr>
+<tr><td>tuple</td><td>(unique, indices, inverse, counts) per flags</td></tr>
+</table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Returns new array; sorted output</li></ul>
+</div>
+
+<h3 id="np-conditional">Conditional Operations</h3>
+
+<div class="entry" id="np-where">
+<h4>np.where()</h4>
+<p class="label">Full Syntax</p>
+<pre>numpy.where(condition, [x, y, ]/, )
+# x, y, / are positional-only in NumPy 2.x</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>condition</td><td>array_like, bool</td><td>—</td><td>bool array</td><td>Where True, choose x; else y</td></tr>
+<tr><td>x</td><td>array_like, optional</td><td>—</td><td>scalar, array</td><td>Values chosen where condition True</td></tr>
+<tr><td>y</td><td>array_like, optional</td><td>—</td><td>scalar, array</td><td>Values chosen where condition False</td></tr>
+</table>
+<p class="label">Returns</p>
+<table>
+<tr><th>Return Type</th><th>Meaning</th></tr>
+<tr><td>ndarray</td><td>Element-wise selection if x,y given</td></tr>
+<tr><td>tuple of ndarrays</td><td>Indices where condition True (if only condition)</td></tr>
+</table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>np.where(cond) equivalent to np.nonzero(cond)</li><li>Single-arg form returns indices tuple</li></ul>
+</div>
+
+<h3 id="np-logical">Logical Operations</h3>
+
+<div class="entry" id="np-any">
+<h4>np.any() / ndarray.any()</h4>
+<p class="label">Full Syntax</p>
+<pre>numpy.any(a, axis=None, out=None, keepdims=False, *, where=True)
+ndarray.any(axis=None, out=None, keepdims=False, *, where=True)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>a</td><td>array_like</td><td>—</td><td>ndarray</td><td>Input (np.any only)</td></tr>
+<tr><td>axis</td><td>None, int, tuple of ints</td><td>None</td><td>0, 1</td><td>Axis along which to test</td></tr>
+<tr><td>out</td><td>ndarray, optional</td><td>None</td><td>ndarray</td><td>Output array</td></tr>
+<tr><td>keepdims</td><td>bool</td><td>False</td><td>True, False</td><td>Keep reduced axes</td></tr>
+<tr><td>where</td><td>array_like of bool</td><td>True</td><td>bool array</td><td>Elements to include in test</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>bool or ndarray of bool</td><td>True if any element is True</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>axis=None tests all elements</li></ul>
+</div>
+
+<div class="entry" id="np-all">
+<h4>np.all() / ndarray.all()</h4>
+<p class="label">Full Syntax</p>
+<pre>numpy.all(a, axis=None, out=None, keepdims=False, *, where=True)
+ndarray.all(axis=None, out=None, keepdims=False, *, where=True)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>a</td><td>array_like</td><td>—</td><td>ndarray</td><td>Input (np.all only)</td></tr>
+<tr><td>axis</td><td>None, int, tuple of ints</td><td>None</td><td>0, 1</td><td>Axis along which to test</td></tr>
+<tr><td>out</td><td>ndarray, optional</td><td>None</td><td>ndarray</td><td>Output array</td></tr>
+<tr><td>keepdims</td><td>bool</td><td>False</td><td>True, False</td><td>Keep reduced axes</td></tr>
+<tr><td>where</td><td>array_like of bool</td><td>True</td><td>bool array</td><td>Elements to include in test</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>bool or ndarray of bool</td><td>True if all elements are True</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>axis=None tests all elements</li></ul>
+</div>
+
+<h3 id="np-bool-index">Boolean Indexing</h3>
+
+<div class="entry" id="np-bool-single">
+<h4>Single Condition Boolean Indexing</h4>
+<p class="label">Full Syntax</p>
+<pre>arr[condition]
+arr[arr &gt; threshold]
+arr[arr == value]
+arr[~(arr &lt; 0)]</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>condition</td><td>ndarray, bool</td><td>—</td><td>same shape as arr</td><td>Boolean mask selecting elements</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>ndarray (1D)</td><td>Flat array of elements where condition True</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Returns copy of selected elements (1D)</li><li>Assignment: arr[condition] = value modifies in-place</li></ul>
+</div>
+
+<div class="entry" id="np-bool-multi">
+<h4>Multiple Conditions (&amp; and |)</h4>
+<p class="label">Full Syntax</p>
+<pre>arr[(condition1) &amp; (condition2)]
+arr[(condition1) | (condition2)]
+arr[~((condition1) &amp; (condition2))]</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>condition1, condition2</td><td>ndarray, bool</td><td>—</td><td>same shape</td><td>Boolean masks combined with &amp; (and) or | (or)</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>ndarray (1D)</td><td>Elements matching combined condition</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Must use &amp;, |, ~ not and, or, not</li><li>Wrap each condition in parentheses</li></ul>
+</div>
+
+<h3 id="np-clip">Clipping</h3>
+
+<div class="entry" id="np-clip">
+<h4>np.clip() / ndarray.clip()</h4>
+<p class="label">Full Syntax</p>
+<pre>numpy.clip(a, a_min, a_max, out=None, *, min=None, max=None, **kwargs)
+ndarray.clip(min=None, max=None, out=None, *, **kwargs)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>a</td><td>array_like</td><td>—</td><td>ndarray</td><td>Input array (np.clip only)</td></tr>
+<tr><td>a_min, min</td><td>array_like or None</td><td>None</td><td>scalar, array</td><td>Minimum value (lower bound)</td></tr>
+<tr><td>a_max, max</td><td>array_like or None</td><td>None</td><td>scalar, array</td><td>Maximum value (upper bound)</td></tr>
+<tr><td>out</td><td>ndarray, optional</td><td>None</td><td>ndarray</td><td>Output array</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>ndarray</td><td>Values clipped to [min, max]</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>np.clip returns new array; arr.clip() can be in-place if out=arr</li></ul>
+</div>
+
+<h3 id="np-percentile">Percentiles</h3>
+
+<div class="entry" id="np-percentile">
+<h4>np.percentile()</h4>
+<p class="label">Full Syntax</p>
+<pre>numpy.percentile(a, q, axis=None, out=None, overwrite_input=False, method='linear', keepdims=False, *, interpolation=None)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>a</td><td>array_like</td><td>—</td><td>ndarray</td><td>Input data</td></tr>
+<tr><td>q</td><td>array_like of float</td><td>—</td><td>0–100</td><td>Percentile(s) to compute</td></tr>
+<tr><td>axis</td><td>int, tuple of ints, optional</td><td>None</td><td>0, 1</td><td>Axis along which percentiles computed</td></tr>
+<tr><td>out</td><td>ndarray, optional</td><td>None</td><td>ndarray</td><td>Output array</td></tr>
+<tr><td>overwrite_input</td><td>bool</td><td>False</td><td>True, False</td><td>Input may be modified</td></tr>
+<tr><td>method</td><td>str</td><td>'linear'</td><td>'linear','lower','higher','midpoint','nearest'</td><td>Interpolation method</td></tr>
+<tr><td>keepdims</td><td>bool</td><td>False</td><td>True, False</td><td>Keep reduced axes</td></tr>
+<tr><td>interpolation</td><td>str, optional</td><td>None</td><td>same as method</td><td>Deprecated alias for method</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>ndarray or scalar</td><td>q-th percentile(s)</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>q in [0, 100]; np.quantile uses [0,1] scale</li></ul>
+</div>
+
+<div class="entry" id="np-quantile">
+<h4>np.quantile()</h4>
+<p class="label">Full Syntax</p>
+<pre>numpy.quantile(a, q, axis=None, out=None, overwrite_input=False, method='linear', keepdims=False, *, interpolation=None)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>a</td><td>array_like</td><td>—</td><td>ndarray</td><td>Input data</td></tr>
+<tr><td>q</td><td>array_like of float</td><td>—</td><td>0.0–1.0</td><td>Quantile(s) to compute</td></tr>
+<tr><td>axis</td><td>int, tuple of ints, optional</td><td>None</td><td>0, 1</td><td>Axis along which quantiles computed</td></tr>
+<tr><td>out</td><td>ndarray, optional</td><td>None</td><td>ndarray</td><td>Output array</td></tr>
+<tr><td>overwrite_input</td><td>bool</td><td>False</td><td>True, False</td><td>Input may be modified</td></tr>
+<tr><td>method</td><td>str</td><td>'linear'</td><td>'linear','lower','higher','midpoint','nearest'</td><td>Interpolation method</td></tr>
+<tr><td>keepdims</td><td>bool</td><td>False</td><td>True, False</td><td>Keep reduced axes</td></tr>
+<tr><td>interpolation</td><td>str, optional</td><td>None</td><td>same as method</td><td>Deprecated alias for method</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>ndarray or scalar</td><td>q-th quantile(s)</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>np.percentile(a, q) == np.quantile(a, q/100)</li></ul>
+</div>
+
+<h3 id="np-linalg">Linear Algebra</h3>
+
+<div class="entry" id="np-dot">
+<h4>np.dot()</h4>
+<p class="label">Full Syntax</p>
+<pre>numpy.dot(a, b, out=None)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>a</td><td>array_like</td><td>—</td><td>ndarray</td><td>First argument</td></tr>
+<tr><td>b</td><td>array_like</td><td>—</td><td>ndarray</td><td>Second argument</td></tr>
+<tr><td>out</td><td>ndarray, optional</td><td>None</td><td>ndarray</td><td>Output array</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>ndarray or scalar</td><td>Dot product; matrix multiply for 2D</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>2D×2D: matrix multiplication; prefer @ or np.matmul for clarity</li></ul>
+</div>
+
+<div class="entry" id="np-matmul">
+<h4>@ operator / np.matmul()</h4>
+<p class="label">Full Syntax</p>
+<pre>a @ b
+numpy.matmul(x1, x2, /, out=None, *, casting='same_kind', order='K', dtype=None, subok=True[, axes, axis])</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>x1</td><td>array_like</td><td>—</td><td>ndarray</td><td>First input array</td></tr>
+<tr><td>x2</td><td>array_like</td><td>—</td><td>ndarray</td><td>Second input array</td></tr>
+<tr><td>out</td><td>ndarray, optional</td><td>None</td><td>ndarray</td><td>Output array</td></tr>
+<tr><td>casting</td><td>{'no','equiv','safe','same_kind','unsafe'}</td><td>'same_kind'</td><td>casting modes</td><td>Casting rule</td></tr>
+<tr><td>order</td><td>{'K','A','C','F'}</td><td>'K'</td><td>layout options</td><td>Memory layout of output</td></tr>
+<tr><td>dtype</td><td>dtype, optional</td><td>None</td><td>any dtype</td><td>Computation dtype</td></tr>
+<tr><td>subok</td><td>bool</td><td>True</td><td>True, False</td><td>Pass subclasses through</td></tr>
+<tr><td>axes</td><td>list of (int,int), optional</td><td>None</td><td>axis pairs</td><td>Axes to sum over (broadcasting)</td></tr>
+<tr><td>axis</td><td>int, optional</td><td>None</td><td>int</td><td>Axis for vector dot product</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>ndarray</td><td>Matrix product of inputs</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>@ preferred for matrix multiplication</li><li>Not element-wise; use * for element-wise</li></ul>
+</div>
+
+<h3 id="np-stacking">Stacking</h3>
+
+<div class="entry" id="np-vstack">
+<h4>np.vstack()</h4>
+<p class="label">Full Syntax</p>
+<pre>numpy.vstack(tup, *, dtype=None, casting='same_kind')</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>tup</td><td>sequence of arrays</td><td>—</td><td>(arr1, arr2)</td><td>Arrays to stack vertically (row-wise)</td></tr>
+<tr><td>dtype</td><td>str or dtype, optional</td><td>None</td><td>any dtype</td><td>Output dtype</td></tr>
+<tr><td>casting</td><td>{'no','equiv','safe','same_kind','unsafe'}</td><td>'same_kind'</td><td>casting modes</td><td>Casting rule</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>ndarray</td><td>Stacked array along axis 0</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Equivalent to np.concatenate(tup, axis=0) for 2D</li><li>1D arrays treated as row vectors</li></ul>
+</div>
+
+<div class="entry" id="np-hstack">
+<h4>np.hstack()</h4>
+<p class="label">Full Syntax</p>
+<pre>numpy.hstack(tup, *, dtype=None, casting='same_kind')</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>tup</td><td>sequence of arrays</td><td>—</td><td>(arr1, arr2)</td><td>Arrays to stack horizontally (column-wise)</td></tr>
+<tr><td>dtype</td><td>str or dtype, optional</td><td>None</td><td>any dtype</td><td>Output dtype</td></tr>
+<tr><td>casting</td><td>{'no','equiv','safe','same_kind','unsafe'}</td><td>'same_kind'</td><td>casting modes</td><td>Casting rule</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>ndarray</td><td>Stacked array along last axis</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>1D: concatenate; 2D: concatenate along axis 1</li></ul>
+</div>
+
+<div class="entry" id="np-concatenate">
+<h4>np.concatenate()</h4>
+<p class="label">Full Syntax</p>
+<pre>numpy.concatenate((a1, a2, ...), axis=0, out=None, dtype=None, casting='same_kind')</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>arrays</td><td>sequence of array_like</td><td>—</td><td>(a1, a2, ...)</td><td>Arrays to join</td></tr>
+<tr><td>axis</td><td>int, optional</td><td>0</td><td>0, 1, -1</td><td>Axis along which arrays joined</td></tr>
+<tr><td>out</td><td>ndarray, optional</td><td>None</td><td>ndarray</td><td>Output array</td></tr>
+<tr><td>dtype</td><td>str or dtype, optional</td><td>None</td><td>any dtype</td><td>Output dtype</td></tr>
+<tr><td>casting</td><td>{'no','equiv','safe','same_kind','unsafe'}</td><td>'same_kind'</td><td>casting modes</td><td>Casting rule</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>ndarray</td><td>Concatenated array</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>All arrays must have same shape except on axis</li></ul>
+</div>
+
+<div class="entry" id="np-stack">
+<h4>np.stack()</h4>
+<p class="label">Full Syntax</p>
+<pre>numpy.stack(arrays, axis=0, out=None, *, dtype=None, casting='same_kind')</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>arrays</td><td>sequence of array_like</td><td>—</td><td>[a1, a2]</td><td>Arrays of same shape to stack</td></tr>
+<tr><td>axis</td><td>int</td><td>0</td><td>0, 1, -1</td><td>Axis along which to stack (new axis)</td></tr>
+<tr><td>out</td><td>ndarray, optional</td><td>None</td><td>ndarray</td><td>Output array</td></tr>
+<tr><td>dtype</td><td>str or dtype, optional</td><td>None</td><td>any dtype</td><td>Output dtype</td></tr>
+<tr><td>casting</td><td>{'no','equiv','safe','same_kind','unsafe'}</td><td>'same_kind'</td><td>casting modes</td><td>Casting rule</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>ndarray</td><td>Stacked array with new axis</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Creates new dimension; unlike concatenate</li></ul>
+</div>
+
+<h3 id="np-random">Random Module</h3>
+
+<div class="entry" id="np-random-seed">
+<h4>np.random.seed()</h4>
+<p class="label">Full Syntax</p>
+<pre>numpy.random.seed(seed=None)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>seed</td><td>int, array_like, SeedSequence, optional</td><td>None</td><td>int, None</td><td>Seed for legacy RandomState</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>list or None</td><td>Old random state if seed is None</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Legacy API; prefer np.random.default_rng(seed) in NumPy 1.17+</li></ul>
+</div>
+
+<div class="entry" id="np-random-normal">
+<h4>np.random.normal()</h4>
+<p class="label">Full Syntax</p>
+<pre>numpy.random.normal(loc=0.0, scale=1.0, size=None)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>loc</td><td>float or array_like</td><td>0.0</td><td>scalar</td><td>Mean of distribution</td></tr>
+<tr><td>scale</td><td>float or array_like</td><td>1.0</td><td>scalar &gt; 0</td><td>Standard deviation</td></tr>
+<tr><td>size</td><td>int or tuple of ints, optional</td><td>None</td><td>(m,n)</td><td>Output shape</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>float or ndarray</td><td>Drawn samples from normal distribution</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Legacy: np.random.normal(); Generator: rng.normal()</li></ul>
+</div>
+
+<div class="entry" id="np-random-choice">
+<h4>np.random.choice()</h4>
+<p class="label">Full Syntax</p>
+<pre>numpy.random.choice(a, size=None, replace=True, p=None)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>a</td><td>1-D array-like or int</td><td>—</td><td>arr or n</td><td>If int n, sample from np.arange(n)</td></tr>
+<tr><td>size</td><td>int or tuple of ints, optional</td><td>None</td><td>(m,n)</td><td>Output shape</td></tr>
+<tr><td>replace</td><td>bool</td><td>True</td><td>True, False</td><td>Sample with replacement</td></tr>
+<tr><td>p</td><td>1-D array_like, optional</td><td>None</td><td>probabilities summing to 1</td><td>Probability of each element</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>scalar or ndarray</td><td>Random sample(s) from a</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>replace=False requires size ≤ len(a)</li></ul>
+</div>
+
+<div class="entry" id="np-random-randint">
+<h4>np.random.randint()</h4>
+<p class="label">Full Syntax</p>
+<pre>numpy.random.randint(low, high=None, size=None, dtype=int)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>low</td><td>int</td><td>—</td><td>int</td><td>Lowest (signed) integer (inclusive)</td></tr>
+<tr><td>high</td><td>int, optional</td><td>None</td><td>int</td><td>One above highest integer (exclusive)</td></tr>
+<tr><td>size</td><td>int or tuple of ints, optional</td><td>None</td><td>(m,n)</td><td>Output shape</td></tr>
+<tr><td>dtype</td><td>dtype</td><td>int</td><td>np.int32, np.int64</td><td>Desired dtype</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>int or ndarray of int</td><td>Random integers from [low, high)</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>high=None: range [0, low)</li></ul>
+</div>
+
+<div class="entry" id="np-random-uniform">
+<h4>np.random.uniform()</h4>
+<p class="label">Full Syntax</p>
+<pre>numpy.random.uniform(low=0.0, high=1.0, size=None)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>low</td><td>float or array_like</td><td>0.0</td><td>scalar</td><td>Lower boundary (inclusive)</td></tr>
+<tr><td>high</td><td>float or array_like</td><td>1.0</td><td>scalar</td><td>Upper boundary (exclusive)</td></tr>
+<tr><td>size</td><td>int or tuple of ints, optional</td><td>None</td><td>(m,n)</td><td>Output shape</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>float or ndarray</td><td>Uniform samples in [low, high)</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Continuous uniform distribution</li></ul>
+</div>
+
+<h3 id="np-elementwise">Element-wise Math</h3>
+
+<div class="entry" id="np-sqrt">
+<h4>np.sqrt()</h4>
+<p class="label">Full Syntax</p>
+<pre>numpy.sqrt(x, /, out=None, *, where=True, casting='same_kind', order='K', dtype=None, subok=True[, signature, extobj])</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>x</td><td>array_like</td><td>—</td><td>ndarray</td><td>Input values</td></tr>
+<tr><td>out</td><td>ndarray, optional</td><td>None</td><td>ndarray</td><td>Output array</td></tr>
+<tr><td>where</td><td>array_like, optional</td><td>True</td><td>bool array</td><td>Condition for applying ufunc</td></tr>
+<tr><td>casting</td><td>{'no','equiv','safe','same_kind','unsafe'}</td><td>'same_kind'</td><td>casting modes</td><td>Casting rule</td></tr>
+<tr><td>order</td><td>{'K','A','C','F'}</td><td>'K'</td><td>layout options</td><td>Memory layout</td></tr>
+<tr><td>dtype</td><td>dtype, optional</td><td>None</td><td>any dtype</td><td>Override dtype of calculation</td></tr>
+<tr><td>subok</td><td>bool</td><td>True</td><td>True, False</td><td>Pass subclasses</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>ndarray</td><td>Non-negative square root element-wise</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>ufunc; returns new array</li><li>exp, log, abs share same ufunc optional params</li></ul>
+</div>
+
+<div class="entry" id="np-exp">
+<h4>np.exp()</h4>
+<p class="label">Full Syntax</p>
+<pre>numpy.exp(x, /, out=None, *, where=True, casting='same_kind', order='K', dtype=None, subok=True[, signature, extobj])</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>x</td><td>array_like</td><td>—</td><td>ndarray</td><td>Input exponent</td></tr>
+<tr><td>out</td><td>ndarray, optional</td><td>None</td><td>ndarray</td><td>Output array</td></tr>
+<tr><td>where</td><td>array_like, optional</td><td>True</td><td>bool array</td><td>Condition for applying ufunc</td></tr>
+<tr><td>casting</td><td>{'no','equiv','safe','same_kind','unsafe'}</td><td>'same_kind'</td><td>casting modes</td><td>Casting rule</td></tr>
+<tr><td>order</td><td>{'K','A','C','F'}</td><td>'K'</td><td>layout options</td><td>Memory layout</td></tr>
+<tr><td>dtype</td><td>dtype, optional</td><td>None</td><td>any dtype</td><td>Override dtype</td></tr>
+<tr><td>subok</td><td>bool</td><td>True</td><td>True, False</td><td>Pass subclasses</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>ndarray</td><td>e raised to power x element-wise</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Natural exponential (base e)</li></ul>
+</div>
+
+<div class="entry" id="np-log">
+<h4>np.log()</h4>
+<p class="label">Full Syntax</p>
+<pre>numpy.log(x, /, out=None, *, where=True, casting='same_kind', order='K', dtype=None, subok=True[, signature, extobj])</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>x</td><td>array_like</td><td>—</td><td>ndarray</td><td>Input values (&gt;0)</td></tr>
+<tr><td>out</td><td>ndarray, optional</td><td>None</td><td>ndarray</td><td>Output array</td></tr>
+<tr><td>where</td><td>array_like, optional</td><td>True</td><td>bool array</td><td>Condition for applying ufunc</td></tr>
+<tr><td>casting</td><td>{'no','equiv','safe','same_kind','unsafe'}</td><td>'same_kind'</td><td>casting modes</td><td>Casting rule</td></tr>
+<tr><td>order</td><td>{'K','A','C','F'}</td><td>'K'</td><td>layout options</td><td>Memory layout</td></tr>
+<tr><td>dtype</td><td>dtype, optional</td><td>None</td><td>any dtype</td><td>Override dtype</td></tr>
+<tr><td>subok</td><td>bool</td><td>True</td><td>True, False</td><td>Pass subclasses</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>ndarray</td><td>Natural logarithm element-wise</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>np.log10(), np.log2() for other bases</li></ul>
+</div>
+
+<div class="entry" id="np-abs">
+<h4>np.abs() / np.absolute()</h4>
+<p class="label">Full Syntax</p>
+<pre>numpy.abs(x, /, out=None, *, where=True, casting='same_kind', order='K', dtype=None, subok=True[, signature, extobj])
+numpy.absolute(x, /, out=None, *, where=True, casting='same_kind', order='K', dtype=None, subok=True[, signature, extobj])</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>x</td><td>array_like</td><td>—</td><td>ndarray</td><td>Input array</td></tr>
+<tr><td>out</td><td>ndarray, optional</td><td>None</td><td>ndarray</td><td>Output array</td></tr>
+<tr><td>where</td><td>array_like, optional</td><td>True</td><td>bool array</td><td>Condition for applying ufunc</td></tr>
+<tr><td>casting</td><td>{'no','equiv','safe','same_kind','unsafe'}</td><td>'same_kind'</td><td>casting modes</td><td>Casting rule</td></tr>
+<tr><td>order</td><td>{'K','A','C','F'}</td><td>'K'</td><td>layout options</td><td>Memory layout</td></tr>
+<tr><td>dtype</td><td>dtype, optional</td><td>None</td><td>any dtype</td><td>Override dtype</td></tr>
+<tr><td>subok</td><td>bool</td><td>True</td><td>True, False</td><td>Pass subclasses</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>ndarray</td><td>Absolute value element-wise</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>np.abs is alias for np.absolute</li></ul>
+</div>
+
+<h3 id="np-rounding">Rounding</h3>
+
+<div class="entry" id="np-round">
+<h4>np.round() / ndarray.round()</h4>
+<p class="label">Full Syntax</p>
+<pre>numpy.round(a, decimals=0, out=None)
+ndarray.round(decimals=0, out=None)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>a</td><td>array_like</td><td>—</td><td>ndarray</td><td>Input (np.round only)</td></tr>
+<tr><td>decimals</td><td>int</td><td>0</td><td>int</td><td>Number of decimal places; negative rounds left of decimal</td></tr>
+<tr><td>out</td><td>ndarray, optional</td><td>None</td><td>ndarray</td><td>Output array</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>ndarray</td><td>Rounded values (evenly to nearest)</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Alias: np.around(); banker's rounding (half to even)</li></ul>
+</div>
+
+</section>

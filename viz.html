@@ -1,0 +1,486 @@
+<section id="visualization">
+<h2>VISUALIZATION</h2>
+
+<h3 id="mpl">Matplotlib</h3>
+
+<div class="entry" id="plt-figure">
+<h4>plt.figure()</h4>
+<p class="label">Full Syntax</p>
+<pre>matplotlib.pyplot.figure(num=None, figsize=None, dpi=None, facecolor=None, edgecolor=None, frameon=True, FigureClass=&lt;class 'Figure'&gt;, clear=False, **kwargs)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>num</td><td>int, str, Figure, optional</td><td>None</td><td>1, 'name', Figure</td><td>Figure identifier</td></tr>
+<tr><td>figsize</td><td>tuple of float</td><td>None</td><td>(10,6)</td><td>Width, height in inches</td></tr>
+<tr><td>dpi</td><td>float</td><td>None</td><td>100, 300</td><td>Resolution (dots per inch)</td></tr>
+<tr><td>facecolor</td><td>color</td><td>None</td><td>'white', '#fff'</td><td>Figure background color</td></tr>
+<tr><td>edgecolor</td><td>color</td><td>None</td><td>color</td><td>Figure edge color</td></tr>
+<tr><td>frameon</td><td>bool</td><td>True</td><td>True, False</td><td>Draw figure frame</td></tr>
+<tr><td>FigureClass</td><td>class</td><td>Figure</td><td>Figure subclass</td><td>Figure class to instantiate</td></tr>
+<tr><td>clear</td><td>bool</td><td>False</td><td>True, False</td><td>Clear figure if num exists</td></tr>
+<tr><td>**kwargs</td><td>any</td><td>—</td><td>—</td><td>Passed to Figure constructor</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>Figure</td><td>Current or new figure object</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Creates new figure or activates existing by num</li></ul>
+</div>
+
+<div class="entry" id="plt-plot">
+<h4>plt.plot()</h4>
+<p class="label">Full Syntax</p>
+<pre>matplotlib.pyplot.plot(*args, scalex=True, scaley=True, data=None, **kwargs)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>*args</td><td>float, 1D array</td><td>—</td><td>y, x,y, x,y,fmt</td><td>Data and optional format string</td></tr>
+<tr><td>scalex</td><td>bool</td><td>True</td><td>True, False</td><td>Autoscale x-axis</td></tr>
+<tr><td>scaley</td><td>bool</td><td>True</td><td>True, False</td><td>Autoscale y-axis</td></tr>
+<tr><td>data</td><td>indexable, optional</td><td>None</td><td>DataFrame, dict</td><td>Object for label lookup</td></tr>
+<tr><td>x</td><td>array-like</td><td>—</td><td>array</td><td>x values (kwarg)</td></tr>
+<tr><td>y</td><td>array-like</td><td>—</td><td>array</td><td>y values (kwarg)</td></tr>
+<tr><td>fmt</td><td>str</td><td>—</td><td>'ro-', 'b--'</td><td>Format: color, marker, linestyle</td></tr>
+<tr><td>color / c</td><td>color</td><td>None</td><td>'r', '#ff0000'</td><td>Line color</td></tr>
+<tr><td>linestyle / ls</td><td>str</td><td>'-'</td><td>'-','--','-.',':'</td><td>Line style</td></tr>
+<tr><td>linewidth / lw</td><td>float</td><td>None</td><td>1.5, 2</td><td>Line width</td></tr>
+<tr><td>marker</td><td>str</td><td>None</td><td>'o','s','^'</td><td>Point marker style</td></tr>
+<tr><td>markersize / ms</td><td>float</td><td>None</td><td>8</td><td>Marker size</td></tr>
+<tr><td>markerfacecolor / mfc</td><td>color</td><td>None</td><td>color</td><td>Marker fill color</td></tr>
+<tr><td>markeredgecolor / mec</td><td>color</td><td>None</td><td>color</td><td>Marker edge color</td></tr>
+<tr><td>markeredgewidth / mew</td><td>float</td><td>None</td><td>float</td><td>Marker edge width</td></tr>
+<tr><td>alpha</td><td>float</td><td>None</td><td>0.0–1.0</td><td>Transparency</td></tr>
+<tr><td>label</td><td>str</td><td>None</td><td>str</td><td>Legend label</td></tr>
+<tr><td>drawstyle</td><td>str</td><td>'default'</td><td>'steps','steps-pre'</td><td>Drawing style</td></tr>
+<tr><td>fillstyle</td><td>str</td><td>None</td><td>'full','none'</td><td>Marker fill style</td></tr>
+<tr><td>zorder</td><td>float</td><td>None</td><td>float</td><td>Drawing order</td></tr>
+<tr><td>rasterized</td><td>bool</td><td>None</td><td>True, False</td><td>Rasterize for vector output</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>list of Line2D</td><td>Line artist objects</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>plot(x,y) or plot(y) with implicit x=range</li></ul>
+</div>
+
+<div class="entry" id="plt-scatter">
+<h4>plt.scatter()</h4>
+<p class="label">Full Syntax</p>
+<pre>matplotlib.pyplot.scatter(x, y, s=None, c=None, marker=None, cmap=None, norm=None, vmin=None, vmax=None, alpha=None, linewidths=None, *, edgecolors=None, colorizer=None, plotnonfinite=False, data=None, **kwargs)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>x</td><td>float, array-like</td><td>—</td><td>array</td><td>x coordinates</td></tr>
+<tr><td>y</td><td>float, array-like</td><td>—</td><td>array</td><td>y coordinates</td></tr>
+<tr><td>s</td><td>scalar, array-like</td><td>None</td><td>20, array</td><td>Marker size(s) in points²</td></tr>
+<tr><td>c</td><td>color, sequence, optional</td><td>None</td><td>'r', array, column</td><td>Marker color or colormap values</td></tr>
+<tr><td>marker</td><td>MarkerStyle</td><td>'o'</td><td>'o','s','^'</td><td>Marker style</td></tr>
+<tr><td>cmap</td><td>Colormap, str</td><td>None</td><td>'viridis'</td><td>Colormap for c values</td></tr>
+<tr><td>norm</td><td>Normalize</td><td>None</td><td>Normalize</td><td>Normalize c for colormap</td></tr>
+<tr><td>vmin, vmax</td><td>float, optional</td><td>None</td><td>float</td><td>Colormap value limits</td></tr>
+<tr><td>alpha</td><td>float</td><td>None</td><td>0.0–1.0</td><td>Transparency</td></tr>
+<tr><td>linewidths</td><td>float, sequence</td><td>None</td><td>float</td><td>Edge line width</td></tr>
+<tr><td>edgecolors</td><td>color, sequence</td><td>'face'</td><td>color, 'none'</td><td>Edge color</td></tr>
+<tr><td>colorizer</td><td>Colorizer, optional</td><td>None</td><td>Colorizer</td><td>Color normalization object</td></tr>
+<tr><td>plotnonfinite</td><td>bool</td><td>False</td><td>True, False</td><td>Plot inf/nan points</td></tr>
+<tr><td>data</td><td>indexable, optional</td><td>None</td><td>DataFrame</td><td>Data source for labels</td></tr>
+<tr><td>label</td><td>str</td><td>None</td><td>str</td><td>Legend label</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>PathCollection</td><td>Scatter artist object</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>PathCollection; use plt.colorbar(collection) for colorbar</li></ul>
+</div>
+
+<div class="entry" id="plt-bar">
+<h4>plt.bar()</h4>
+<p class="label">Full Syntax</p>
+<pre>matplotlib.pyplot.bar(x, height, width=0.8, bottom=None, *, align='center', data=None, **kwargs)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>x</td><td>scalar, array-like</td><td>—</td><td>labels, positions</td><td>x coordinates of bars</td></tr>
+<tr><td>height</td><td>scalar, array-like</td><td>—</td><td>values</td><td>Bar heights</td></tr>
+<tr><td>width</td><td>float, array-like</td><td>0.8</td><td>float</td><td>Bar width</td></tr>
+<tr><td>bottom</td><td>scalar, array-like</td><td>None</td><td>0, array</td><td>y base of bars (stacked base)</td></tr>
+<tr><td>align</td><td>{'center','edge'}</td><td>'center'</td><td>'center','edge'</td><td>Bar alignment to x</td></tr>
+<tr><td>data</td><td>indexable, optional</td><td>None</td><td>DataFrame</td><td>Data source</td></tr>
+<tr><td>color</td><td>color, sequence</td><td>None</td><td>color</td><td>Bar face color</td></tr>
+<tr><td>edgecolor</td><td>color, sequence</td><td>None</td><td>color</td><td>Bar edge color</td></tr>
+<tr><td>linewidth</td><td>float, sequence</td><td>None</td><td>float</td><td>Edge line width</td></tr>
+<tr><td>alpha</td><td>float</td><td>None</td><td>0.0–1.0</td><td>Transparency</td></tr>
+<tr><td>label</td><td>str</td><td>None</td><td>str</td><td>Legend label</td></tr>
+<tr><td>hatch</td><td>str</td><td>None</td><td>'/', '\\', '|'</td><td>Fill pattern</td></tr>
+<tr><td>tick_label</td><td>sequence of str</td><td>None</td><td>labels</td><td>Tick labels for x</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>BarContainer</td><td>Container of Rectangle patches</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Vertical bars; plt.barh() for horizontal</li></ul>
+</div>
+
+<div class="entry" id="plt-hist">
+<h4>plt.hist()</h4>
+<p class="label">Full Syntax</p>
+<pre>matplotlib.pyplot.hist(x, bins=None, range=None, density=False, weights=None, cumulative=False, bottom=None, histtype='bar', align='mid', orientation='vertical', rwidth=None, log=False, color=None, label=None, stacked=False, *, data=None, **kwargs)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>x</td><td>array-like</td><td>—</td><td>1D array, sequence</td><td>Input values</td></tr>
+<tr><td>bins</td><td>int, sequence, str</td><td>None</td><td>10, [0,1,2], 'auto'</td><td>Bin edges or count</td></tr>
+<tr><td>range</td><td>tuple, optional</td><td>None</td><td>(0,10)</td><td>Lower and upper bin range</td></tr>
+<tr><td>density</td><td>bool</td><td>False</td><td>True, False</td><td>Normalize to form PDF</td></tr>
+<tr><td>weights</td><td>array-like, optional</td><td>None</td><td>array</td><td>Weight per value</td></tr>
+<tr><td>cumulative</td><td>bool</td><td>False</td><td>True, False</td><td>Cumulative histogram</td></tr>
+<tr><td>bottom</td><td>array-like, scalar</td><td>None</td><td>0</td><td>Baseline for bins</td></tr>
+<tr><td>histtype</td><td>{'bar','barstacked','step','stepfilled'}</td><td>'bar'</td><td>hist types</td><td>Histogram style</td></tr>
+<tr><td>align</td><td>{'left','mid','right'}</td><td>'mid'</td><td>align options</td><td>Bar alignment</td></tr>
+<tr><td>orientation</td><td>{'vertical','horizontal'}</td><td>'vertical'</td><td>'vertical','horizontal'</td><td>Bar orientation</td></tr>
+<tr><td>rwidth</td><td>float, optional</td><td>None</td><td>0.8</td><td>Relative bar width</td></tr>
+<tr><td>log</td><td>bool</td><td>False</td><td>True, False</td><td>Log scale on y-axis</td></tr>
+<tr><td>color</td><td>color, sequence</td><td>None</td><td>color</td><td>Bar color</td></tr>
+<tr><td>label</td><td>str</td><td>None</td><td>str</td><td>Legend label</td></tr>
+<tr><td>stacked</td><td>bool</td><td>False</td><td>True, False</td><td>Stack multiple datasets</td></tr>
+<tr><td>data</td><td>indexable, optional</td><td>None</td><td>DataFrame</td><td>Data source</td></tr>
+<tr><td>edgecolor</td><td>color</td><td>None</td><td>color</td><td>Bar edge color</td></tr>
+<tr><td>alpha</td><td>float</td><td>None</td><td>0.0–1.0</td><td>Transparency</td></tr>
+</table>
+<p class="label">Returns</p>
+<table>
+<tr><th>Return Type</th><th>Meaning</th></tr>
+<tr><td>n (array)</td><td>Bin counts or probabilities</td></tr>
+<tr><td>bins (array)</td><td>Bin edges</td></tr>
+<tr><td>patches (BarContainer or list)</td><td>Silent list of patches</td></tr>
+</table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Returns (n, bins, patches) tuple</li></ul>
+</div>
+
+<div class="entry" id="plt-boxplot">
+<h4>plt.boxplot()</h4>
+<p class="label">Full Syntax</p>
+<pre>matplotlib.pyplot.boxplot(x, notch=None, sym=None, vert=None, whis=None, positions=None, widths=None, patch_artist=None, bootstrap=None, usermedians=None, conf_intervals=None, meanline=None, showmeans=None, showcaps=None, showbox=None, showfliers=None, showmedians=None, meanprops=None, medianprops=None, boxprops=None, whiskerprops=None, capprops=None, flierprops=None, label=None, labels=None, *, data=None)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>x</td><td>array or sequence of arrays</td><td>—</td><td>array, [a,b,c]</td><td>Data to plot</td></tr>
+<tr><td>notch</td><td>bool</td><td>False</td><td>True, False</td><td>Draw notch around median</td></tr>
+<tr><td>sym</td><td>str</td><td>None</td><td>'b+'</td><td>Flier marker (deprecated)</td></tr>
+<tr><td>vert</td><td>bool</td><td>True</td><td>True, False</td><td>Vertical boxes</td></tr>
+<tr><td>whis</td><td>float, sequence</td><td>1.5</td><td>1.5, (5,95)</td><td>Whisker extent (IQR multiplier or percentiles)</td></tr>
+<tr><td>positions</td><td>array-like</td><td>None</td><td>[1,2,3]</td><td>Box positions</td></tr>
+<tr><td>widths</td><td>float, sequence</td><td>None</td><td>0.5</td><td>Box widths</td></tr>
+<tr><td>patch_artist</td><td>bool</td><td>False</td><td>True, False</td><td>Fill boxes with color</td></tr>
+<tr><td>bootstrap</td><td>int, optional</td><td>None</td><td>1000</td><td>Notch CI bootstrap iterations</td></tr>
+<tr><td>usermedians</td><td>array-like</td><td>None</td><td>array</td><td>Override median values</td></tr>
+<tr><td>conf_intervals</td><td>array-like</td><td>None</td><td>array</td><td>Notch confidence intervals</td></tr>
+<tr><td>meanline</td><td>bool</td><td>False</td><td>True, False</td><td>Mean as line (not point)</td></tr>
+<tr><td>showmeans</td><td>bool</td><td>False</td><td>True, False</td><td>Show mean</td></tr>
+<tr><td>showcaps</td><td>bool</td><td>True</td><td>True, False</td><td>Show whisker caps</td></tr>
+<tr><td>showbox</td><td>bool</td><td>True</td><td>True, False</td><td>Show box</td></tr>
+<tr><td>showfliers</td><td>bool</td><td>True</td><td>True, False</td><td>Show outlier points</td></tr>
+<tr><td>showmedians</td><td>bool</td><td>True</td><td>True, False</td><td>Show median line</td></tr>
+<tr><td>meanprops</td><td>dict</td><td>None</td><td>dict</td><td>Mean artist properties</td></tr>
+<tr><td>medianprops</td><td>dict</td><td>None</td><td>dict</td><td>Median line properties</td></tr>
+<tr><td>boxprops</td><td>dict</td><td>None</td><td>dict</td><td>Box properties</td></tr>
+<tr><td>whiskerprops</td><td>dict</td><td>None</td><td>dict</td><td>Whisker properties</td></tr>
+<tr><td>capprops</td><td>dict</td><td>None</td><td>dict</td><td>Cap properties</td></tr>
+<tr><td>flierprops</td><td>dict</td><td>None</td><td>dict</td><td>Outlier marker properties</td></tr>
+<tr><td>label</td><td>str</td><td>None</td><td>str</td><td>Legend label (single box)</td></tr>
+<tr><td>labels</td><td>sequence of str</td><td>None</td><td>['A','B']</td><td>Tick labels per box</td></tr>
+<tr><td>data</td><td>indexable, optional</td><td>None</td><td>DataFrame</td><td>Data source</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>dict</td><td>Artist dict: boxes, medians, whiskers, caps, fliers, means</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>patch_artist=True needed to set box facecolor</li></ul>
+</div>
+
+<div class="entry" id="plt-subplot">
+<h4>plt.subplot()</h4>
+<p class="label">Full Syntax</p>
+<pre>matplotlib.pyplot.subplot(*args, **kwargs)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>nrows, ncols, index</td><td>int</td><td>—</td><td>2,2,1 or 221</td><td>Grid rows, cols, subplot index (1-based)</td></tr>
+<tr><td>num</td><td>int, str, SubplotSpec</td><td>—</td><td>111, SubplotSpec</td><td>Alternative: single int or SubplotSpec</td></tr>
+<tr><td>projection</td><td>{None,'polar','3d'}</td><td>None</td><td>None,'polar'</td><td>Axes projection type</td></tr>
+<tr><td>polar</td><td>bool</td><td>False</td><td>True, False</td><td>Deprecated; use projection='polar'</td></tr>
+<tr><td>sharex, sharey</td><td>Axes</td><td>None</td><td>Axes</td><td>Share x/y axis with another Axes</td></tr>
+<tr><td>label</td><td>str</td><td>None</td><td>str</td><td>Axes label</td></tr>
+<tr><td>fig</td><td>Figure</td><td>None</td><td>Figure</td><td>Parent figure</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>Axes</td><td>Subplot axes object</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>plt.subplot(2,2,1) or plt.subplot(221)</li></ul>
+</div>
+
+<div class="entry" id="plt-subplots">
+<h4>plt.subplots()</h4>
+<p class="label">Full Syntax</p>
+<pre>matplotlib.pyplot.subplots(nrows=1, ncols=1, *, sharex=False, sharey=False, squeeze=True, width_ratios=None, height_ratios=None, subplot_kw=None, gridspec_kw=None, **fig_kw)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>nrows, ncols</td><td>int</td><td>1</td><td>2, 3</td><td>Number of subplot rows and columns</td></tr>
+<tr><td>sharex</td><td>bool or {'none','all','row','col'}</td><td>False</td><td>True, 'row'</td><td>Share x-axis</td></tr>
+<tr><td>sharey</td><td>bool or {'none','all','row','col'}</td><td>False</td><td>True, 'col'</td><td>Share y-axis</td></tr>
+<tr><td>squeeze</td><td>bool</td><td>True</td><td>True, False</td><td>Squeeze extra dimensions from array</td></tr>
+<tr><td>width_ratios</td><td>array-like</td><td>None</td><td>[1,2,1]</td><td>Relative column widths</td></tr>
+<tr><td>height_ratios</td><td>array-like</td><td>None</td><td>[2,1]</td><td>Relative row heights</td></tr>
+<tr><td>subplot_kw</td><td>dict</td><td>None</td><td>dict</td><td>Keywords passed to add_subplot</td></tr>
+<tr><td>gridspec_kw</td><td>dict</td><td>None</td><td>dict</td><td>GridSpec keywords</td></tr>
+<tr><td>**fig_kw</td><td>any</td><td>—</td><td>figsize, dpi</td><td>Passed to plt.figure()</td></tr>
+</table>
+<p class="label">Returns</p>
+<table>
+<tr><th>Return Type</th><th>Meaning</th></tr>
+<tr><td>Figure</td><td>Figure object</td></tr>
+<tr><td>Axes or ndarray of Axes</td><td>Axes array (2D if nrows,ncols &gt; 1)</td></tr>
+</table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>fig, axes = plt.subplots(2,2) preferred pattern</li></ul>
+</div>
+
+<div class="entry" id="plt-savefig">
+<h4>plt.savefig()</h4>
+<p class="label">Full Syntax</p>
+<pre>matplotlib.pyplot.savefig(fname, *, dpi='figure', format=None, metadata=None, pil_kwargs=None, bbox_inches=None, pad_inches=0.1, facecolor='auto', edgecolor='auto', backend=None, transparent=False, **kwargs)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>fname</td><td>str, path-like, file-like</td><td>—</td><td>'plot.png', buffer</td><td>Output filename or buffer</td></tr>
+<tr><td>dpi</td><td>float or 'figure'</td><td>'figure'</td><td>300, 'figure'</td><td>Resolution in dots per inch</td></tr>
+<tr><td>format</td><td>str, optional</td><td>None</td><td>'png','pdf','svg','jpg'</td><td>File format</td></tr>
+<tr><td>metadata</td><td>dict, optional</td><td>None</td><td>dict</td><td>Metadata key-value pairs (PDF, SVG)</td></tr>
+<tr><td>pil_kwargs</td><td>dict, optional</td><td>None</td><td>dict</td><td>PIL save options (raster)</td></tr>
+<tr><td>bbox_inches</td><td>str or Bbox</td><td>None</td><td>'tight', Bbox</td><td>Bounding box in inches</td></tr>
+<tr><td>pad_inches</td><td>float</td><td>0.1</td><td>float</td><td>Padding around bbox_inches</td></tr>
+<tr><td>facecolor</td><td>color or 'auto'</td><td>'auto'</td><td>color</td><td>Figure face color</td></tr>
+<tr><td>edgecolor</td><td>color or 'auto'</td><td>'auto'</td><td>color</td><td>Figure edge color</td></tr>
+<tr><td>backend</td><td>str, optional</td><td>None</td><td>backend name</td><td>Force specific backend</td></tr>
+<tr><td>transparent</td><td>bool</td><td>False</td><td>True, False</td><td>Transparent background</td></tr>
+<tr><td>orientation</td><td>{'portrait','landscape'}</td><td>'portrait'</td><td>orientation</td><td>Page orientation (PS, PDF)</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>None</td><td>Saves figure to file</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>bbox_inches='tight' trims whitespace</li><li>Call before plt.show() if showing interactively</li></ul>
+</div>
+
+<h3 id="sns">Seaborn</h3>
+
+<div class="entry" id="sns-countplot">
+<h4>sns.countplot()</h4>
+<p class="label">Full Syntax</p>
+<pre>seaborn.countplot(data=None, *, x=None, y=None, hue=None, order=None, hue_order=None, orient=None, color=None, palette=None, saturation=0.75, fill=True, hue_norm=None, stat='count', width=0.8, dodge='auto', gap=0, log_scale=None, native_scale=False, formatter=None, legend='auto', capsize=0, err_kws=None, ax=None, **kwargs)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>data</td><td>DataFrame, array, dict</td><td>None</td><td>DataFrame</td><td>Input dataset</td></tr>
+<tr><td>x, y</td><td>vector, optional</td><td>None</td><td>col name, array</td><td>Categorical variable (one required)</td></tr>
+<tr><td>hue</td><td>vector, optional</td><td>None</td><td>col name</td><td>Grouping variable (color)</td></tr>
+<tr><td>order</td><td>list, optional</td><td>None</td><td>list</td><td>Order of x categories</td></tr>
+<tr><td>hue_order</td><td>list, optional</td><td>None</td><td>list</td><td>Order of hue levels</td></tr>
+<tr><td>orient</td><td>{'v','h','x','y'}</td><td>None</td><td>'v','h'</td><td>Orientation</td></tr>
+<tr><td>color</td><td>color</td><td>None</td><td>color</td><td>Bar color (no hue)</td></tr>
+<tr><td>palette</td><td>palette name, list, dict</td><td>None</td><td>'Set2', list</td><td>Colors for hue levels</td></tr>
+<tr><td>saturation</td><td>float</td><td>0.75</td><td>0.0–1.0</td><td>Color saturation</td></tr>
+<tr><td>fill</td><td>bool</td><td>True</td><td>True, False</td><td>Fill bars</td></tr>
+<tr><td>hue_norm</td><td>Normalize, optional</td><td>None</td><td>Normalize</td><td>Normalize hue mapping</td></tr>
+<tr><td>stat</td><td>str</td><td>'count'</td><td>'count','percent','probability','proportion'</td><td>Statistic to compute</td></tr>
+<tr><td>width</td><td>float</td><td>0.8</td><td>0.0–1.0</td><td>Bar width fraction</td></tr>
+<tr><td>dodge</td><td>bool or 'auto'</td><td>'auto'</td><td>True, False, 'auto'</td><td>Dodge hue groups</td></tr>
+<tr><td>gap</td><td>float</td><td>0</td><td>≥0</td><td>Gap between bars</td></tr>
+<tr><td>log_scale</td><td>bool, number, pair</td><td>None</td><td>True, 10, (True,False)</td><td>Log scale axis</td></tr>
+<tr><td>native_scale</td><td>bool</td><td>False</td><td>True, False</td><td>Native numeric scale</td></tr>
+<tr><td>formatter</td><td>callable</td><td>None</td><td>func</td><td>Axis tick formatter</td></tr>
+<tr><td>legend</td><td>{'auto',True,False}</td><td>'auto'</td><td>'auto',True,False</td><td>Draw legend</td></tr>
+<tr><td>capsize</td><td>float</td><td>0</td><td>float</td><td>Error bar cap width</td></tr>
+<tr><td>err_kws</td><td>dict</td><td>None</td><td>dict</td><td>Error bar artist kwargs</td></tr>
+<tr><td>ax</td><td>Axes, optional</td><td>None</td><td>Axes</td><td>Matplotlib axes to plot on</td></tr>
+<tr><td>**kwargs</td><td>any</td><td>—</td><td>edgecolor, linewidth</td><td>Bar artist kwargs</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>Axes</td><td>Matplotlib axes with plot</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Shows count per category</li></ul>
+</div>
+
+<div class="entry" id="sns-barplot">
+<h4>sns.barplot()</h4>
+<p class="label">Full Syntax</p>
+<pre>seaborn.barplot(data=None, *, x=None, y=None, hue=None, order=None, hue_order=None, estimator='mean', errorbar=('ci', 95), n_boot=1000, seed=None, units=None, weights=None, orient=None, color=None, palette=None, saturation=0.75, fill=True, hue_norm=None, width=0.8, dodge='auto', gap=0, log_scale=None, native_scale=False, formatter=None, legend='auto', capsize=0, err_kws=None, ci=&lt;deprecated&gt;, errcolor=&lt;deprecated&gt;, errwidth=&lt;deprecated&gt;, ax=None, **kwargs)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>data</td><td>DataFrame, array, dict</td><td>None</td><td>DataFrame</td><td>Input dataset</td></tr>
+<tr><td>x, y</td><td>vector, optional</td><td>None</td><td>col name</td><td>Variables (one categorical, one numeric)</td></tr>
+<tr><td>hue</td><td>vector, optional</td><td>None</td><td>col name</td><td>Grouping variable</td></tr>
+<tr><td>order, hue_order</td><td>list, optional</td><td>None</td><td>list</td><td>Category order</td></tr>
+<tr><td>estimator</td><td>callable</td><td>np.mean</td><td>np.sum, np.median</td><td>Aggregate function for bar height</td></tr>
+<tr><td>errorbar</td><td>tuple, str, callable</td><td>('ci', 95)</td><td>('sd',), 'se', None</td><td>Error bar type and size</td></tr>
+<tr><td>n_boot</td><td>int</td><td>1000</td><td>int</td><td>Bootstrap iterations for CI</td></tr>
+<tr><td>seed</td><td>int, Generator, optional</td><td>None</td><td>int</td><td>Random seed</td></tr>
+<tr><td>units</td><td>vector, optional</td><td>None</td><td>col name</td><td>Sampling units for bootstrap</td></tr>
+<tr><td>weights</td><td>vector, optional</td><td>None</td><td>array</td><td>Weights for estimator</td></tr>
+<tr><td>orient, color, palette, saturation, fill, hue_norm, width, dodge, gap, log_scale, native_scale, formatter, legend, capsize, err_kws, ax, **kwargs</td><td>—</td><td>—</td><td>—</td><td>Same as countplot</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>Axes</td><td>Matplotlib axes with bar plot</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Aggregates numeric y by categorical x</li></ul>
+</div>
+
+<div class="entry" id="sns-boxplot">
+<h4>sns.boxplot()</h4>
+<p class="label">Full Syntax</p>
+<pre>seaborn.boxplot(data=None, *, x=None, y=None, hue=None, order=None, hue_order=None, orient=None, color=None, palette=None, saturation=0.75, fill=True, hue_norm=None, width=0.8, dodge='auto', gap=0, whis=1.5, linecolor='auto', linewidth=None, log_scale=None, native_scale=False, formatter=None, legend='auto', ax=None, **kwargs)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>data</td><td>DataFrame, array, dict</td><td>None</td><td>DataFrame</td><td>Input dataset</td></tr>
+<tr><td>x, y</td><td>vector, optional</td><td>None</td><td>col name</td><td>Variables (one categorical, one numeric)</td></tr>
+<tr><td>hue</td><td>vector, optional</td><td>None</td><td>col name</td><td>Grouping variable</td></tr>
+<tr><td>order, hue_order</td><td>list, optional</td><td>None</td><td>list</td><td>Category order</td></tr>
+<tr><td>orient</td><td>{'v','h','x','y'}</td><td>None</td><td>'v','h'</td><td>Orientation</td></tr>
+<tr><td>color, palette, saturation, fill, hue_norm, width, dodge, gap</td><td>—</td><td>—</td><td>—</td><td>Same as countplot</td></tr>
+<tr><td>whis</td><td>float, pair</td><td>1.5</td><td>1.5, (5,95)</td><td>Whisker extent (IQR or percentiles)</td></tr>
+<tr><td>linecolor</td><td>color, 'auto'</td><td>'auto'</td><td>color</td><td>Box/whisker line color</td></tr>
+<tr><td>linewidth</td><td>float, optional</td><td>None</td><td>float</td><td>Line width</td></tr>
+<tr><td>log_scale, native_scale, formatter, legend, ax, **kwargs</td><td>—</td><td>—</td><td>—</td><td>Same as countplot</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>Axes</td><td>Matplotlib axes with boxplot</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Shows quartiles and outliers per group</li></ul>
+</div>
+
+<div class="entry" id="sns-histplot">
+<h4>sns.histplot()</h4>
+<p class="label">Full Syntax</p>
+<pre>seaborn.histplot(data=None, *, x=None, y=None, hue=None, weights=None, stat='count', bins='auto', binwidth=None, binrange=None, discrete=None, cumulative=False, common_bins=True, common_norm=True, multiple='layer', element='bars', fill=True, shrink=1, kde=False, kde_kws=None, line_kws=None, thresh=None, pthresh=None, pmax=None, cbar=False, cbar_ax=None, cbar_kws=None, palette=None, hue_order=None, hue_norm=None, color=None, log_scale=None, native_scale=False, formatter=None, legend='auto', ax=None, **kwargs)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>data</td><td>DataFrame, array, dict</td><td>None</td><td>DataFrame</td><td>Input dataset</td></tr>
+<tr><td>x, y</td><td>vector, optional</td><td>None</td><td>col name</td><td>Numeric variable(s)</td></tr>
+<tr><td>hue</td><td>vector, optional</td><td>None</td><td>col name</td><td>Grouping variable</td></tr>
+<tr><td>weights</td><td>vector, optional</td><td>None</td><td>array</td><td>Per-observation weights</td></tr>
+<tr><td>stat</td><td>str</td><td>'count'</td><td>'count','frequency','probability','density','percent'</td><td>Normalization statistic</td></tr>
+<tr><td>bins</td><td>int, str, array</td><td>'auto'</td><td>20, 'auto', array</td><td>Bin specification</td></tr>
+<tr><td>binwidth</td><td>float, optional</td><td>None</td><td>float</td><td>Width of each bin</td></tr>
+<tr><td>binrange</td><td>pair, optional</td><td>None</td><td>(0,10)</td><td>Lowest and highest bin edges</td></tr>
+<tr><td>discrete</td><td>bool, optional</td><td>None</td><td>True, False</td><td>Treat as discrete</td></tr>
+<tr><td>cumulative</td><td>bool</td><td>False</td><td>True, False</td><td>Cumulative histogram</td></tr>
+<tr><td>common_bins</td><td>bool</td><td>True</td><td>True, False</td><td>Same bins across hue groups</td></tr>
+<tr><td>common_norm</td><td>bool</td><td>True</td><td>True, False</td><td>Normalize across hue groups</td></tr>
+<tr><td>multiple</td><td>{'layer','dodge','stack','fill'}</td><td>'layer'</td><td>multiple modes</td><td>How to draw hue groups</td></tr>
+<tr><td>element</td><td>{'bars','step','poly'}</td><td>'bars'</td><td>element types</td><td>Histogram element type</td></tr>
+<tr><td>fill</td><td>bool</td><td>True</td><td>True, False</td><td>Fill histogram</td></tr>
+<tr><td>shrink</td><td>float</td><td>1</td><td>0.0–1.0</td><td>Scale bar width</td></tr>
+<tr><td>kde</td><td>bool</td><td>False</td><td>True, False</td><td>Overlay KDE curve</td></tr>
+<tr><td>kde_kws</td><td>dict</td><td>None</td><td>dict</td><td>KDE line kwargs</td></tr>
+<tr><td>line_kws</td><td>dict</td><td>None</td><td>dict</td><td>Step/poly line kwargs</td></tr>
+<tr><td>thresh, pthresh, pmax</td><td>float, optional</td><td>None</td><td>float</td><td>Hide low-count bins</td></tr>
+<tr><td>cbar</td><td>bool</td><td>False</td><td>True, False</td><td>Draw colorbar (2D)</td></tr>
+<tr><td>cbar_ax, cbar_kws</td><td>Axes, dict</td><td>None</td><td>Axes, dict</td><td>Colorbar axis and kwargs</td></tr>
+<tr><td>palette, hue_order, hue_norm, color, log_scale, native_scale, formatter, legend, ax, **kwargs</td><td>—</td><td>—</td><td>—</td><td>Standard seaborn params</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>Axes</td><td>Matplotlib axes with histogram</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>stat='density' for normalized histogram</li></ul>
+</div>
+
+<div class="entry" id="sns-displot">
+<h4>sns.displot()</h4>
+<p class="label">Full Syntax</p>
+<pre>seaborn.displot(data=None, *, x=None, y=None, hue=None, row=None, col=None, weights=None, kind='hist', rug=False, rug_kws=None, log_scale=None, native_scale=False, palette=None, hue_order=None, hue_norm=None, color=None, col_wrap=None, row_order=None, col_order=None, height=5, aspect=1, facet_kws=None, legend='auto', **kwargs)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>data</td><td>DataFrame, array, dict</td><td>None</td><td>DataFrame</td><td>Input dataset</td></tr>
+<tr><td>x, y</td><td>vector, optional</td><td>None</td><td>col name</td><td>Numeric variable(s)</td></tr>
+<tr><td>hue</td><td>vector, optional</td><td>None</td><td>col name</td><td>Semantic grouping</td></tr>
+<tr><td>row, col</td><td>vector, optional</td><td>None</td><td>col name</td><td>Facet variables</td></tr>
+<tr><td>weights</td><td>vector, optional</td><td>None</td><td>array</td><td>Observation weights</td></tr>
+<tr><td>kind</td><td>{'hist','kde','ecdf'}</td><td>'hist'</td><td>'hist','kde','ecdf'</td><td>Distribution plot type</td></tr>
+<tr><td>rug</td><td>bool</td><td>False</td><td>True, False</td><td>Draw rug plot on margin</td></tr>
+<tr><td>rug_kws</td><td>dict</td><td>None</td><td>dict</td><td>Rug plot kwargs</td></tr>
+<tr><td>log_scale, native_scale, palette, hue_order, hue_norm, color</td><td>—</td><td>—</td><td>—</td><td>Standard params</td></tr>
+<tr><td>col_wrap</td><td>int, optional</td><td>None</td><td>int</td><td>Wrap column facets</td></tr>
+<tr><td>row_order, col_order</td><td>list, optional</td><td>None</td><td>list</td><td>Facet order</td></tr>
+<tr><td>height</td><td>float</td><td>5</td><td>float</td><td>Facet height in inches</td></tr>
+<tr><td>aspect</td><td>float</td><td>1</td><td>float</td><td>Width/height ratio per facet</td></tr>
+<tr><td>facet_kws</td><td>dict</td><td>None</td><td>dict</td><td>FacetGrid kwargs</td></tr>
+<tr><td>legend</td><td>{'auto',True,False}</td><td>'auto'</td><td>legend options</td><td>Draw legend</td></tr>
+<tr><td>**kwargs</td><td>any</td><td>—</td><td>—</td><td>Passed to histplot/kdeplot/ecdfplot</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>FacetGrid</td><td>Figure-level grid object with .figure, .axes</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Figure-level; use g = sns.displot(); g.figure</li></ul>
+</div>
+
+<div class="entry" id="sns-scatterplot">
+<h4>sns.scatterplot()</h4>
+<p class="label">Full Syntax</p>
+<pre>seaborn.scatterplot(data=None, *, x=None, y=None, hue=None, size=None, style=None, palette=None, hue_order=None, hue_norm=None, sizes=None, size_order=None, size_norm=None, markers=True, style_order=None, legend='auto', ax=None, **kwargs)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>data</td><td>DataFrame, array, dict</td><td>None</td><td>DataFrame</td><td>Input dataset</td></tr>
+<tr><td>x, y</td><td>vector, optional</td><td>None</td><td>col name</td><td>Numeric variables</td></tr>
+<tr><td>hue</td><td>vector, optional</td><td>None</td><td>col name</td><td>Color grouping</td></tr>
+<tr><td>size</td><td>vector, optional</td><td>None</td><td>col name</td><td>Marker size grouping</td></tr>
+<tr><td>style</td><td>vector, optional</td><td>None</td><td>col name</td><td>Marker style grouping</td></tr>
+<tr><td>palette</td><td>palette, optional</td><td>None</td><td>'viridis'</td><td>Color palette for hue</td></tr>
+<tr><td>hue_order, hue_norm</td><td>list, Normalize</td><td>None</td><td>list, Normalize</td><td>Hue order and normalization</td></tr>
+<tr><td>sizes</td><td>tuple, dict, optional</td><td>None</td><td>(20,200), dict</td><td>Size range or mapping</td></tr>
+<tr><td>size_order, size_norm</td><td>list, Normalize</td><td>None</td><td>list</td><td>Size order and normalization</td></tr>
+<tr><td>markers</td><td>bool, dict, list</td><td>True</td><td>True, {'a':'o'}</td><td>Marker styles for style levels</td></tr>
+<tr><td>style_order</td><td>list, optional</td><td>None</td><td>list</td><td>Style level order</td></tr>
+<tr><td>legend</td><td>{'auto',True,False,'brief',False}</td><td>'auto'</td><td>legend options</td><td>Legend display</td></tr>
+<tr><td>ax</td><td>Axes, optional</td><td>None</td><td>Axes</td><td>Axes to plot on</td></tr>
+<tr><td>**kwargs</td><td>any</td><td>—</td><td>alpha, edgecolor, linewidth</td><td>PathCollection kwargs</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>Axes</td><td>Matplotlib axes with scatter plot</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Supports hue, size, style semantic mappings</li></ul>
+</div>
+
+<div class="entry" id="sns-heatmap">
+<h4>sns.heatmap()</h4>
+<p class="label">Full Syntax</p>
+<pre>seaborn.heatmap(data, *, vmin=None, vmax=None, cmap=None, center=None, robust=False, annot=None, fmt='.2g', annot_kws=None, linewidths=0, linecolor='white', cbar=True, cbar_kws=None, cbar_ax=None, square=False, xticklabels='auto', yticklabels='auto', mask=None, ax=None, **kwargs)</pre>
+<p class="label">Parameters</p>
+<table>
+<tr><th>Parameter</th><th>Type</th><th>Default</th><th>Possible Values</th><th>Meaning</th></tr>
+<tr><td>data</td><td>array-like, DataFrame</td><td>—</td><td>2D array, corr matrix</td><td>Rectangular dataset to plot</td></tr>
+<tr><td>vmin, vmax</td><td>float, optional</td><td>None</td><td>float</td><td>Color scale limits</td></tr>
+<tr><td>cmap</td><td>Colormap, str</td><td>None</td><td>'rocket','coolwarm'</td><td>Colormap name or object</td></tr>
+<tr><td>center</td><td>float, optional</td><td>None</td><td>0</td><td>Center colormap at this value</td></tr>
+<tr><td>robust</td><td>bool</td><td>False</td><td>True, False</td><td>Use 2nd–98th percentile for scale</td></tr>
+<tr><td>annot</td><td>bool, array-like</td><td>None</td><td>True, array</td><td>Annotate cells with values</td></tr>
+<tr><td>fmt</td><td>str</td><td>'.2g'</td><td>'.2f', 'd'</td><td>Annotation format string</td></tr>
+<tr><td>annot_kws</td><td>dict</td><td>None</td><td>dict</td><td>Text annotation kwargs</td></tr>
+<tr><td>linewidths</td><td>float</td><td>0</td><td>float</td><td>Width of cell borders</td></tr>
+<tr><td>linecolor</td><td>color</td><td>'white'</td><td>color</td><td>Cell border color</td></tr>
+<tr><td>cbar</td><td>bool</td><td>True</td><td>True, False</td><td>Draw colorbar</td></tr>
+<tr><td>cbar_kws</td><td>dict</td><td>None</td><td>dict</td><td>Colorbar kwargs</td></tr>
+<tr><td>cbar_ax</td><td>Axes, optional</td><td>None</td><td>Axes</td><td>Axes for colorbar</td></tr>
+<tr><td>square</td><td>bool</td><td>False</td><td>True, False</td><td>Force square cells</td></tr>
+<tr><td>xticklabels, yticklabels</td><td>bool, int, list</td><td>'auto'</td><td>True, False, list</td><td>Tick label display</td></tr>
+<tr><td>mask</td><td>array-like, optional</td><td>None</td><td>bool array</td><td>Mask cells (True = hidden)</td></tr>
+<tr><td>ax</td><td>Axes, optional</td><td>None</td><td>Axes</td><td>Axes to plot on</td></tr>
+<tr><td>**kwargs</td><td>any</td><td>—</td><td>—</td><td>Passed to matplotlib pcolormesh</td></tr>
+</table>
+<p class="label">Returns</p>
+<table><tr><th>Return Type</th><th>Meaning</th></tr><tr><td>Axes</td><td>Matplotlib axes with heatmap</td></tr></table>
+<p class="label">Important Notes</p>
+<ul class="notes"><li>Common: sns.heatmap(df.corr(), annot=True)</li></ul>
+</div>
+
+</section>
